@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>BIOS更新找回Linux重建Grub</title>
+      <link href="2021/02/27/BIOS%E6%9B%B4%E6%96%B0%E6%89%BE%E5%9B%9ELinux%E9%87%8D%E5%BB%BAGrub/"/>
+      <url>2021/02/27/BIOS%E6%9B%B4%E6%96%B0%E6%89%BE%E5%9B%9ELinux%E9%87%8D%E5%BB%BAGrub/</url>
+      
+        <content type="html"><![CDATA[<h2 id="起因">起因</h2><p>今天耐不住设备管理器LenovoFirmware的黄色感叹号，去搜了下，是因为BIOS需要更新，于是就去联想官网(我的电脑是Y7000)下载bios并更新。结果重启丢失Linux其动向。</p><h2 id="如何解决">如何解决</h2><p>我TM直接谷歌，一顿搜索，慢慢试了出来</p><h3 id="一">一</h3><p>拿出LiveCD(就是你装linux时的启动盘)<br>在windows下启动进入BIOS,然后选择从U盘启动，这里可以选择在Windows设置里找到更新-&gt;高级重新启动，其面有一个<em>UEFI</em>的相关选项(具体叫什么记不清楚了)以进入BIOS。<br>然后在BIOS中选择从U盘启动，我的电脑是F5、F6调整顺序。</p><h3 id="二">二</h3><p>进入Live CD环境后，挂载磁盘</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@:~$ lsblk <span class="comment">##检查分区</span></span><br><span class="line">@:~$ mount /dev/nvme0n1p4 /mnt <span class="comment">##挂载</span></span><br><span class="line"></span><br><span class="line">@:~$ mount --<span class="built_in">bind</span> /dev /mnt/dev</span><br><span class="line">@:~$ mount --<span class="built_in">bind</span> /dev/pts /mnt/dev/pts</span><br><span class="line">@:~$ mount --<span class="built_in">bind</span> /proc /mnt/proc</span><br><span class="line">@:~$ mount --<span class="built_in">bind</span> /sys /mnt/sys</span><br><span class="line"></span><br><span class="line">@:~$ mkdir /mnt/boot</span><br><span class="line">@:~$ mount /dev/nvme0n1p2 /mnt/boot</span><br><span class="line"></span><br><span class="line">@:~$ chroot /mnt</span><br></pre></td></tr></table></figure><p>进入到系统以后，重建grub就好了</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@:~$ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch</span><br><span class="line">@:~$ grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure><p>结果我的电脑在进行上述第一步操作时提示<br><em>EFI varible not support </em>巴拉巴拉WTF！<br>又是一顿搜，结局方案如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@:~$ <span class="comment">##退回到LiveCD</span></span><br><span class="line">@:~$ modprobe efivarfs</span><br><span class="line">@:~$ <span class="comment">##进入系统</span></span><br><span class="line">@:~$ chroot /mnt</span><br><span class="line">@:~$ mount -t efivarfs efivarfs /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure><p>然后再次重建grub开机就有grub了😮‍💨！<br>然而！！！这次又丢失Windows。不过这个我会。<br>进入linux后安装grub customizer，打开后自己进行配置就好了。</p><p>不过要注意<strong>针对自己的系统与分区，进而调整命令</strong></p><h2 id="最后">最后</h2><p>终于好了😮‍💨！</p><p>参考</p><ul><li><a href="https://io-oi.me/tech/how-to-reinstall-grub/">Linux + Windows 双系统，GRUB 突然不见了？</a></li><li><a href="https://bbs.archlinux.org/viewtopic.php?id=172867">[SOLVED] Module efivars not found but /sys/firmware/efi/efivars avail.</a></li><li><a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface#UEFI_Variables">ArchWiki</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 折腾 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>My2020</title>
+      <link href="2020/12/31/my_2020/"/>
+      <url>2020/12/31/my_2020/</url>
+      
+        <content type="html"><![CDATA[<p>2020就剩几个小时了，纠结之后还是打算记录下来，算是检讨，也算是对自己的激励。客观上，2020发生了各种不好的事情， 但是我觉得对我个人的影响不是很大。2020我依然颓废，做事走马观花，考研也没有好好准备，整日沉迷于一些非重要的事情。而且，最大的遗憾便是短短的两个月的恋情吧，可是我并没有反思以变得更好。2020下半年看了许多电影，了解了许多历史事件“所谓”的真相，思想有了些许变化<br>希望未来能够养成一些好习惯，自信点。不过又有了一个似乎不切实际的想法，努力学习吧，攒够资本，如果国内国际形势允许，争取在28岁前移民。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 生活 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
