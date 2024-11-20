@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Kris的Neverland</title>
-    <link>https://magics0ng-github-io.pages.dev/</link>
-    <description>Recent content on Kris的Neverland</description>
+    <title>Posts on Kris的Neverland</title>
+    <link>https://magics0ng-github-io.pages.dev/posts/</link>
+    <description>Recent content in Posts on Kris的Neverland</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 20 Nov 2024 17:16:47 +0800</lastBuildDate>
-    <atom:link href="https://magics0ng-github-io.pages.dev/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://magics0ng-github-io.pages.dev/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First Post</title>
       <link>https://magics0ng-github-io.pages.dev/posts/my-first-post/</link>
