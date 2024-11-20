@@ -1,0 +1,4 @@
+baseURL = 'https://MagicS0ng.github.io/'
+languageCode = 'zh-cn'
+title = 'Kris的Neverland'
+theme = 'PaperMod'
