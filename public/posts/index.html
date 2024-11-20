@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
+<html lang="zh-cn" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" type="application/rss+xml" href="https://magics0ng-github-io.pages.dev/posts/index.xml">
-<link rel="alternate" hreflang="en" href="https://magics0ng-github-io.pages.dev/posts/">
+<link rel="alternate" hreflang="zh-cn" href="https://magics0ng-github-io.pages.dev/posts/">
 <noscript>
     <style>
         #theme-toggle,
@@ -131,6 +131,19 @@
     Posts
   </h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Leetcode 3243
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>leetcode 3243 原题链接
+class Solution{ private: int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neighbor) { vector&lt;int&gt; dist(n,-1); // 定义每个点到起点的距离 queue&lt;int&gt; q; // 用于bfs遍历的队列 q.push(0); // 将起点加入队列 dist[0]=0; // 0~0 距离为0 while(!q.empty()) { int x = q.front(); // 取出当前起点 q.pop(); for(auto &amp;y: neighbor[x]) // 遍历下一个节点 { if(dist[y]!=-1) continue; // 如果已经访问过了，直接跳过 q.push(y); dist[y] = dist[x]&#43;1; // 计算0到x的距离，&#43;1 } } return dist[n-1]; } public: vector&lt;int&gt; shortestDistanceAfterQueries(int n, vector&lt;vector&lt;int&gt;&gt;&amp; queries) { vector&lt;vector&lt;int&gt;&gt; graph(n); // 定义图 vector&lt;int&gt; result; // 定义结果集 for (int i = 0; i &lt; n - 1; i&#43;&#43;) { graph[i].emplace_back(i&#43;1); // 建图 } for (auto&amp; query : queries) { graph[query[0]].emplace_back(query[1]); // 插入边 result.emplace_back(bfs(n, graph)); // 计算图更新后的结果 } return result; } }; 时间复杂度分析 每次插入一条边，都要遍历一次 每次bfs，都需要遍历n&#43;q次 时间复杂度为O(q*(n&#43;q)) 空间复杂度分析 存储图和结果集，需要O(n&#43;q)的空间 </p>
+  </div>
+  <footer class="entry-footer"><span title='2024-11-20 21:53:37 +0800 CST'>November 20, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to Leetcode 3243" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3243/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">

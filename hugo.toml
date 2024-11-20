@@ -1,4 +1,5 @@
 baseURL = 'https://magics0ng-github-io.pages.dev'
 languageCode = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
 title = 'Kris的Neverland'
 theme = 'PaperMod'
