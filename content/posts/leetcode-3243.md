@@ -8,6 +8,7 @@ ShowBreadCrumbs=true
 showToc = true
 description="leetcode 3243的bfs题解" 
 tags = ['leetcode', 'bfs']
+summary = "leetcode 每日一图 bfs求解"
 +++
 
 # leetcode 3243

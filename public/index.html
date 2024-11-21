@@ -5,11 +5,11 @@
 	<meta name="generator" content="Hugo 0.138.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Kris的Neverland</title>
 
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="This is kris&#39;s neverland">
+<meta name="author" content="Kris">
 <link rel="canonical" href="http://localhost:1313/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
@@ -58,7 +58,29 @@
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="Kris的Neverland">
+  <meta property="og:title" content="Kris的Neverland">
+  <meta property="og:description" content="This is kris&#39;s neverland">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kris的Neverland">
+<meta name="twitter:description" content="This is kris&#39;s neverland">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Kris的Neverland",
+  "url": "http://localhost:1313/",
+  "description": "This is kris's neverland",
+  "logo": "http://localhost:1313/favicon.ico",
+  "sameAs": [
+      
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -102,8 +124,8 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archive">
-                    <span>Archive</span>
+                <a href="http://localhost:1313/archives/" title="Archives">
+                    <span>Archives</span>
                 </a>
             </li>
             <li>
@@ -120,17 +142,31 @@
     </nav>
 </header>
 <main class="main"> 
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>Kris&rsquo;s Neverland</h1>
+    </header>
+    <div class="entry-content">
+        <p>今朝有酒今朝醉，明日愁来明日愁。😎</p>
+<p>人生得意须尽欢，莫使金樽空对月。🫡</p>
 
-<article class="first-entry"> 
+    </div>
+    <footer class="entry-footer">
+        <div class="social-icons" >
+</div>
+
+    </footer>
+</article>
+
+<article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Leetcode 3243
     </h2>
   </header>
   <div class="entry-content">
-    <p>leetcode 3243 原题链接 本题的求解思路为：每次更新一条边就要进行一次求起点到终点的最短路径。
-class Solution{ private: int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neighbor) { vector&lt;int&gt; dist(n,-1); // 定义每个点到起点的距离 queue&lt;int&gt; q; // 用于bfs遍历的队列 q.push(0); // 将起点加入队列 dist[0]=0; // 0~0 距离为0 while(!q.empty()) { int x = q.front(); // 取出当前起点 q.pop(); for(auto &amp;y: neighbor[x]) // 遍历下一个节点 { if(dist[y]!=-1) continue; // 如果已经访问过了，直接跳过 q.push(y); dist[y] = dist[x]&#43;1; // 计算0到x的距离，&#43;1 } } return dist[n-1]; } public: vector&lt;int&gt; shortestDistanceAfterQueries(int n, vector&lt;vector&lt;int&gt;&gt;&amp; queries) { vector&lt;vector&lt;int&gt;&gt; graph(n); // 定义图 vector&lt;int&gt; result; // 定义结果集 for (int i = 0; i &lt; n - 1; i&#43;&#43;) { graph[i].emplace_back(i&#43;1); // 建图 } for (auto&amp; query : queries) { graph[query[0]].emplace_back(query[1]); // 插入边 result.emplace_back(bfs(n, graph)); // 计算图更新后的结果 } return result; } }; 时间复杂度分析 每次插入一条边，都要遍历一次 每次bfs，都需要遍历n&#43;q次 时间复杂度为O(q*(n&#43;q)) 空间复杂度分析 存储图和结果集，需要O(n&#43;q)的空间 </p>
+    <p>leetcode 每日一图 bfs求解</p>
   </div>
-  <footer class="entry-footer"><span title='2024-11-20 21:53:37 +0800 CST'>十一月 20, 2024</span>&nbsp;·&nbsp;1 分钟</footer>
+  <footer class="entry-footer"><span title='2024-11-20 21:53:37 +0800 CST'>十一月 20, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris</footer>
   <a class="entry-link" aria-label="post link to Leetcode 3243" href="http://localhost:1313/posts/leetcode-3243/"></a>
 </article>
 
@@ -143,7 +179,7 @@ class Solution{ private: int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neig
     <p>Hello World! This is my first post.
 print(&#34;Hello World!&#34;) </p>
   </div>
-  <footer class="entry-footer"><span title='2024-11-20 17:16:47 +0800 CST'>十一月 20, 2024</span></footer>
+  <footer class="entry-footer"><span title='2024-11-20 17:16:47 +0800 CST'>十一月 20, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris</footer>
   <a class="entry-link" aria-label="post link to My First Post" href="http://localhost:1313/posts/my-first-post/"></a>
 </article>
     </main>
