@@ -115,7 +115,6 @@ env = "production"
 description = "This is kris's neverland"
 author = "Kris"
 defaultTheme = "auto"
-ShowShareButtons = true
 ShowReadingTime = true
 displayFullLangName = true
 ShowPostNavLinks = true
