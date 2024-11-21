@@ -101,8 +101,8 @@
   "keywords": [
     "leetcode", "模拟"
   ],
-  "articleBody": "leetcode 3243 原题链接 本题的求解思路为：模拟即可\nclass Solution { const unordered_map\u003cstring, int\u003e mp = { {\"LEFT\", -1}, {\"RIGHT\", 1}, {\"UP\", -1}, {\"DOWN\", 1}}; public: int finalPositionOfSnake(int n, vector\u003cstring\u003e\u0026 commands) { int startX = 0, startY = 0; for (auto\u0026 command : commands) { if (command == \"RIGHT\" || command == \"LEFT\") startY = startY + (command == \"LEFT\" ? -1 : 1); else if (command == \"UP\" || command == \"DOWN\") startX = startX + (command == \"UP\" ? -1 : 1); } return ((startX)*n - 1) + startY + 1; } }; 时间复杂度分析 遍历commands数字时间复杂度为O(N) 空间复杂度分析 常量的存储空间 O(1) ",
-  "wordCount" : "96",
+  "articleBody": "leetcode 3243 原题链接 本题的求解思路为：模拟即可\nclass Solution { public: int finalPositionOfSnake(int n, vector\u003cstring\u003e\u0026 commands) { int startX = 0, startY = 0; for (auto\u0026 command : commands) { if (command == \"RIGHT\" || command == \"LEFT\") startY = startY + (command == \"LEFT\" ? -1 : 1); else if (command == \"UP\" || command == \"DOWN\") startX = startX + (command == \"UP\" ? -1 : 1); } return ((startX)*n - 1) + startY + 1; } }; 时间复杂度分析 遍历commands数字时间复杂度为O(N) 空间复杂度分析 常量的存储空间 O(1) ",
+  "wordCount" : "82",
   "inLanguage": "zh",
   "datePublished": "2024-11-21T22:19:17+08:00",
   "dateModified": "2024-11-21T22:19:17+08:00",
@@ -221,9 +221,6 @@
 <p><a href="https://leetcode.cn/problems/snake-in-matrix/description/">原题链接</a>
 本题的求解思路为：模拟即可</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s">&#34;LEFT&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#34;RIGHT&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#34;UP&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#34;DOWN&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">}};</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">finalPositionOfSnake</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">commands</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">startX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">startY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>

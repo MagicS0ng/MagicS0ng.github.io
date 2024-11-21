@@ -16,9 +16,6 @@ summary = "leetcode 每日一题，简单题"
 本题的求解思路为：模拟即可
 ```C++
 class Solution {
-    const unordered_map<string, int> mp = {
-        {"LEFT", -1}, {"RIGHT", 1}, {"UP", -1}, {"DOWN", 1}};
-
 public:
     int finalPositionOfSnake(int n, vector<string>& commands) {
         int startX = 0, startY = 0;
