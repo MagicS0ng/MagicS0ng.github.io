@@ -126,7 +126,7 @@ ShowPageNums = true
 ShowToc = true
 
   [params.profileMode]
-  enabled = false
+  enabled = true
   title = "Kris's Neverland"
   #imageUrl = "#"
   #imageTitle = "my image"
