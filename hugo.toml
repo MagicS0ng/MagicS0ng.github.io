@@ -17,23 +17,22 @@ disableXML = true
 languageName = "Chinese"
 weight = 1
   [languages.zh.taxonomies]
-  category = "categories"
   tag = "tags"
   archives="archives"
 [[languages.zh.menu.main]]
 name = "Archives"
-url = "/archives/"
+url = "/archives"
 weight = 5
 
-[[languages.zh.menu.main]]
-name = "Search"
-url = "/search/"
-weight = 10
+#[[languages.zh.menu.main]]
+#name = "Search"
+#url = "/search/"
+#weight = 10
 
 [[languages.zh.menu.main]]
 name = "Tags"
-url = "/tags/"
-weight = 10
+url = "/tags"
+weight = 20
 
 [outputs]
 home = [ "HTML", "RSS", "JSON" ]
@@ -112,7 +111,7 @@ disableInlineCSS = true
 disableInlineCSS = true
 [params]
 env = "production"
-description = "This is kris's neverland"
+description = "This is Kris's neverland"
 author = "Kris"
 defaultTheme = "auto"
 ShowReadingTime = true
@@ -130,14 +129,14 @@ ShowToc = true
   title = "Kris's Neverland"
   #imageUrl = "#"
   #imageTitle = "my image"
-
+  subtitle = "😎Welcome to Kris's Neverland!🫡"
     [[params.profileMode.buttons]]
     name = "Archives"
-    url = "archives"
+    url = "/archives"
 
     [[params.profileMode.buttons]]
     name = "Tags"
-    url = "tags"
+    url = "/tags"
 
   [params.homeInfoParams]
   Title = "Kris's Neverland"
