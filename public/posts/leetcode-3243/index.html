@@ -1,72 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="auto">
+<html lang="zh" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Leetcode 3243 | Kris的Neverland</title>
-<meta name="keywords" content="">
-<meta name="description" content="leetcode 3243
-原题链接
-class Solution{
-private:
-    int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neighbor)
-    {
-        vector&lt;int&gt; dist(n,-1); // 定义每个点到起点的距离
-        queue&lt;int&gt; q;           // 用于bfs遍历的队列
-        q.push(0);              // 将起点加入队列
-        dist[0]=0;              // 0~0 距离为0
-        while(!q.empty())
-        {
-            int x = q.front(); // 取出当前起点
-            q.pop();
-            for(auto &amp;y: neighbor[x])  // 遍历下一个节点
-            {
-                if(dist[y]!=-1)
-                    continue;       // 如果已经访问过了，直接跳过
-                q.push(y);
-                dist[y] = dist[x]&#43;1; // 计算0到x的距离，&#43;1
-            }
-        }
-        return dist[n-1];
-    }
-public:
-    vector&lt;int&gt; shortestDistanceAfterQueries(int n,
-                                             vector&lt;vector&lt;int&gt;&gt;&amp; queries) {
-        vector&lt;vector&lt;int&gt;&gt; graph(n);   // 定义图
-        vector&lt;int&gt; result;             // 定义结果集
-        for (int i = 0; i &lt; n - 1; i&#43;&#43;) {
-            graph[i].emplace_back(i&#43;1); // 建图
-        }
-        for (auto&amp; query : queries) {
-            graph[query[0]].emplace_back(query[1]); // 插入边
-            result.emplace_back(bfs(n, graph));         // 计算图更新后的结果
-        }
-        return result;
-    }
-};
-时间复杂度分析
-
-每次插入一条边，都要遍历一次
-每次bfs，都需要遍历n&#43;q次
-时间复杂度为O(q*(n&#43;q))
-
-空间复杂度分析
-
-存储图和结果集，需要O(n&#43;q)的空间
-">
+<meta name="keywords" content="leetcode, bfs">
+<meta name="description" content="leetcode 3243的bfs题解">
 <meta name="author" content="">
-<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3243/">
+<link rel="canonical" href="http://localhost:1313/posts/leetcode-3243/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
-<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh-cn" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3243/">
+<link rel="alternate" hreflang="zh" href="http://localhost:1313/posts/leetcode-3243/">
 <noscript>
     <style>
         #theme-toggle,
@@ -103,118 +55,7 @@ public:
         }
 
     </style>
-</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/leetcode-3243/">
-  <meta property="og:site_name" content="Kris的Neverland">
-  <meta property="og:title" content="Leetcode 3243">
-  <meta property="og:description" content="leetcode 3243 原题链接
-class Solution{ private: int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neighbor) { vector&lt;int&gt; dist(n,-1); // 定义每个点到起点的距离 queue&lt;int&gt; q; // 用于bfs遍历的队列 q.push(0); // 将起点加入队列 dist[0]=0; // 0~0 距离为0 while(!q.empty()) { int x = q.front(); // 取出当前起点 q.pop(); for(auto &amp;y: neighbor[x]) // 遍历下一个节点 { if(dist[y]!=-1) continue; // 如果已经访问过了，直接跳过 q.push(y); dist[y] = dist[x]&#43;1; // 计算0到x的距离，&#43;1 } } return dist[n-1]; } public: vector&lt;int&gt; shortestDistanceAfterQueries(int n, vector&lt;vector&lt;int&gt;&gt;&amp; queries) { vector&lt;vector&lt;int&gt;&gt; graph(n); // 定义图 vector&lt;int&gt; result; // 定义结果集 for (int i = 0; i &lt; n - 1; i&#43;&#43;) { graph[i].emplace_back(i&#43;1); // 建图 } for (auto&amp; query : queries) { graph[query[0]].emplace_back(query[1]); // 插入边 result.emplace_back(bfs(n, graph)); // 计算图更新后的结果 } return result; } }; 时间复杂度分析 每次插入一条边，都要遍历一次 每次bfs，都需要遍历n&#43;q次 时间复杂度为O(q*(n&#43;q)) 空间复杂度分析 存储图和结果集，需要O(n&#43;q)的空间 ">
-  <meta property="og:locale" content="zh-cn">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-11-20T21:53:37+08:00">
-    <meta property="article:modified_time" content="2024-11-20T21:53:37+08:00">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode 3243">
-<meta name="twitter:description" content="leetcode 3243
-原题链接
-class Solution{
-private:
-    int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neighbor)
-    {
-        vector&lt;int&gt; dist(n,-1); // 定义每个点到起点的距离
-        queue&lt;int&gt; q;           // 用于bfs遍历的队列
-        q.push(0);              // 将起点加入队列
-        dist[0]=0;              // 0~0 距离为0
-        while(!q.empty())
-        {
-            int x = q.front(); // 取出当前起点
-            q.pop();
-            for(auto &amp;y: neighbor[x])  // 遍历下一个节点
-            {
-                if(dist[y]!=-1)
-                    continue;       // 如果已经访问过了，直接跳过
-                q.push(y);
-                dist[y] = dist[x]&#43;1; // 计算0到x的距离，&#43;1
-            }
-        }
-        return dist[n-1];
-    }
-public:
-    vector&lt;int&gt; shortestDistanceAfterQueries(int n,
-                                             vector&lt;vector&lt;int&gt;&gt;&amp; queries) {
-        vector&lt;vector&lt;int&gt;&gt; graph(n);   // 定义图
-        vector&lt;int&gt; result;             // 定义结果集
-        for (int i = 0; i &lt; n - 1; i&#43;&#43;) {
-            graph[i].emplace_back(i&#43;1); // 建图
-        }
-        for (auto&amp; query : queries) {
-            graph[query[0]].emplace_back(query[1]); // 插入边
-            result.emplace_back(bfs(n, graph));         // 计算图更新后的结果
-        }
-        return result;
-    }
-};
-时间复杂度分析
-
-每次插入一条边，都要遍历一次
-每次bfs，都需要遍历n&#43;q次
-时间复杂度为O(q*(n&#43;q))
-
-空间复杂度分析
-
-存储图和结果集，需要O(n&#43;q)的空间
-">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://magics0ng-github-io.pages.dev/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Leetcode 3243",
-      "item": "https://magics0ng-github-io.pages.dev/posts/leetcode-3243/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Leetcode 3243",
-  "name": "Leetcode 3243",
-  "description": "leetcode 3243 原题链接\nclass Solution{ private: int bfs(int n, vector\u0026lt;vector\u0026lt;int\u0026gt;\u0026gt;\u0026amp;neighbor) { vector\u0026lt;int\u0026gt; dist(n,-1); // 定义每个点到起点的距离 queue\u0026lt;int\u0026gt; q; // 用于bfs遍历的队列 q.push(0); // 将起点加入队列 dist[0]=0; // 0~0 距离为0 while(!q.empty()) { int x = q.front(); // 取出当前起点 q.pop(); for(auto \u0026amp;y: neighbor[x]) // 遍历下一个节点 { if(dist[y]!=-1) continue; // 如果已经访问过了，直接跳过 q.push(y); dist[y] = dist[x]+1; // 计算0到x的距离，+1 } } return dist[n-1]; } public: vector\u0026lt;int\u0026gt; shortestDistanceAfterQueries(int n, vector\u0026lt;vector\u0026lt;int\u0026gt;\u0026gt;\u0026amp; queries) { vector\u0026lt;vector\u0026lt;int\u0026gt;\u0026gt; graph(n); // 定义图 vector\u0026lt;int\u0026gt; result; // 定义结果集 for (int i = 0; i \u0026lt; n - 1; i++) { graph[i].emplace_back(i+1); // 建图 } for (auto\u0026amp; query : queries) { graph[query[0]].emplace_back(query[1]); // 插入边 result.emplace_back(bfs(n, graph)); // 计算图更新后的结果 } return result; } }; 时间复杂度分析 每次插入一条边，都要遍历一次 每次bfs，都需要遍历n+q次 时间复杂度为O(q*(n+q)) 空间复杂度分析 存储图和结果集，需要O(n+q)的空间 ",
-  "keywords": [
-    
-  ],
-  "articleBody": "leetcode 3243 原题链接\nclass Solution{ private: int bfs(int n, vector\u003cvector\u003cint\u003e\u003e\u0026neighbor) { vector\u003cint\u003e dist(n,-1); // 定义每个点到起点的距离 queue\u003cint\u003e q; // 用于bfs遍历的队列 q.push(0); // 将起点加入队列 dist[0]=0; // 0~0 距离为0 while(!q.empty()) { int x = q.front(); // 取出当前起点 q.pop(); for(auto \u0026y: neighbor[x]) // 遍历下一个节点 { if(dist[y]!=-1) continue; // 如果已经访问过了，直接跳过 q.push(y); dist[y] = dist[x]+1; // 计算0到x的距离，+1 } } return dist[n-1]; } public: vector\u003cint\u003e shortestDistanceAfterQueries(int n, vector\u003cvector\u003cint\u003e\u003e\u0026 queries) { vector\u003cvector\u003cint\u003e\u003e graph(n); // 定义图 vector\u003cint\u003e result; // 定义结果集 for (int i = 0; i \u003c n - 1; i++) { graph[i].emplace_back(i+1); // 建图 } for (auto\u0026 query : queries) { graph[query[0]].emplace_back(query[1]); // 插入边 result.emplace_back(bfs(n, graph)); // 计算图更新后的结果 } return result; } }; 时间复杂度分析 每次插入一条边，都要遍历一次 每次bfs，都需要遍历n+q次 时间复杂度为O(q*(n+q)) 空间复杂度分析 存储图和结果集，需要O(n+q)的空间 ",
-  "wordCount" : "111",
-  "inLanguage": "zh-cn",
-  "datePublished": "2024-11-20T21:53:37+08:00",
-  "dateModified": "2024-11-20T21:53:37+08:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://magics0ng-github-io.pages.dev/posts/leetcode-3243/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Kris的Neverland",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -232,7 +73,7 @@ public:
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="Kris的Neverland (Alt + H)">Kris的Neverland</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Kris的Neverland (Alt + H)">Kris的Neverland</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -257,6 +98,21 @@ public:
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search">
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -264,53 +120,75 @@ public:
 
 <article class="post-single">
   <header class="post-header">
-    
+    <div class="breadcrumbs"><a href="http://localhost:1313/">主页</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       Leetcode 3243
     </h1>
-    <div class="post-meta"><span title='2024-11-20 21:53:37 +0800 CST'>November 20, 2024</span>
+    <div class="post-description">
+      leetcode 3243的bfs题解
+    </div>
+    <div class="post-meta"><span title='2024-11-20 21:53:37 +0800 CST'>十一月 20, 2024</span>&nbsp;·&nbsp;1 分钟
 
 </div>
-  </header> 
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#leetcode-3243" aria-label="leetcode 3243">leetcode 3243</a></li>
+                <li>
+                    <a href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6%e5%88%86%e6%9e%90" aria-label="时间复杂度分析">时间复杂度分析</a></li>
+                <li>
+                    <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6%e5%88%86%e6%9e%90" aria-label="空间复杂度分析">空间复杂度分析</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
   <div class="post-content"><h1 id="leetcode-3243">leetcode 3243<a hidden class="anchor" aria-hidden="true" href="#leetcode-3243">#</a></h1>
-<p><a href="https://leetcode.cn/problems/shortest-distance-after-road-addition-queries-i/description/">原题链接</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> bfs(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span>neighbor)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dist(n,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>); <span style="color:#75715e">// 定义每个点到起点的距离
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;           <span style="color:#75715e">// 用于bfs遍历的队列
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        q.push(<span style="color:#ae81ff">0</span>);              <span style="color:#75715e">// 将起点加入队列
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dist[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;              <span style="color:#75715e">// 0~0 距离为0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty())
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> q.front(); <span style="color:#75715e">// 取出当前起点
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            q.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>y: neighbor[x])  <span style="color:#75715e">// 遍历下一个节点
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(dist[y]<span style="color:#f92672">!=-</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">continue</span>;       <span style="color:#75715e">// 如果已经访问过了，直接跳过
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                q.push(y);
-</span></span><span style="display:flex;"><span>                dist[y] <span style="color:#f92672">=</span> dist[x]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; <span style="color:#75715e">// 计算0到x的距离，+1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dist[n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> shortestDistanceAfterQueries(<span style="color:#66d9ef">int</span> n,
-</span></span><span style="display:flex;"><span>                                             vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> queries) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> graph(n);   <span style="color:#75715e">// 定义图
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> result;             <span style="color:#75715e">// 定义结果集
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            graph[i].emplace_back(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>); <span style="color:#75715e">// 建图
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> query : queries) {
-</span></span><span style="display:flex;"><span>            graph[query[<span style="color:#ae81ff">0</span>]].emplace_back(query[<span style="color:#ae81ff">1</span>]); <span style="color:#75715e">// 插入边
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            result.emplace_back(bfs(n, graph));         <span style="color:#75715e">// 计算图更新后的结果
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
+<p><a href="https://leetcode.cn/problems/shortest-distance-after-road-addition-queries-i/description/">原题链接</a>
+本题的求解思路为：每次更新一条边就要进行一次求起点到终点的最短路径。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="n">neighbor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 定义每个点到起点的距离
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>           <span class="c1">// 用于bfs遍历的队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>              <span class="c1">// 将起点加入队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>              <span class="c1">// 0~0 距离为0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="c1">// 取出当前起点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">y</span><span class="p">:</span> <span class="n">neighbor</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>  <span class="c1">// 遍历下一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">continue</span><span class="p">;</span>       <span class="c1">// 如果已经访问过了，直接跳过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dist</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// 计算0到x的距离，+1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dist</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">shortestDistanceAfterQueries</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                             <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">queries</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">graph</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>   <span class="c1">// 定义图
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>             <span class="c1">// 定义结果集
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 建图
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">query</span> <span class="p">:</span> <span class="n">queries</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">graph</span><span class="p">[</span><span class="n">query</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">query</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// 插入边
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">bfs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">graph</span><span class="p">));</span>         <span class="c1">// 计算图更新后的结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><h1 id="时间复杂度分析">时间复杂度分析<a hidden class="anchor" aria-hidden="true" href="#时间复杂度分析">#</a></h1>
 <ol>
 <li>每次插入一条边，都要遍历一次</li>
@@ -327,13 +205,15 @@ public:
 
   <footer class="post-footer">
     <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/leetcode/">Leetcode</a></li>
+      <li><a href="http://localhost:1313/tags/bfs/">Bfs</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">Kris的Neverland</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Kris的Neverland</a></span> · 
 
     <span>
         Powered by
@@ -400,6 +280,53 @@ public:
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

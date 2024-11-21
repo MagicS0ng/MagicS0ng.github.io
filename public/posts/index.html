@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="auto">
+<html lang="zh" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Posts | Kris的Neverland</title>
 <meta name="keywords" content="">
 <meta name="description" content="Posts - Kris的Neverland">
 <meta name="author" content="">
-<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/">
+<link rel="canonical" href="http://localhost:1313/posts/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
-<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://magics0ng-github-io.pages.dev/posts/index.xml">
-<link rel="alternate" hreflang="zh-cn" href="https://magics0ng-github-io.pages.dev/posts/">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/posts/index.xml">
+<link rel="alternate" hreflang="zh" href="http://localhost:1313/posts/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,30 +56,7 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/">
-  <meta property="og:site_name" content="Kris的Neverland">
-  <meta property="og:title" content="Posts">
-  <meta property="og:locale" content="zh-cn">
-  <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Posts">
-<meta name="twitter:description" content="">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://magics0ng-github-io.pages.dev/posts/"
-    }
-  ]
-}
-</script>
+</noscript>
 </head>
 
 <body class="list" id="top">
@@ -97,7 +74,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="Kris的Neverland (Alt + H)">Kris的Neverland</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Kris的Neverland (Alt + H)">Kris的Neverland</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -122,6 +99,21 @@
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search">
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -138,11 +130,11 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>leetcode 3243 原题链接
+    <p>leetcode 3243 原题链接 本题的求解思路为：每次更新一条边就要进行一次求起点到终点的最短路径。
 class Solution{ private: int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neighbor) { vector&lt;int&gt; dist(n,-1); // 定义每个点到起点的距离 queue&lt;int&gt; q; // 用于bfs遍历的队列 q.push(0); // 将起点加入队列 dist[0]=0; // 0~0 距离为0 while(!q.empty()) { int x = q.front(); // 取出当前起点 q.pop(); for(auto &amp;y: neighbor[x]) // 遍历下一个节点 { if(dist[y]!=-1) continue; // 如果已经访问过了，直接跳过 q.push(y); dist[y] = dist[x]&#43;1; // 计算0到x的距离，&#43;1 } } return dist[n-1]; } public: vector&lt;int&gt; shortestDistanceAfterQueries(int n, vector&lt;vector&lt;int&gt;&gt;&amp; queries) { vector&lt;vector&lt;int&gt;&gt; graph(n); // 定义图 vector&lt;int&gt; result; // 定义结果集 for (int i = 0; i &lt; n - 1; i&#43;&#43;) { graph[i].emplace_back(i&#43;1); // 建图 } for (auto&amp; query : queries) { graph[query[0]].emplace_back(query[1]); // 插入边 result.emplace_back(bfs(n, graph)); // 计算图更新后的结果 } return result; } }; 时间复杂度分析 每次插入一条边，都要遍历一次 每次bfs，都需要遍历n&#43;q次 时间复杂度为O(q*(n&#43;q)) 空间复杂度分析 存储图和结果集，需要O(n&#43;q)的空间 </p>
   </div>
-  <footer class="entry-footer"><span title='2024-11-20 21:53:37 +0800 CST'>November 20, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to Leetcode 3243" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3243/"></a>
+  <footer class="entry-footer"><span title='2024-11-20 21:53:37 +0800 CST'>十一月 20, 2024</span>&nbsp;·&nbsp;1 分钟</footer>
+  <a class="entry-link" aria-label="post link to Leetcode 3243" href="http://localhost:1313/posts/leetcode-3243/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -152,15 +144,15 @@ class Solution{ private: int bfs(int n, vector&lt;vector&lt;int&gt;&gt;&amp;neig
   </header>
   <div class="entry-content">
     <p>Hello World! This is my first post.
-</p>
+print(&#34;Hello World!&#34;) </p>
   </div>
-  <footer class="entry-footer"><span title='2024-11-20 17:16:47 +0800 CST'>November 20, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to My First Post" href="https://magics0ng-github-io.pages.dev/posts/my-first-post/"></a>
+  <footer class="entry-footer"><span title='2024-11-20 17:16:47 +0800 CST'>十一月 20, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to My First Post" href="http://localhost:1313/posts/my-first-post/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">Kris的Neverland</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Kris的Neverland</a></span> · 
 
     <span>
         Powered by

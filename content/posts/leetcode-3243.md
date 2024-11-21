@@ -2,12 +2,18 @@
 date = '2024-11-20T21:53:37+08:00'
 draft = false
 title = 'Leetcode 3243'
+ShowCodeCopyButtons=true
+ShowReadingTime=true
+ShowBreadCrumbs=true
+showToc = true
+description="leetcode 3243的bfs题解" 
+tags = ['leetcode', 'bfs']
 +++
 
 # leetcode 3243
 
 [原题链接](https://leetcode.cn/problems/shortest-distance-after-road-addition-queries-i/description/)
-
+本题的求解思路为：每次更新一条边就要进行一次求起点到终点的最短路径。
 ```C++
 class Solution{
 private:
