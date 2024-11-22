@@ -66,8 +66,8 @@ home = [ "HTML", "RSS", "JSON" ]
       [markup.goldmark.extensions.passthrough]
         enable = false
         [markup.goldmark.extensions.passthrough.delimiters]
-          block = []
-          inline = []
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
       [markup.goldmark.extensions.typographer]
         apostrophe = '&rsquo;'
         disable = false

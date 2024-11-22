@@ -6,8 +6,15 @@
     <description>Recent content in Leetcode on Kris的Neverland</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 21 Nov 2024 22:19:17 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 Nov 2024 21:43:28 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode 3240</title>
+      <link>http://localhost:1313/posts/leetcode-3240/</link>
+      <pubDate>Fri, 22 Nov 2024 21:43:28 +0800</pubDate>
+      <guid>http://localhost:1313/posts/leetcode-3240/</guid>
+      <description>leetcode 3240的题解</description>
+    </item>
     <item>
       <title>Leetcode 3248</title>
       <link>http://localhost:1313/posts/leetcode-3248/</link>
