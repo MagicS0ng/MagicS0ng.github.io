@@ -2,38 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Leetcode on Kris的Neverland</title>
-    <link>http://localhost:1313/tags/leetcode/</link>
+    <link>https://magics0ng-github-io.pages.dev/tags/leetcode/</link>
     <description>Recent content in Leetcode on Kris的Neverland</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 22 Nov 2024 22:13:36 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Nov 2024 12:11:04 +0800</lastBuildDate>
+    <atom:link href="https://magics0ng-github-io.pages.dev/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode 3238</title>
+      <link>https://magics0ng-github-io.pages.dev/posts/leetcode-3238/</link>
+      <pubDate>Sat, 23 Nov 2024 12:11:04 +0800</pubDate>
+      <guid>https://magics0ng-github-io.pages.dev/posts/leetcode-3238/</guid>
+      <description>leetcode 3238的题解</description>
+    </item>
     <item>
       <title>Leetcode 3233</title>
-      <link>http://localhost:1313/posts/leetcode-3233/</link>
+      <link>https://magics0ng-github-io.pages.dev/posts/leetcode-3233/</link>
       <pubDate>Fri, 22 Nov 2024 22:13:36 +0800</pubDate>
-      <guid>http://localhost:1313/posts/leetcode-3233/</guid>
+      <guid>https://magics0ng-github-io.pages.dev/posts/leetcode-3233/</guid>
       <description>leetcode 3233的题解</description>
     </item>
     <item>
       <title>Leetcode 3240</title>
-      <link>http://localhost:1313/posts/leetcode-3240/</link>
+      <link>https://magics0ng-github-io.pages.dev/posts/leetcode-3240/</link>
       <pubDate>Fri, 22 Nov 2024 21:43:28 +0800</pubDate>
-      <guid>http://localhost:1313/posts/leetcode-3240/</guid>
+      <guid>https://magics0ng-github-io.pages.dev/posts/leetcode-3240/</guid>
       <description>leetcode 3240的题解</description>
     </item>
     <item>
       <title>Leetcode 3248</title>
-      <link>http://localhost:1313/posts/leetcode-3248/</link>
+      <link>https://magics0ng-github-io.pages.dev/posts/leetcode-3248/</link>
       <pubDate>Thu, 21 Nov 2024 22:19:17 +0800</pubDate>
-      <guid>http://localhost:1313/posts/leetcode-3248/</guid>
+      <guid>https://magics0ng-github-io.pages.dev/posts/leetcode-3248/</guid>
       <description>leetcode 3248的bfs题解</description>
     </item>
     <item>
       <title>Leetcode 3243</title>
-      <link>http://localhost:1313/posts/leetcode-3243/</link>
+      <link>https://magics0ng-github-io.pages.dev/posts/leetcode-3243/</link>
       <pubDate>Wed, 20 Nov 2024 21:53:37 +0800</pubDate>
-      <guid>http://localhost:1313/posts/leetcode-3243/</guid>
+      <guid>https://magics0ng-github-io.pages.dev/posts/leetcode-3243/</guid>
       <description>leetcode 3243的bfs题解</description>
     </item>
   </channel>
