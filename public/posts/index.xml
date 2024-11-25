@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Kris的Neverland</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
-    <lastBuildDate>Sat, 23 Nov 2024 12:11:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2024 23:30:23 +0800</lastBuildDate>
     <atom:link href="https://magics0ng-github-io.pages.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode 743</title>
+      <link>https://magics0ng-github-io.pages.dev/posts/leetcode-743/</link>
+      <pubDate>Mon, 25 Nov 2024 23:30:23 +0800</pubDate>
+      <guid>https://magics0ng-github-io.pages.dev/posts/leetcode-743/</guid>
+      <description>leetcode 743的题解</description>
+    </item>
     <item>
       <title>Leetcode 3238</title>
       <link>https://magics0ng-github-io.pages.dev/posts/leetcode-3238/</link>

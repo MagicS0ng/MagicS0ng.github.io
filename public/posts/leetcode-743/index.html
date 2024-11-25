@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Leetcode 3238 | Kris的Neverland</title>
-<meta name="keywords" content="leetcode">
-<meta name="description" content="leetcode 3238的题解">
+<title>Leetcode 743 | Kris的Neverland</title>
+<meta name="keywords" content="leetcode, graph">
+<meta name="description" content="leetcode 743的题解">
 <meta name="author" content="Kris">
-<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3238/">
+<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/leetcode-743/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.c125afe64541d4fabfe34fa011bcbf6c417678ef48885bcf23c30dd11d39e89e.css" integrity="sha256-wSWv5kVB1Pq/40&#43;gEby/bEF2eO9IiFvPI8MN0R056J4=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3238/">
+<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/leetcode-743/">
 <noscript>
     <style>
         #theme-toggle,
@@ -73,19 +73,20 @@
       });
     });
 </script>
-<meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/leetcode-3238/">
+<meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/leetcode-743/">
   <meta property="og:site_name" content="Kris的Neverland">
-  <meta property="og:title" content="Leetcode 3238">
-  <meta property="og:description" content="leetcode 3238的题解">
+  <meta property="og:title" content="Leetcode 743">
+  <meta property="og:description" content="leetcode 743的题解">
   <meta property="og:locale" content="zh">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-11-23T12:11:04+08:00">
-    <meta property="article:modified_time" content="2024-11-23T12:11:04+08:00">
+    <meta property="article:published_time" content="2024-11-25T23:30:23+08:00">
+    <meta property="article:modified_time" content="2024-11-25T23:30:23+08:00">
     <meta property="article:tag" content="Leetcode">
+    <meta property="article:tag" content="Graph">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode 3238">
-<meta name="twitter:description" content="leetcode 3238的题解">
+<meta name="twitter:title" content="Leetcode 743">
+<meta name="twitter:description" content="leetcode 743的题解">
 
 
 <script type="application/ld+json">
@@ -102,8 +103,8 @@
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Leetcode 3238",
-      "item": "https://magics0ng-github-io.pages.dev/posts/leetcode-3238/"
+      "name": "Leetcode 743",
+      "item": "https://magics0ng-github-io.pages.dev/posts/leetcode-743/"
     }
   ]
 }
@@ -112,24 +113,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Leetcode 3238",
-  "name": "Leetcode 3238",
-  "description": "leetcode 3238的题解",
+  "headline": "Leetcode 743",
+  "name": "Leetcode 743",
+  "description": "leetcode 743的题解",
   "keywords": [
-    "leetcode"
+    "leetcode", "graph"
   ],
-  "articleBody": "leetcode 3238 原题\n分析 题目定义玩家的某个颜色的球的个数大于玩家id为胜利玩家，\n因此需要统计每个玩家的对应颜色的球的数量，也就是要定义一个二维数组 $arr[playerId][ballColor]$ 表示玩家id为playerId，球颜色为ballColor的球数量。 一个玩家只能被记录一次胜利玩家，因此需要一个标记数组$tags[playerCount]$标记玩家是否已经被记录过 一旦某个玩家的$arr[playerId][ballColor]\u003eplayerId$，胜利玩家结果数量+1，且要将$tags[playerId]$标记为true，表示该玩家已经被记录为胜利玩家 // 1. // const int MXN =20; // int arr[MXN][11]{0}; // bool tags[MXN]{false}; class Solution { public: int winningPlayerCount(int n, vector\u003cvector\u003cint\u003e\u003e\u0026 pick) { // 2. vector\u003cvector\u003cint\u003e\u003e arr(n,vector\u003cint\u003e(11,0)); vector\u003cbool\u003e tags(n,false); int result = 0; for (auto pic : pick) { // playerId = pic[0]; // ballColor = pic[1]; // tags[playerId]未被记入结果时，且arr[playerId][ballColor]\u003eplayerId // 结果+1 将tags[playerId] 标记为true int playerId = pic[0]; int ballColor = pic[1]; ++arr[playerId][ballColor]; if (tags[playerId] == false \u0026\u0026 arr[playerId][ballColor] \u003e playerId) { result++; tags[playerId] = true; } } return result; } }; 时间复杂度 对于每个pic 都需要遍历一次 对于两个数组，需要对$n*max(y)$的数组初始化 因此时间复杂度为$O(n*max(y)+m)$ $m$为pick的长度，$n$为playerId的数量，$y$为球颜色数量 空间复杂度 需要两个数组，因此空间复杂度为$O(n*y)$\n一些问题 尚未搞明白，为什么注释1的定义方式本地可以通过leetcode无法通过，注释2的可以\n",
-  "wordCount" : "101",
+  "articleBody": "leetcode 743 原题\n分析 题目要求计算从起始节点到所有节点的最短时间，也就是到最远距离的最小时间。 使用dijkstra算法即可。\nclass Solution { public: int networkDelayTime(vector\u003cvector\u003cint\u003e\u003e\u0026 times, int n, int k) { vector\u003cvector\u003cint\u003e\u003e g(n, vector\u003cint\u003e(n, INT_MAX / 2));// 定义图， g[i][j] for (auto\u0026 t : times) { g[t[0] - 1][t[1] - 1] = t[2]; } vector\u003cint\u003e dis(n, INT_MAX / 2), done(n); // dis[i] 表示k-\u003e i的最短路 dis[k - 1] = 0; // 起始节点为k 起始距离为0 while (true) { int x = -1; for (int i = 0; i \u003c n; i++) { if (!done[i] \u0026\u0026 (x \u003c 0 || dis[i] \u003c dis[x])) { x = i; // 寻找一个未访问的点，且到它的距离最小 } } if (x \u003c 0) return ranges::max(dis); if (dis[x] == INT_MAX / 2) // 如果一个点不可达 直接返回 return -1; done[x] = true; // 更新该点访问过 for (int y = 0; y \u003c n; y++) { dis[y] = min(dis[y], dis[x] + g[x][y]); //更新最短距离 } } } }; 时间复杂度 初始化邻接矩阵为$O(n^2)$ 空间复杂度 使用了邻接矩阵存储图为$O(n^2)$ ",
+  "wordCount" : "140",
   "inLanguage": "zh",
-  "datePublished": "2024-11-23T12:11:04+08:00",
-  "dateModified": "2024-11-23T12:11:04+08:00",
+  "datePublished": "2024-11-25T23:30:23+08:00",
+  "dateModified": "2024-11-25T23:30:23+08:00",
   "author":{
     "@type": "Person",
     "name": "Kris"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://magics0ng-github-io.pages.dev/posts/leetcode-3238/"
+    "@id": "https://magics0ng-github-io.pages.dev/posts/leetcode-743/"
   },
   "publisher": {
     "@type": "Organization",
@@ -202,12 +203,12 @@
   <header class="post-header">
     <div class="breadcrumbs"><a href="https://magics0ng-github-io.pages.dev/">主页</a>&nbsp;»&nbsp;<a href="https://magics0ng-github-io.pages.dev/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      Leetcode 3238
+      Leetcode 743
     </h1>
     <div class="post-description">
-      leetcode 3238的题解
+      leetcode 743的题解
     </div>
-    <div class="post-meta"><span title='2024-11-23 12:11:04 +0800 CST'>十一月 23, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris
+    <div class="post-meta"><span title='2024-11-25 23:30:23 +0800 CST'>十一月 25, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris
 
 </div>
   </header> <div class="toc">
@@ -218,7 +219,7 @@
 
         <div class="inner"><ul>
                 <li>
-                    <a href="#leetcode-3238" aria-label="leetcode 3238">leetcode 3238</a><ul>
+                    <a href="#leetcode-743" aria-label="leetcode 743">leetcode 743</a><ul>
                         
                 <li>
                     <a href="#%e5%88%86%e6%9e%90" aria-label="分析">分析</a></li></ul>
@@ -226,62 +227,53 @@
                 <li>
                     <a href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="时间复杂度">时间复杂度</a></li>
                 <li>
-                    <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="空间复杂度">空间复杂度</a></li>
-                <li>
-                    <a href="#%e4%b8%80%e4%ba%9b%e9%97%ae%e9%a2%98" aria-label="一些问题">一些问题</a>
+                    <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="空间复杂度">空间复杂度</a>
                 </li>
             </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><h1 id="leetcode-3238">leetcode 3238<a hidden class="anchor" aria-hidden="true" href="#leetcode-3238">#</a></h1>
-<p><a href="https://leetcode.cn/problems/find-the-number-of-winning-players/?envType=daily-question&amp;envId=2024-11-23">原题</a></p>
+  <div class="post-content"><h1 id="leetcode-743">leetcode 743<a hidden class="anchor" aria-hidden="true" href="#leetcode-743">#</a></h1>
+<p><a href="https://leetcode.cn/problems/network-delay-time/description/?envType=daily-question&amp;envId=2024-11-25">原题</a></p>
 <h2 id="分析">分析<a hidden class="anchor" aria-hidden="true" href="#分析">#</a></h2>
-<p>题目定义玩家的某个颜色的球的个数大于玩家id为胜利玩家，</p>
-<ol>
-<li>因此需要统计每个玩家的对应颜色的球的数量，也就是要定义一个二维数组 $arr[playerId][ballColor]$ 表示玩家id为playerId，球颜色为ballColor的球数量。</li>
-<li>一个玩家只能被记录一次胜利玩家，因此需要一个标记数组$tags[playerCount]$标记玩家是否已经被记录过</li>
-<li>一旦某个玩家的$arr[playerId][ballColor]&gt;playerId$，胜利玩家结果数量+1，且要将$tags[playerId]$标记为true，表示该玩家已经被记录为胜利玩家</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="c1">// 1.
-</span></span></span><span class="line"><span class="cl"><span class="c1">// const int MXN =20;
-</span></span></span><span class="line"><span class="cl"><span class="c1">// int arr[MXN][11]{0};
-</span></span></span><span class="line"><span class="cl"><span class="c1">// bool tags[MXN]{false};
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<p>题目要求计算从起始节点到所有节点的最短时间，也就是到最远距离的最小时间。
+使用dijkstra算法即可。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">winningPlayerCount</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">pick</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 2.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">tags</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="nb">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">pic</span> <span class="p">:</span> <span class="n">pick</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// playerId = pic[0];
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// ballColor = pic[1];
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// tags[playerId]未被记入结果时，且arr[playerId][ballColor]&gt;playerId
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 结果+1 将tags[playerId] 标记为true
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">int</span> <span class="n">playerId</span> <span class="o">=</span> <span class="n">pic</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">ballColor</span> <span class="o">=</span> <span class="n">pic</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="o">++</span><span class="n">arr</span><span class="p">[</span><span class="n">playerId</span><span class="p">][</span><span class="n">ballColor</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">playerId</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span> <span class="o">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">playerId</span><span class="p">][</span><span class="n">ballColor</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">playerId</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">result</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">tags</span><span class="p">[</span><span class="n">playerId</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">networkDelayTime</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">times</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span> <span class="o">/</span> <span class="mi">2</span><span class="p">));</span><span class="c1">// 定义图， g[i][j] 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">t</span> <span class="p">:</span> <span class="n">times</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">g</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">done</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">// dis[i] 表示k-&gt; i的最短路
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dis</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 起始节点为k 起始距离为0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">done</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// 寻找一个未访问的点，且到它的距离最小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">ranges</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">dis</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">INT_MAX</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// 如果一个点不可达 直接返回
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">done</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 更新该点访问过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dis</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]);</span> <span class="c1">//更新最短距离
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><h1 id="时间复杂度">时间复杂度<a hidden class="anchor" aria-hidden="true" href="#时间复杂度">#</a></h1>
 <ol>
-<li>对于每个pic 都需要遍历一次</li>
-<li>对于两个数组，需要对$n*max(y)$的数组初始化</li>
-<li>因此时间复杂度为$O(n*max(y)+m)$ $m$为pick的长度，$n$为playerId的数量，$y$为球颜色数量</li>
+<li>初始化邻接矩阵为$O(n^2)$</li>
 </ol>
 <h1 id="空间复杂度">空间复杂度<a hidden class="anchor" aria-hidden="true" href="#空间复杂度">#</a></h1>
-<p>需要两个数组，因此空间复杂度为$O(n*y)$</p>
-<h1 id="一些问题">一些问题<a hidden class="anchor" aria-hidden="true" href="#一些问题">#</a></h1>
-<p>尚未搞明白，为什么注释1的定义方式本地可以通过leetcode无法通过，注释2的可以</p>
+<ol>
+<li>使用了邻接矩阵存储图为$O(n^2)$</li>
+</ol>
 
 
   </div>
@@ -289,17 +281,13 @@
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://magics0ng-github-io.pages.dev/tags/leetcode/">Leetcode</a></li>
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/graph/">Graph</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://magics0ng-github-io.pages.dev/posts/leetcode-743/">
-    <span class="title">« 上一页</span>
-    <br>
-    <span>Leetcode 743</span>
-  </a>
-  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3233/">
+  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3238/">
     <span class="title">下一页 »</span>
     <br>
-    <span>Leetcode 3233</span>
+    <span>Leetcode 3238</span>
   </a>
 </nav>
 

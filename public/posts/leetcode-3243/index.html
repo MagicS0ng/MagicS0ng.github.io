@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Leetcode 3243 | Kris的Neverland</title>
-<meta name="keywords" content="leetcode, bfs">
+<meta name="keywords" content="leetcode, bfs, graph">
 <meta name="description" content="leetcode 3243的bfs题解">
 <meta name="author" content="Kris">
 <link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3243/">
@@ -66,6 +66,7 @@
     <meta property="article:modified_time" content="2024-11-20T21:53:37+08:00">
     <meta property="article:tag" content="Leetcode">
     <meta property="article:tag" content="Bfs">
+    <meta property="article:tag" content="Graph">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 3243">
 <meta name="twitter:description" content="leetcode 3243的bfs题解">
@@ -99,7 +100,7 @@
   "name": "Leetcode 3243",
   "description": "leetcode 3243的bfs题解",
   "keywords": [
-    "leetcode", "bfs"
+    "leetcode", "bfs", "graph"
   ],
   "articleBody": "leetcode 3243 原题链接 本题的求解思路为：每次更新一条边就要进行一次求起点到终点的最短路径。\nclass Solution{ private: int bfs(int n, vector\u003cvector\u003cint\u003e\u003e\u0026neighbor) { vector\u003cint\u003e dist(n,-1); // 定义每个点到起点的距离 queue\u003cint\u003e q; // 用于bfs遍历的队列 q.push(0); // 将起点加入队列 dist[0]=0; // 0~0 距离为0 while(!q.empty()) { int x = q.front(); // 取出当前起点 q.pop(); for(auto \u0026y: neighbor[x]) // 遍历下一个节点 { if(dist[y]!=-1) continue; // 如果已经访问过了，直接跳过 q.push(y); dist[y] = dist[x]+1; // 计算0到x的距离，+1 } } return dist[n-1]; } public: vector\u003cint\u003e shortestDistanceAfterQueries(int n, vector\u003cvector\u003cint\u003e\u003e\u0026 queries) { vector\u003cvector\u003cint\u003e\u003e graph(n); // 定义图 vector\u003cint\u003e result; // 定义结果集 for (int i = 0; i \u003c n - 1; i++) { graph[i].emplace_back(i+1); // 建图 } for (auto\u0026 query : queries) { graph[query[0]].emplace_back(query[1]); // 插入边 result.emplace_back(bfs(n, graph)); // 计算图更新后的结果 } return result; } }; 时间复杂度分析 每次插入一条边，都要遍历一次 每次bfs，都需要遍历n+q次 时间复杂度为O(q*(n+q)) 空间复杂度分析 存储图和结果集，需要O(n+q)的空间 ",
   "wordCount" : "112",
@@ -270,6 +271,7 @@
     <ul class="post-tags">
       <li><a href="https://magics0ng-github-io.pages.dev/tags/leetcode/">Leetcode</a></li>
       <li><a href="https://magics0ng-github-io.pages.dev/tags/bfs/">Bfs</a></li>
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/graph/">Graph</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3248/">
