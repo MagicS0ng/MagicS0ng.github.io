@@ -29,18 +29,20 @@ public:
         dis[k - 1] = 0; // 起始节点为k 起始距离为0
         while (true) {
             int x = -1;
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++) { // 遍历dis 寻找距离最短的点
                 if (!done[i] && (x < 0 || dis[i] < dis[x])) {
-                    x = i; // 寻找一个未访问的点，且到它的距离最小
+                    x = i; 
                 }
             }
-            if (x < 0) 
+            // 如果 没有找到未处理的点，直接返回
+            if (x < 0)
                 return ranges::max(dis);
-            if (dis[x] == INT_MAX / 2) // 如果一个点不可达 直接返回
+            // 如果找到的距离最小的点的距离还是inf 返回-1，表示不可达
+            if (dis[x] == INT_MAX / 2)
                 return -1;
-            done[x] = true; // 更新该点访问过
+            done[x] = true; // 更新该节点为访问过
             for (int y = 0; y < n; y++) {
-                dis[y] = min(dis[y], dis[x] + g[x][y]); //更新最短距离
+                dis[y] = min(dis[y], dis[x] + g[x][y]); // 以当前节点为起始节点，更新最小距离
             }
         }
     }
