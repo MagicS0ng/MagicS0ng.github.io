@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cpp Thread Basic | Kris的Neverland</title>
+<meta name="keywords" content="C&#43;&#43;, multi-thread">
+<meta name="description" content="C&#43;&#43;多线程的基础概念">
+<meta name="author" content="Kris">
+<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c125afe64541d4fabfe34fa011bcbf6c417678ef48885bcf23c30dd11d39e89e.css" integrity="sha256-wSWv5kVB1Pq/40&#43;gEby/bEF2eO9IiFvPI8MN0R056J4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/">
+  <meta property="og:site_name" content="Kris的Neverland">
+  <meta property="og:title" content="Cpp Thread Basic">
+  <meta property="og:description" content="C&#43;&#43;多线程的基础概念">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-26T20:52:32+08:00">
+    <meta property="article:modified_time" content="2024-11-26T20:52:32+08:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="Multi-Thread">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cpp Thread Basic">
+<meta name="twitter:description" content="C&#43;&#43;多线程的基础概念">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://magics0ng-github-io.pages.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Cpp Thread Basic",
+      "item": "https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cpp Thread Basic",
+  "name": "Cpp Thread Basic",
+  "description": "C++多线程的基础概念",
+  "keywords": [
+    "C++", "multi-thread"
+  ],
+  "articleBody": "多线程 多线程享有一个进程的地址空间，线程切换比进程切换要简单，而且线程通信也比进程通信要简单。\nC++中使用多线程可以通过std::thread类实现。std::thread位于头文件中。 具体可以通过以下方式实现一个线程\n绑定普通函数 绑定lambda表达式 绑定函数对象 函数指针 仿函数 std::bind 初始化一个线程后，线程就会开始执行，但是线程可能会在主线程结束之后还需要运行，因此需要使用std::thread::join方法来等待线程结束。\n也可以通过std::thread::detach在主线程后台运行，主线程不会等待子线程执行结束。 绑定普通函数 void print() { std::cout \u003c\u003c \"Hello, World!\" \u003c\u003c std::endl; } void bindaThread() { std::thread t1(print); t1.join(); } 绑定类成员函数 class Foo { public: void print(){ std::cout \u003c\u003c \"This is a class member function\" \u003c\u003c std::endl; } } void bindClassMember() { Foo foo; std::thread t(\u0026Foo::print, \u0026foo); t.join(); } 绑定lambda void bindLambda() { std::thread t([](){ std::cout \u003c\u003c \"Bind a lambda function\" \u003c\u003c std::endl; }) } 绑定仿函数 struct ClassLikeFunc { void operator()() { std::cout \u003c\u003c \"Bind a class like function\" \u003c\u003c std::endl; } } void bindClassLikeFunc() { std::thread t{ClassLikeFunc()}; t.join(); } 如需要传参，初始化时std::thread t(func,params)即可。\n注意 std::thread不支持拷贝构造，只能通过移动构造。 因此一个线程对象可以通过std::move()的方式将所有权转移给其他线程 std::thread默认传参是以拷贝的方式，如果要传入引用，需要通过std::ref() ",
+  "wordCount" : "106",
+  "inLanguage": "zh",
+  "datePublished": "2024-11-26T20:52:32+08:00",
+  "dateModified": "2024-11-26T20:52:32+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Kris"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kris的Neverland",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="Kris的Neverland (Alt + H)">Kris的Neverland</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/archives" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/tags" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://magics0ng-github-io.pages.dev/">主页</a>&nbsp;»&nbsp;<a href="https://magics0ng-github-io.pages.dev/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Cpp Thread Basic
+    </h1>
+    <div class="post-description">
+      C&#43;&#43;多线程的基础概念
+    </div>
+    <div class="post-meta"><span title='2024-11-26 20:52:32 +0800 CST'>十一月 26, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%a4%9a%e7%ba%bf%e7%a8%8b" aria-label="多线程">多线程</a><ul>
+                        
+                <li>
+                    <a href="#%e7%bb%91%e5%ae%9a%e6%99%ae%e9%80%9a%e5%87%bd%e6%95%b0" aria-label="绑定普通函数">绑定普通函数</a></li>
+                <li>
+                    <a href="#%e7%bb%91%e5%ae%9a%e7%b1%bb%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0" aria-label="绑定类成员函数">绑定类成员函数</a></li>
+                <li>
+                    <a href="#%e7%bb%91%e5%ae%9alambda" aria-label="绑定lambda">绑定lambda</a></li>
+                <li>
+                    <a href="#%e7%bb%91%e5%ae%9a%e4%bb%bf%e5%87%bd%e6%95%b0" aria-label="绑定仿函数">绑定仿函数</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%b3%a8%e6%84%8f" aria-label="注意">注意</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="多线程">多线程<a hidden class="anchor" aria-hidden="true" href="#多线程">#</a></h1>
+<p>多线程享有一个进程的地址空间，线程切换比进程切换要简单，而且线程通信也比进程通信要简单。<br>
+C++中使用多线程可以通过<code>std::thread</code>类实现。<code>std::thread</code>位于头文件<code>&lt;thread&gt;</code>中。
+具体可以通过以下方式实现一个线程</p>
+<ol>
+<li>绑定普通函数</li>
+<li>绑定lambda表达式</li>
+<li>绑定函数对象</li>
+<li>函数指针</li>
+<li>仿函数</li>
+<li><code>std::bind</code>
+初始化一个线程后，线程就会开始执行，但是线程可能会在主线程结束之后还需要运行，因此需要使用<code>std::thread::join</code>方法来等待线程结束。<br>
+也可以通过<code>std::thread::detach</code>在主线程后台运行，主线程不会等待子线程执行结束。</li>
+</ol>
+<h2 id="绑定普通函数">绑定普通函数<a hidden class="anchor" aria-hidden="true" href="#绑定普通函数">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, World!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bindaThread</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">t1</span><span class="p">(</span><span class="n">print</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="绑定类成员函数">绑定类成员函数<a hidden class="anchor" aria-hidden="true" href="#绑定类成员函数">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Foo</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">print</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;This is a class member function&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bindClassMember</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Foo</span> <span class="n">foo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">t</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Foo</span><span class="o">::</span><span class="n">print</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">foo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="绑定lambda">绑定lambda<a hidden class="anchor" aria-hidden="true" href="#绑定lambda">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bindLambda</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">t</span><span class="p">([](){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Bind a lambda function&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="绑定仿函数">绑定仿函数<a hidden class="anchor" aria-hidden="true" href="#绑定仿函数">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">ClassLikeFunc</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">operator</span><span class="p">()()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Bind a class like function&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bindClassLikeFunc</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">t</span><span class="p">{</span><span class="n">ClassLikeFunc</span><span class="p">()};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>如需要传参，初始化时<code>std::thread t(func,params)</code>即可。</p>
+<h1 id="注意">注意<a hidden class="anchor" aria-hidden="true" href="#注意">#</a></h1>
+<ol>
+<li><code>std::thread</code>不支持拷贝构造，只能通过移动构造。  因此一个线程对象可以通过<code>std::move()</code>的方式将所有权转移给其他线程</li>
+<li><code>std::thread</code>默认传参是以拷贝的方式，如果要传入引用，需要通过<code>std::ref()</code></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/multi-thread/">Multi-Thread</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://magics0ng-github-io.pages.dev/posts/future-async-promise/">
+    <span class="title">« 上一页</span>
+    <br>
+    <span>Future Async Promise</span>
+  </a>
+  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/leetcode-743/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>Leetcode 743</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">Kris的Neverland</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

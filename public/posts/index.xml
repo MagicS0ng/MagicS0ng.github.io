@@ -6,8 +6,22 @@
     <description>Recent content in Posts on Kris的Neverland</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 25 Nov 2024 23:30:23 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 27 Nov 2024 21:11:39 +0800</lastBuildDate>
     <atom:link href="https://magics0ng-github-io.pages.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Future Async Promise</title>
+      <link>https://magics0ng-github-io.pages.dev/posts/future-async-promise/</link>
+      <pubDate>Wed, 27 Nov 2024 21:11:39 +0800</pubDate>
+      <guid>https://magics0ng-github-io.pages.dev/posts/future-async-promise/</guid>
+      <description>C&#43;&#43;中std::future, std::packaged_task, std::promise的使用</description>
+    </item>
+    <item>
+      <title>Cpp Thread Basic</title>
+      <link>https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/</link>
+      <pubDate>Tue, 26 Nov 2024 20:52:32 +0800</pubDate>
+      <guid>https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/</guid>
+      <description>C&#43;&#43;多线程的基础概念</description>
+    </item>
     <item>
       <title>Leetcode 743</title>
       <link>https://magics0ng-github-io.pages.dev/posts/leetcode-743/</link>

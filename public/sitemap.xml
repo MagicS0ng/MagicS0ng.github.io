@@ -2,22 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://magics0ng-github-io.pages.dev/tags/graph/</loc>
-    <lastmod>2024-11-25T23:30:23+08:00</lastmod>
+    <loc>https://magics0ng-github-io.pages.dev/tags/async/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/tags/c&#43;&#43;/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/tags/future/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/posts/future-async-promise/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
   </url><url>
     <loc>https://magics0ng-github-io.pages.dev/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/tags/multi-thread/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/posts/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/tags/promise/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/tags/</loc>
+    <lastmod>2024-11-27T21:11:39+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/posts/cpp-thread-basic/</loc>
+    <lastmod>2024-11-26T20:52:32+08:00</lastmod>
+  </url><url>
+    <loc>https://magics0ng-github-io.pages.dev/tags/graph/</loc>
     <lastmod>2024-11-25T23:30:23+08:00</lastmod>
   </url><url>
     <loc>https://magics0ng-github-io.pages.dev/tags/leetcode/</loc>
     <lastmod>2024-11-25T23:30:23+08:00</lastmod>
   </url><url>
     <loc>https://magics0ng-github-io.pages.dev/posts/leetcode-743/</loc>
-    <lastmod>2024-11-25T23:30:23+08:00</lastmod>
-  </url><url>
-    <loc>https://magics0ng-github-io.pages.dev/posts/</loc>
-    <lastmod>2024-11-25T23:30:23+08:00</lastmod>
-  </url><url>
-    <loc>https://magics0ng-github-io.pages.dev/tags/</loc>
     <lastmod>2024-11-25T23:30:23+08:00</lastmod>
   </url><url>
     <loc>https://magics0ng-github-io.pages.dev/posts/leetcode-3238/</loc>

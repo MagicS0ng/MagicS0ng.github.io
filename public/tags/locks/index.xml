@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Locks on Kris的Neverland</title>
+    <link>http://localhost:8310/tags/locks/</link>
+    <description>Recent content in Locks on Kris的Neverland</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 27 Nov 2024 11:29:45 +0800</lastBuildDate>
+    <atom:link href="http://localhost:8310/tags/locks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cpp Thread Lock</title>
+      <link>http://localhost:8310/posts/cpp-thread-lock/</link>
+      <pubDate>Wed, 27 Nov 2024 11:29:45 +0800</pubDate>
+      <guid>http://localhost:8310/posts/cpp-thread-lock/</guid>
+      <description>C&#43;&#43;多线程编程中的锁的使用方法</description>
+    </item>
+  </channel>
+</rss>
