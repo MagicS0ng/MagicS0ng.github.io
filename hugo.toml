@@ -1,6 +1,6 @@
 baseURL = 'https://magics0ng-github-io.pages.dev'
 languageCode = 'zh-cn'
-title = 'Kris的Neverland'
+title = '😶‍🌫️Kris的Neverland'
 theme = 'PaperMod'
 defaultContentLanguage = 'zh'
 enableInlineShortcodes = true
@@ -20,7 +20,7 @@ weight = 1
   tag = "tags"
   archives="archives"
 [[languages.zh.menu.main]]
-name = "Archives"
+name = "🗂️Archives"
 url = "/archives"
 weight = 5
 
@@ -30,7 +30,7 @@ weight = 5
 #weight = 10
 
 [[languages.zh.menu.main]]
-name = "Tags"
+name = "🏷️Tags"
 url = "/tags"
 weight = 20
 
@@ -96,6 +96,12 @@ home = [ "HTML", "RSS", "JSON" ]
       hardWraps = false
       unsafe = false
       xhtml = false
+  [markup.highlight]
+    codeFences= true
+    guessSyntax= true
+    lineNos = true
+    noClasses = false
+    style ="monokai"
 #[markup]
 #defaultMarkdownHandler = 'goldmark'
 #[markup.goldmark.renderer]
@@ -119,6 +125,8 @@ displayFullLangName = true
 ShowPostNavLinks = true
 ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
+ShowExpandButton = true
+ShowMacDots = true
 ShowRssButtonInSectionTermList = true
 ShowAllPagesInArchive = true
 ShowPageNums = true
@@ -126,16 +134,16 @@ ShowToc = true
 
   [params.profileMode]
   enabled = false
-  title = "Kris's Neverland"
+  title = "😶‍🌫️Kris's Neverland"
   #imageUrl = "#"
   #imageTitle = "my image"
   subtitle = "😎Welcome to Kris's Neverland!🫡"
     [[params.profileMode.buttons]]
-    name = "Archives"
+    name = "🗂️Archives"
     url = "/archives"
 
     [[params.profileMode.buttons]]
-    name = "Tags"
+    name = "⌗Tags"
     url = "/tags"
 
   [params.homeInfoParams]
