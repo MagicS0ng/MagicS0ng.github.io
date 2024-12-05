@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Leetcode 3274 12/03/2024 | 😶‍🌫️Kris的Neverland</title>
+<meta name="keywords" content="leetcode">
+<meta name="description" content="leetcode 3274 简单题，但是原理不简单">
+<meta name="author" content="Kris">
+<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3274-12-03-2024/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b77f76025494e037d52c0250f00cc8a2ff41875d068463a56e0d76beed50dd13.css" integrity="sha256-t392AlSU4DfVLAJQ8AzIov9Bh10GhGOlbg12vu1Q3RM=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3274-12-03-2024/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/leetcode-3274-12-03-2024/">
+  <meta property="og:site_name" content="😶‍🌫️Kris的Neverland">
+  <meta property="og:title" content="Leetcode 3274 12/03/2024">
+  <meta property="og:description" content="leetcode 3274 简单题，但是原理不简单">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-03T11:44:04+08:00">
+    <meta property="article:modified_time" content="2024-12-03T11:44:04+08:00">
+    <meta property="article:tag" content="Leetcode">
+    <meta property="og:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyOg.img">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyOg.img">
+<meta name="twitter:title" content="Leetcode 3274 12/03/2024">
+<meta name="twitter:description" content="leetcode 3274 简单题，但是原理不简单">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://magics0ng-github-io.pages.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Leetcode 3274 12/03/2024",
+      "item": "https://magics0ng-github-io.pages.dev/posts/leetcode-3274-12-03-2024/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Leetcode 3274 12/03/2024",
+  "name": "Leetcode 3274 12\/03\/2024",
+  "description": "leetcode 3274 简单题，但是原理不简单",
+  "keywords": [
+    "leetcode"
+  ],
+  "articleBody": "原题\nleetcode 3274 检查棋盘方格颜色是否相同 方法1 因为原题给出了棋盘的格式，所以我的想法是初始化棋盘，然后根据两个坐标访问即可。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 class Solution { private: const string s1 = \"01010101\"; const string s2 = \"10101010\"; vector\u003cstring\u003e grid; void init() { grid.resize(8, string(8, '0')); for (int i = 0; i \u003c 8; i++) { grid[i] = i % 2 ? s1 : s2; } } public: bool checkTwoChessboards(string coordinate1, string coordinate2) { init(); return grid[coordinate1[0] - 'a'][coordinate1[1] - '0' - 1] == grid[coordinate2[0] - 'a'][coordinate2[1] - '0' - 1]; } }; 时间复杂度 使用了常数时间初始化棋盘，可以视作O(1) 空间复杂度 使用了常数量的空间存储棋盘，可以视作 O(1) 方法2 方法2 就很取巧了。棋盘的横坐标是a~h ascii即为97~104，纵坐标为1~8。 举几个例子：\n(a,1)为黑色，(a,2)为白色，后边交替…… (b,1)为白色，(b,2)为黑色，后边交替…… (c,1)为黑色，(c,2)为白色，后边交替…… (d,1)为白色，(d,2)为黑色，后边交替…… 把横坐标使用ascii代替后 (97,1)为黑色，(97,2)为白色，后边交替…… (98,1)为白色，(98,2)为黑色，后边交替…… (99,1)为黑色，(99,2)为白色，后边交替…… (100,1)为白色，(100,2)为黑色，后边交替…… 总结规律： 如果横纵坐标奇偶性一致，为黑色，否则为白色 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 class Solution { bool same(int a, int b) { if (a % 2 \u0026\u0026 b % 2) return true; else if (a % 2 == 0 \u0026\u0026 b % 2 == 0) return true; return false; } public: bool checkTwoChessboards(string s, string t) { int s0 = toascii(s[0]); int s1 = s[1] - '0'; int t0 = toascii(t[0]); int t1 = t[1] - '0'; if (same(s0, s1) \u0026\u0026 same(t0, t1) || !same(s0, s1) \u0026\u0026 !same(t0, t1)) return true; return false; } }; 时间复杂度 O(1) 空间复杂度 O(1) ",
+  "wordCount" : "219",
+  "inLanguage": "zh",
+  "image":"https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyOg.img","datePublished": "2024-12-03T11:44:04+08:00",
+  "dateModified": "2024-12-03T11:44:04+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Kris"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://magics0ng-github-io.pages.dev/posts/leetcode-3274-12-03-2024/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "😶‍🌫️Kris的Neverland",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="😶‍🌫️Kris的Neverland (Alt + H)">😶‍🌫️Kris的Neverland</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/archives" title="🗂️Archives">
+                    <span>🗂️Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/tags" title="🏷️Tags">
+                    <span>🏷️Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://magics0ng-github-io.pages.dev/">主页</a>&nbsp;»&nbsp;<a href="https://magics0ng-github-io.pages.dev/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Leetcode 3274 12/03/2024
+    </h1>
+    <div class="post-meta"><span title='2024-12-03 11:44:04 +0800 CST'>十二月 3, 2024</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Kris
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="eager" src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyOg.img" alt="">
+        
+</figure><aside id="toc-container" class="toc-container wide">
+        <div class="toc">
+            <details >
+                <summary accesskey="c" title="(Alt + C)">
+                    <span class="details">目录</span>
+                </summary>
+
+                <div class="inner"><ul>
+                        <li>
+                            <a href="#leetcode-3274-%e6%a3%80%e6%9f%a5%e6%a3%8b%e7%9b%98%e6%96%b9%e6%a0%bc%e9%a2%9c%e8%89%b2%e6%98%af%e5%90%a6%e7%9b%b8%e5%90%8c" aria-label="leetcode 3274 检查棋盘方格颜色是否相同">leetcode 3274 检查棋盘方格颜色是否相同</a><ul>
+                                    
+                        <li>
+                            <a href="#%e6%96%b9%e6%b3%951" aria-label="方法1">方法1</a><ul>
+                                    
+                        <li>
+                            <a href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="时间复杂度">时间复杂度</a></li>
+                        <li>
+                            <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="空间复杂度">空间复杂度</a></li></ul>
+                        </li>
+                        <li>
+                            <a href="#%e6%96%b9%e6%b3%952" aria-label="方法2">方法2</a><ul>
+                                    
+                        <li>
+                            <a href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6-1" aria-label="时间复杂度">时间复杂度</a></li>
+                        <li>
+                            <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6-1" aria-label="空间复杂度">空间复杂度</a>
+                        </li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </aside>
+    <script>
+        let activeElement;
+        let elements;
+        window.addEventListener('DOMContentLoaded', function (event) {
+            checkTocPosition();
+
+            elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }, false);
+
+        window.addEventListener('resize', function (event) {
+            checkTocPosition();
+        }, false);
+
+        window.addEventListener('scroll', () => {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                    (getOffsetTop(element) - window.pageYOffset) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement
+
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                if (element === activeElement) {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+                } else {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+                }
+            })
+        }, false);
+
+        const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+        const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+        const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+        function checkTocPosition() {
+            const width = document.body.scrollWidth;
+
+            if (width - main - (toc * 2) - (gap * 4) > 0) {
+                document.getElementById("toc-container").classList.add("wide");
+            } else {
+                document.getElementById("toc-container").classList.remove("wide");
+            }
+        }
+
+        function getOffsetTop(element) {
+            if (!element.getClientRects().length) {
+                return 0;
+            }
+            let rect = element.getBoundingClientRect();
+            let win = element.ownerDocument.defaultView;
+            return rect.top + win.pageYOffset;
+        }
+    </script>
+
+  <div class="post-content"><p><a href="https://leetcode.cn/problems/check-if-two-chessboard-squares-have-the-same-color/description/">原题</a></p>
+<h1 id="leetcode-3274-检查棋盘方格颜色是否相同">leetcode 3274 检查棋盘方格颜色是否相同<a hidden class="anchor" aria-hidden="true" href="#leetcode-3274-检查棋盘方格颜色是否相同">#</a></h1>
+<h2 id="方法1">方法1<a hidden class="anchor" aria-hidden="true" href="#方法1">#</a></h2>
+<p>因为原题给出了棋盘的格式，所以我的想法是初始化棋盘，然后根据两个坐标访问即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">string</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;01010101&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">string</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;10101010&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">grid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">grid</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">string</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">?</span> <span class="nl">s1</span> <span class="p">:</span> <span class="n">s2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">checkTwoChessboards</span><span class="p">(</span><span class="n">string</span> <span class="n">coordinate1</span><span class="p">,</span> <span class="n">string</span> <span class="n">coordinate2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">grid</span><span class="p">[</span><span class="n">coordinate1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">][</span><span class="n">coordinate1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span>
+</span></span><span class="line"><span class="cl">               <span class="n">grid</span><span class="p">[</span><span class="n">coordinate2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">][</span><span class="n">coordinate2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="时间复杂度">时间复杂度<a hidden class="anchor" aria-hidden="true" href="#时间复杂度">#</a></h3>
+<ol>
+<li>使用了常数时间初始化棋盘，可以视作<code>O(1)</code></li>
+</ol>
+<h3 id="空间复杂度">空间复杂度<a hidden class="anchor" aria-hidden="true" href="#空间复杂度">#</a></h3>
+<ol>
+<li>使用了常数量的空间存储棋盘，可以视作 <code>O(1)</code></li>
+</ol>
+<h2 id="方法2">方法2<a hidden class="anchor" aria-hidden="true" href="#方法2">#</a></h2>
+<p>方法2 就很取巧了。棋盘的横坐标是<code>a~h</code> ascii即为<code>97~104</code>，纵坐标为<code>1~8</code>。
+举几个例子：</p>
+<ol>
+<li><code>(a,1)</code>为黑色，<code>(a,2)</code>为白色，后边交替&hellip;&hellip;</li>
+<li><code>(b,1)</code>为白色，<code>(b,2)</code>为黑色，后边交替&hellip;&hellip;</li>
+<li><code>(c,1)</code>为黑色，<code>(c,2)</code>为白色，后边交替&hellip;&hellip;</li>
+<li><code>(d,1)</code>为白色，<code>(d,2)</code>为黑色，后边交替&hellip;&hellip;
+把横坐标使用ascii代替后</li>
+<li><code>(97,1)</code>为黑色，<code>(97,2)</code>为白色，后边交替&hellip;&hellip;</li>
+<li><code>(98,1)</code>为白色，<code>(98,2)</code>为黑色，后边交替&hellip;&hellip;</li>
+<li><code>(99,1)</code>为黑色，<code>(99,2)</code>为白色，后边交替&hellip;&hellip;</li>
+<li><code>(100,1)</code>为白色，<code>(100,2)</code>为黑色，后边交替&hellip;&hellip;
+总结规律： 如果横纵坐标奇偶性一致，为黑色，否则为白色</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">same</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">checkTwoChessboards</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">string</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s0</span> <span class="o">=</span> <span class="n">toascii</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">t0</span> <span class="o">=</span> <span class="n">toascii</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">t1</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">same</span><span class="p">(</span><span class="n">s0</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">same</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">same</span><span class="p">(</span><span class="n">s0</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">same</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="时间复杂度-1">时间复杂度<a hidden class="anchor" aria-hidden="true" href="#时间复杂度-1">#</a></h3>
+<ol>
+<li><code>O(1)</code></li>
+</ol>
+<h3 id="空间复杂度-1">空间复杂度<a hidden class="anchor" aria-hidden="true" href="#空间复杂度-1">#</a></h3>
+<ol>
+<li><code>O(1)</code></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/leetcode/">Leetcode</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%B8%80%E9%9D%A2/">
+    <span class="title">« 上一页</span>
+    <br>
+    <span>金山一面</span>
+  </a>
+  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/future-async-promise/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>Future Async Promise</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">😶‍🌫️Kris的Neverland</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

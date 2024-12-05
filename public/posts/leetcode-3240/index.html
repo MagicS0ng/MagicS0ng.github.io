@@ -5,12 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Leetcode 3240 | Kris的Neverland</title>
+<title>Leetcode 3240 | 😶‍🌫️Kris的Neverland</title>
 <meta name="keywords" content="leetcode">
 <meta name="description" content="leetcode 3240的题解">
 <meta name="author" content="Kris">
 <link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/leetcode-3240/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.c125afe64541d4fabfe34fa011bcbf6c417678ef48885bcf23c30dd11d39e89e.css" integrity="sha256-wSWv5kVB1Pq/40&#43;gEby/bEF2eO9IiFvPI8MN0R056J4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b77f76025494e037d52c0250f00cc8a2ff41875d068463a56e0d76beed50dd13.css" integrity="sha256-t392AlSU4DfVLAJQ8AzIov9Bh10GhGOlbg12vu1Q3RM=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
@@ -74,7 +74,7 @@
     });
 </script>
 <meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/leetcode-3240/">
-  <meta property="og:site_name" content="Kris的Neverland">
+  <meta property="og:site_name" content="😶‍🌫️Kris的Neverland">
   <meta property="og:title" content="Leetcode 3240">
   <meta property="og:description" content="leetcode 3240的题解">
   <meta property="og:locale" content="zh">
@@ -118,8 +118,8 @@
   "keywords": [
     "leetcode"
   ],
-  "articleBody": "Leetcode 3240 原题链接\n题目要求所有的行和列都是回文，又限制1的个数需要被4整除。\n行列均回文即要求 $$ arr[i][j] = arr[m-1-i][j] = arr[i][n-1-j] = arr[m-1-i][n-1-j] $$ 遍历数组，计算$cnt1=arr[i][j] + arr[n-1-i][j] + arr[i][n-1-j] + arr[n-1-i][n-1-j]$的和，和即为1的个数，将$min(result, cnt1)$计入结果。 如果为偶数行偶数列，此时已经计算完毕，反之 中心元素必须为0，$result+=arr[m/2][n/2]$, $arr[m/2][n/2]=0$时不会计入修改次数所以直接相加即可 计算中心行或中心列，先计算匹配的1个数，记为$cnt$，计算需要修改的对数$diff$ $cnt%4==0$ 1的个数能被4整除，$diff$对全改为0，计入结果 $cnt%4==2$ 1的个数不能4整除， $diff==0$，将$cnt%4$余下的两个改为0即可，$diff!=0$ 选择diff中的一对改为1，其余的改为0即可 class Solution { public: int minFlips(vector\u003cvector\u003cint\u003e\u003e\u0026 grid) { /* grid[i][j]=grid[m-i-1][j] 列相等 grid[i][j]=grid[i][n-j-1] 行相等 grid[i][n-j-1] = grid[m-i-1][n-j-1] */ int m = grid.size(), n = grid[0].size(); int result = 0; for (int i = 0; i \u003c m / 2; i++) { for (int j = 0; j \u003c n / 2; j++) { int cnt1 = grid[i][j] + grid[i][n - 1 - j] + grid[m - 1 - i][j] + grid[m - 1 - i][n - 1 - j]; // 计算的结果就是1的个数，将其变为0即可 result += min(cnt1, 4 - cnt1); // 全变为1或全变为0 } } if (m % 2 \u0026\u0026 n % 2) { result += grid[m / 2][n / 2]; // 确保中间为0，如果为0，+0不会变化，如果为1，+1变换次数+1 } /* 单独讨论奇数行和奇数列 镜像位置如果都一样，能不改就不改，先统计不改的位置有多少个1， 记作cnt1, 需要修改的为diff 分类讨论 cnt1%4 = 0 diff对全部改为0 or cnt1%4 = 2 diff\u003e0 选择一对，改为1 diff==0 选择原来不改的一对，改为0即可 */ // 有奇数行 int diff = 0, cnt1 = 0; if (m % 2) { for (int i = 0; i \u003c n / 2; i++) { if (grid[m / 2][i] != grid[m / 2][n - 1 - i]) diff++; else cnt1 += grid[m / 2][i] * 2; } } // 有奇数列 if (n % 2) { for (int i = 0; i \u003c m / 2; i++) { if (grid[i][n / 2] != grid[m - 1 - i][n / 2]) diff++; else cnt1 += grid[i][n / 2] * 2; } } // 如果一致的1的个数能够整除4 返回 result+diff 即将diff中不为0的改为0 if (cnt1 % 4 == 0) return result + diff; // 如果一致的1的个数无法整除4 返回 result+(cnt1%4)+diff // 将整除4余下的个数全改为1即可 return result + (diff ? diff : cnt1 % 4); // return result + (diff ? diff : cnt1 % 4); } }; 时间复杂度 遍历数组，复杂度为O(m*n) 空间复杂度 只需要常数量的变量存储结果，所以未O(1) ",
-  "wordCount" : "299",
+  "articleBody": "Leetcode 3240 原题链接\n题目要求所有的行和列都是回文，又限制1的个数需要被4整除。\n行列均回文即要求 $$ arr[i][j] = arr[m-1-i][j] = arr[i][n-1-j] = arr[m-1-i][n-1-j] $$ 遍历数组，计算$cnt1=arr[i][j] + arr[n-1-i][j] + arr[i][n-1-j] + arr[n-1-i][n-1-j]$的和，和即为1的个数，将$min(result, cnt1)$计入结果。 如果为偶数行偶数列，此时已经计算完毕，反之 中心元素必须为0，$result+=arr[m/2][n/2]$, $arr[m/2][n/2]=0$时不会计入修改次数所以直接相加即可 计算中心行或中心列，先计算匹配的1个数，记为$cnt$，计算需要修改的对数$diff$ $cnt%4==0$ 1的个数能被4整除，$diff$对全改为0，计入结果 $cnt%4==2$ 1的个数不能4整除， $diff==0$，将$cnt%4$余下的两个改为0即可，$diff!=0$ 选择diff中的一对改为1，其余的改为0即可 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 class Solution { public: int minFlips(vector\u003cvector\u003cint\u003e\u003e\u0026 grid) { /* grid[i][j]=grid[m-i-1][j] 列相等 grid[i][j]=grid[i][n-j-1] 行相等 grid[i][n-j-1] = grid[m-i-1][n-j-1] */ int m = grid.size(), n = grid[0].size(); int result = 0; for (int i = 0; i \u003c m / 2; i++) { for (int j = 0; j \u003c n / 2; j++) { int cnt1 = grid[i][j] + grid[i][n - 1 - j] + grid[m - 1 - i][j] + grid[m - 1 - i][n - 1 - j]; // 计算的结果就是1的个数，将其变为0即可 result += min(cnt1, 4 - cnt1); // 全变为1或全变为0 } } if (m % 2 \u0026\u0026 n % 2) { result += grid[m / 2][n / 2]; // 确保中间为0，如果为0，+0不会变化，如果为1，+1变换次数+1 } /* 单独讨论奇数行和奇数列 镜像位置如果都一样，能不改就不改，先统计不改的位置有多少个1， 记作cnt1, 需要修改的为diff 分类讨论 cnt1%4 = 0 diff对全部改为0 or cnt1%4 = 2 diff\u003e0 选择一对，改为1 diff==0 选择原来不改的一对，改为0即可 */ // 有奇数行 int diff = 0, cnt1 = 0; if (m % 2) { for (int i = 0; i \u003c n / 2; i++) { if (grid[m / 2][i] != grid[m / 2][n - 1 - i]) diff++; else cnt1 += grid[m / 2][i] * 2; } } // 有奇数列 if (n % 2) { for (int i = 0; i \u003c m / 2; i++) { if (grid[i][n / 2] != grid[m - 1 - i][n / 2]) diff++; else cnt1 += grid[i][n / 2] * 2; } } // 如果一致的1的个数能够整除4 返回 result+diff 即将diff中不为0的改为0 if (cnt1 % 4 == 0) return result + diff; // 如果一致的1的个数无法整除4 返回 result+(cnt1%4)+diff // 将整除4余下的个数全改为1即可 return result + (diff ? diff : cnt1 % 4); // return result + (diff ? diff : cnt1 % 4); } }; 时间复杂度 遍历数组，复杂度为O(m*n) 空间复杂度 只需要常数量的变量存储结果，所以未O(1) ",
+  "wordCount" : "354",
   "inLanguage": "zh",
   "datePublished": "2024-11-22T21:43:28+08:00",
   "dateModified": "2024-11-22T21:43:28+08:00",
@@ -133,7 +133,7 @@
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Kris的Neverland",
+    "name": "😶‍🌫️Kris的Neverland",
     "logo": {
       "@type": "ImageObject",
       "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
@@ -158,7 +158,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="Kris的Neverland (Alt + H)">Kris的Neverland</a>
+            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="😶‍🌫️Kris的Neverland (Alt + H)">😶‍🌫️Kris的Neverland</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -184,13 +184,13 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://magics0ng-github-io.pages.dev/archives" title="Archives">
-                    <span>Archives</span>
+                <a href="https://magics0ng-github-io.pages.dev/archives" title="🗂️Archives">
+                    <span>🗂️Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://magics0ng-github-io.pages.dev/tags" title="Tags">
-                    <span>Tags</span>
+                <a href="https://magics0ng-github-io.pages.dev/tags" title="🏷️Tags">
+                    <span>🏷️Tags</span>
                 </a>
             </li>
         </ul>
@@ -210,24 +210,85 @@
     <div class="post-meta"><span title='2024-11-22 21:43:28 +0800 CST'>十一月 22, 2024</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Kris
 
 </div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">目录</span>
-        </summary>
+  </header> <aside id="toc-container" class="toc-container wide">
+        <div class="toc">
+            <details >
+                <summary accesskey="c" title="(Alt + C)">
+                    <span class="details">目录</span>
+                </summary>
 
-        <div class="inner"><ul>
-                <li>
-                    <a href="#leetcode-3240" aria-label="Leetcode 3240">Leetcode 3240</a></li>
-                <li>
-                    <a href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="时间复杂度">时间复杂度</a></li>
-                <li>
-                    <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="空间复杂度">空间复杂度</a>
-                </li>
-            </ul>
+                <div class="inner"><ul>
+                        <li>
+                            <a href="#leetcode-3240" aria-label="Leetcode 3240">Leetcode 3240</a></li>
+                        <li>
+                            <a href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="时间复杂度">时间复杂度</a></li>
+                        <li>
+                            <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6" aria-label="空间复杂度">空间复杂度</a>
+                        </li>
+                    </ul>
+                </div>
+            </details>
         </div>
-    </details>
-</div>
+    </aside>
+    <script>
+        let activeElement;
+        let elements;
+        window.addEventListener('DOMContentLoaded', function (event) {
+            checkTocPosition();
+
+            elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }, false);
+
+        window.addEventListener('resize', function (event) {
+            checkTocPosition();
+        }, false);
+
+        window.addEventListener('scroll', () => {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                    (getOffsetTop(element) - window.pageYOffset) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement
+
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                if (element === activeElement) {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+                } else {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+                }
+            })
+        }, false);
+
+        const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+        const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+        const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+        function checkTocPosition() {
+            const width = document.body.scrollWidth;
+
+            if (width - main - (toc * 2) - (gap * 4) > 0) {
+                document.getElementById("toc-container").classList.add("wide");
+            } else {
+                document.getElementById("toc-container").classList.remove("wide");
+            }
+        }
+
+        function getOffsetTop(element) {
+            if (!element.getClientRects().length) {
+                return 0;
+            }
+            let rect = element.getBoundingClientRect();
+            let win = element.ownerDocument.defaultView;
+            return rect.top + win.pageYOffset;
+        }
+    </script>
 
   <div class="post-content"><h1 id="leetcode-3240">Leetcode 3240<a hidden class="anchor" aria-hidden="true" href="#leetcode-3240">#</a></h1>
 <p><a href="https://leetcode.cn/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-ii/description/">原题链接</a></p>
@@ -244,7 +305,66 @@ $$
 <li>$cnt%4==0$ 1的个数能被4整除，$diff$对全改为0，计入结果</li>
 <li>$cnt%4==2$ 1的个数不能4整除， $diff==0$，将$cnt%4$余下的两个改为0即可，$diff!=0$ 选择diff中的一对改为1，其余的改为0即可</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minFlips</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="cm">/*
@@ -299,7 +419,9 @@ $$
 </span></span><span class="line"><span class="cl">        <span class="c1">// return result + (diff ? diff : cnt1 % 4);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><h1 id="时间复杂度">时间复杂度<a hidden class="anchor" aria-hidden="true" href="#时间复杂度">#</a></h1>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="时间复杂度">时间复杂度<a hidden class="anchor" aria-hidden="true" href="#时间复杂度">#</a></h1>
 <ol>
 <li>遍历数组，复杂度为<strong>O(m*n)</strong></li>
 </ol>
@@ -333,7 +455,7 @@ $$
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">Kris的Neverland</a></span> · 
+        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">😶‍🌫️Kris的Neverland</a></span> · 
 
     <span>
         Powered by

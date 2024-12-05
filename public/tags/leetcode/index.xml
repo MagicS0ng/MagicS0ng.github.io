@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Leetcode on Kris的Neverland</title>
+    <title>Leetcode on 😶‍🌫️Kris的Neverland</title>
     <link>https://magics0ng-github-io.pages.dev/tags/leetcode/</link>
-    <description>Recent content in Leetcode on Kris的Neverland</description>
+    <description>Recent content in Leetcode on 😶‍🌫️Kris的Neverland</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 25 Nov 2024 23:30:23 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 03 Dec 2024 11:44:04 +0800</lastBuildDate>
     <atom:link href="https://magics0ng-github-io.pages.dev/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode 3274 12/03/2024</title>
+      <link>https://magics0ng-github-io.pages.dev/posts/leetcode-3274-12-03-2024/</link>
+      <pubDate>Tue, 03 Dec 2024 11:44:04 +0800</pubDate>
+      <guid>https://magics0ng-github-io.pages.dev/posts/leetcode-3274-12-03-2024/</guid>
+      <description>leetcode 3274 简单题，但是原理不简单</description>
+    </item>
     <item>
       <title>Leetcode 743</title>
       <link>https://magics0ng-github-io.pages.dev/posts/leetcode-743/</link>

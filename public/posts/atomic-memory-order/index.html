@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=3158&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Atomic operations and Memory Order | Kris的Neverland</title>
+<meta name="keywords" content="C&#43;&#43;, multi-thread, atomic">
+<meta name="description" content="C&#43;&#43;原子变量和内存序的笔记">
+<meta name="author" content="Kris">
+<link rel="canonical" href="http://localhost:3158/posts/atomic-memory-order/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c125afe64541d4fabfe34fa011bcbf6c417678ef48885bcf23c30dd11d39e89e.css" integrity="sha256-wSWv5kVB1Pq/40&#43;gEby/bEF2eO9IiFvPI8MN0R056J4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:3158/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:3158/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:3158/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:3158/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:3158/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="http://localhost:3158/posts/atomic-memory-order/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:3158/posts/atomic-memory-order/">
+  <meta property="og:site_name" content="Kris的Neverland">
+  <meta property="og:title" content="Atomic operations and Memory Order">
+  <meta property="og:description" content="C&#43;&#43;原子变量和内存序的笔记">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-29T15:18:03+08:00">
+    <meta property="article:modified_time" content="2024-11-29T15:18:03+08:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="Multi-Thread">
+    <meta property="article:tag" content="Atomic">
+    <meta property="og:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyCK.img">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyCK.img">
+<meta name="twitter:title" content="Atomic operations and Memory Order">
+<meta name="twitter:description" content="C&#43;&#43;原子变量和内存序的笔记">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:3158/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Atomic operations and Memory Order",
+      "item": "http://localhost:3158/posts/atomic-memory-order/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Atomic operations and Memory Order",
+  "name": "Atomic operations and Memory Order",
+  "description": "C++原子变量和内存序的笔记",
+  "keywords": [
+    "C++", "multi-thread", "atomic"
+  ],
+  "articleBody": "改动序列 每个C++对象在内存中，都有一个对应的改动序列，这个改动序列由所有的线程对该对象的写操作构成。但是在程序的任意一次运行中，所含有的全部改动蓄力都必须形成相同的改动序列。 改动序列要求：\n某个线程看到过某个对象，再次使用该对象时，必须看到相同的较新的改动。该线程对对象的写操作要放在改动序列后边 某个线程先写一个对象，再读取，就必须读取写的值 如果在改动序列中，读写操作还有别的写操作，必须读取最后的写的值 程序内部，对于同一对象，全部线程都必须形成相同的改动序列 多个的对象上的改动序列是相对关系，线程间不一定要保持一致 原子操作 std::atomic位于头文件atomic中，这些类型的变量支持原子操作。所有原子变量都包含一个静态常量，atomic::is_always_lock_free，可以通过此操作判断原子类型是否是以无锁结构实现的。 只有std::atomic_flag不支持is_always_lock_free()，std::atomic_flag初始时为0，可通过原子操作test_and_set()检查并设置为1，clear()将值设置为0。 test_and_set()是一个原子操作，如果std::atomic_flag的值为0，则将其设置为1，并返回0，否则返回1。 std::atomic 支持load(), store(), exchange(), compare_exchange_weak(), compare_exchange_strong()等操作，这些操作都是原子操作。\n内存序 内存序定义了原子操作之间的相对顺序，内存序有四种：\nmemory_order_relaxed：原子操作之间没有顺序要求，可以乱序执行。 不保证次序 保证原子性 memory_order_acquire：原子操作之前的所有写操作，在原子操作之后的所有读操作之前完成 memory_order_consume: 原子操作之前的所有写操作，在原子操作之后的读操作之前完成 memory_order_release：原子操作之后的所有写操作，在原子操作之前的所有读操作之后完成 memory_order_acq_rel：原子操作之前和之后的读写操作都要求顺序 memory_order_seq_cst：原子操作之前的读写操作，在原子操作之后的读写操作之前完成，原子操作之前的读写操作，在原子操作之后的读写操作之后完成，即memory_order_acquire和memory_order_release的结合，所有原子操作都按照顺序执行，是最高级别的内存序 store() 可以选择使用memory_order_relaxed, memory_order_release, memory_order_seq_cst load() 可以选择使用memory_order_relaxed, memory_order_consume, memory_order_acquire, memory_order_seq_cst 读-写-改 操作可以使用memory_order_relaxed或memory_order_consume, memory_order_acquire, memory_order_release, memory_order_acq_rel, memory_order_seq_cst 原子操作默认使用memory_order_seq_cst。 相互组合可以实现三种顺序模型 Sequencial consistent ordering: 同步，全局顺序一致，一致性最强的模型，也是默认模型 Acquire release ordering: 同步，但不保证全局顺序一致 Relaxed ordering: 不保证同步，也不保证全局顺序一致，只保证原子 原子操作实现SpinLock #include #include #include #include class SpinLock { private: std::atomic_flag _flag ATOMIC_FLAG_INIT; public: void lock() { while (_flag.test_and_set(std::memory_order_acquire)) { // spin } } void unlock() { _flag.clear(std::memory_order_release); } }; void test_spinlock() { SpinLock lock; std::thread t1([\u0026]() { lock.lock(); // critical section for (int i = 0; i \u003c 3; i++) { std::cout \u003c\u003c \"^\"; } std::cout \u003c\u003c std::endl; lock.unlock(); }); std::thread t2([\u0026]() { lock.lock(); for (int i = 0; i \u003c 3; i++) { std::cout \u003c\u003c \"v\"; } std::cout \u003c\u003c std::endl; lock.unlock(); }); t1.join(); t2.join(); } int main() { auto start = std::chrono::high_resolution_clock::now(); test_spinlock(); auto end = std::chrono::high_resolution_clock::now(); auto duration = std::chrono::duration_cast\u003cstd::chrono::microseconds\u003e(end - start); std::cout \u003c\u003c \"Time taken by function: \" \u003c\u003c duration.count() \u003c\u003c \" microseconds\" \u003c\u003c std::endl; } std::memory_order_relaxed happens-before: A happens-before B 表示A在B之前发生，A和B是两个操作，A操作的结果对B操作可见 synchronizes-with: 线程B一定读取到线程A的最新值，称为 Asynchronizes-with B std::memory_order_relaxed的特性\n作用于原子变量 不具有synchronizes-with 关系 对于同一个原子变量，同一个线程具有happens-before 关系， 不同原子变量，同一线程可以乱序执行 多线程不具有happens-before std::atomic\u003cbool\u003e x, y; std::atomic\u003cint\u003e z; void write_x_then_y() { x.store(true, std::memory_order_relaxed); // 1. y.store(true, std::memory_order_relaxed); // 2. } void read_y_then_x() { while (!y.load(std::memory_order_relaxed)) // 3. std::cout \u003c\u003c \"y is not true yet\" \u003c\u003c std::endl; if (x.load(std::memory_order_relaxed)) // 4. ++z; } void TestRelaxedOrder() { x = false; y = false; z = 0; std::thread a(write_x_then_y); std::thread b(read_y_then_x); a.join(); b.join(); assert(z.load() != 0); } 上述代码中，由于采用了std::memory_order_relaxed 无法保证多个原子变量访问顺序的顺序，也无法保证同一个原子变量在不同线程的可见顺序，因此在read_y_then_x()中，y的值可能先被更新为true，然后x的值被更新为true，导致z的值可能为0，因此断言失败。\nhappens-before happens-before可以建立在同一线程的两个操作之间，也可以建立在不同线程的两个操作之间\nsequenced-before 单线程下，前边的语句先执行，后边的语句后执行。操作A先于操作B，操作B可以看到操作A的结果，称操作A先行于操作B。\ninter-thread-happens-before 线程间先行。 如果线程1的操作A先行于线程2的操作B，那么线程1在操作A之前对共享内存做的修改，在线程2操作B之后对共享内存做的修改可见。\ncarries dependency \u0026 dependency-ordered before 单线程下 a sequenced-before b, 且 b 依赖于a， 则acarries dependency into b，即b依赖于a\n多线程下，线程1执行操作A，线程2执行操作B，如果线程1先于线程2执行，且A的结果对B可见，称A dependency-ordered before B.\n",
+  "wordCount" : "288",
+  "inLanguage": "zh",
+  "image":"https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyCK.img","datePublished": "2024-11-29T15:18:03+08:00",
+  "dateModified": "2024-11-29T15:18:03+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Kris"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:3158/posts/atomic-memory-order/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kris的Neverland",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:3158/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:3158/" accesskey="h" title="Kris的Neverland (Alt + H)">Kris的Neverland</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:3158/archives" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:3158/tags" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:3158/">主页</a>&nbsp;»&nbsp;<a href="http://localhost:3158/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Atomic operations and Memory Order
+    </h1>
+    <div class="post-meta"><span title='2024-11-29 15:18:03 +0800 CST'>十一月 29, 2024</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Kris
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="eager" src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msyCK.img" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%94%b9%e5%8a%a8%e5%ba%8f%e5%88%97" aria-label="改动序列">改动序列</a></li>
+                <li>
+                    <a href="#%e5%8e%9f%e5%ad%90%e6%93%8d%e4%bd%9c" aria-label="原子操作">原子操作</a></li>
+                <li>
+                    <a href="#%e5%86%85%e5%ad%98%e5%ba%8f" aria-label="内存序">内存序</a></li>
+                <li>
+                    <a href="#%e5%8e%9f%e5%ad%90%e6%93%8d%e4%bd%9c%e5%ae%9e%e7%8e%b0spinlock" aria-label="原子操作实现SpinLock">原子操作实现SpinLock</a></li>
+                <li>
+                    <a href="#stdmemory_order_relaxed" aria-label="std::memory_order_relaxed">std::memory_order_relaxed</a></li>
+                <li>
+                    <a href="#happens-before" aria-label="happens-before">happens-before</a></li>
+                <li>
+                    <a href="#sequenced-before" aria-label="sequenced-before">sequenced-before</a></li>
+                <li>
+                    <a href="#inter-thread-happens-before" aria-label="inter-thread-happens-before">inter-thread-happens-before</a></li>
+                <li>
+                    <a href="#carries-dependency--dependency-ordered-before" aria-label="carries dependency &amp; dependency-ordered before">carries dependency &amp; dependency-ordered before</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="改动序列">改动序列<a hidden class="anchor" aria-hidden="true" href="#改动序列">#</a></h1>
+<p>每个C++对象在内存中，都有一个对应的改动序列，这个改动序列由所有的线程对该对象的写操作构成。但是在程序的任意一次运行中，所含有的全部改动蓄力都必须形成相同的改动序列。
+改动序列要求：</p>
+<ol>
+<li>某个线程看到过某个对象，再次使用该对象时，必须看到相同的较新的改动。该线程对对象的写操作要放在改动序列后边</li>
+<li>某个线程先写一个对象，再读取，就必须读取写的值</li>
+<li>如果在改动序列中，读写操作还有别的写操作，必须读取最后的写的值</li>
+<li>程序内部，对于同一对象，全部线程都必须形成相同的改动序列</li>
+<li>多个的对象上的改动序列是相对关系，线程间不一定要保持一致</li>
+</ol>
+<h1 id="原子操作">原子操作<a hidden class="anchor" aria-hidden="true" href="#原子操作">#</a></h1>
+<p><code>std::atomic&lt;T&gt;</code>位于头文件<code>atomic</code>中，这些类型的变量支持原子操作。所有原子变量都包含一个静态常量，<code>atomic&lt;T&gt;::is_always_lock_free</code>，可以通过此操作判断原子类型是否是以无锁结构实现的。
+只有<code>std::atomic_flag</code>不支持<code>is_always_lock_free()</code>，<code>std::atomic_flag</code>初始时为0，可通过原子操作<code>test_and_set()</code>检查并设置为1，<code>clear()</code>将值设置为0。
+<code>test_and_set()</code>是一个原子操作，如果<code>std::atomic_flag</code>的值为0，则将其设置为1，并返回0，否则返回1。
+<code>std::atomic&lt;T&gt;</code> 支持<code>load()</code>, <code>store()</code>, <code>exchange()</code>, <code>compare_exchange_weak()</code>, <code>compare_exchange_strong()</code>等操作，这些操作都是原子操作。</p>
+<h1 id="内存序">内存序<a hidden class="anchor" aria-hidden="true" href="#内存序">#</a></h1>
+<p>内存序定义了原子操作之间的相对顺序，内存序有四种：</p>
+<ol>
+<li><code>memory_order_relaxed</code>：原子操作之间没有顺序要求，可以乱序执行。 不保证次序 保证原子性</li>
+<li><code>memory_order_acquire</code>：原子操作之前的所有写操作，在原子操作之后的所有读操作之前完成</li>
+<li><code>memory_order_consume</code>: 原子操作之前的所有写操作，在原子操作之后的读操作之前完成</li>
+<li><code>memory_order_release</code>：原子操作之后的所有写操作，在原子操作之前的所有读操作之后完成</li>
+<li><code>memory_order_acq_rel</code>：原子操作之前和之后的读写操作都要求顺序</li>
+<li><code>memory_order_seq_cst</code>：原子操作之前的读写操作，在原子操作之后的读写操作之前完成，原子操作之前的读写操作，在原子操作之后的读写操作之后完成，即<code>memory_order_acquire</code>和<code>memory_order_release</code>的结合，所有原子操作都按照顺序执行，是最高级别的内存序
+<code>store()</code> 可以选择使用<code>memory_order_relaxed</code>, <code>memory_order_release</code>, <code>memory_order_seq_cst</code>
+<code>load()</code> 可以选择使用<code>memory_order_relaxed</code>, <code>memory_order_consume</code>, <code>memory_order_acquire</code>, <code>memory_order_seq_cst</code>
+<code>读-写-改</code> 操作可以使用<code>memory_order_relaxed</code>或<code>memory_order_consume</code>, <code>memory_order_acquire</code>, <code>memory_order_release</code>, <code>memory_order_acq_rel</code>, <code>memory_order_seq_cst</code>
+原子操作默认使用<code>memory_order_seq_cst</code>。
+相互组合可以实现三种顺序模型</li>
+<li><code>Sequencial consistent ordering</code>: 同步，全局顺序一致，一致性最强的模型，也是默认模型</li>
+<li><code>Acquire release ordering</code>: 同步，但不保证全局顺序一致</li>
+<li><code>Relaxed ordering</code>: 不保证同步，也不保证全局顺序一致，只保证原子</li>
+</ol>
+<h1 id="原子操作实现spinlock">原子操作实现SpinLock<a hidden class="anchor" aria-hidden="true" href="#原子操作实现spinlock">#</a></h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;atomic&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">class</span> <span class="nc">SpinLock</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">atomic_flag</span> <span class="n">_flag</span> <span class="n">ATOMIC_FLAG_INIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">lock</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">_flag</span><span class="p">.</span><span class="n">test_and_set</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_acquire</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// spin
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">unlock</span><span class="p">()</span> <span class="p">{</span> <span class="n">_flag</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_release</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test_spinlock</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SpinLock</span> <span class="n">lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">t1</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lock</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// critical section
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;^&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lock</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">t2</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lock</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;v&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lock</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">test_spinlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">end</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">duration</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">microseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Time taken by function: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">duration</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; microseconds&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h1 id="stdmemory_order_relaxed">std::memory_order_relaxed<a hidden class="anchor" aria-hidden="true" href="#stdmemory_order_relaxed">#</a></h1>
+<p><strong><code>happens-before</code></strong>: A <code>happens-before</code> B 表示A在B之前发生，A和B是两个操作，A操作的结果对B操作可见
+<strong><code>synchronizes-with</code></strong>: 线程B一定读取到线程A的最新值，称为 A<code>synchronizes-with</code> B
+<code>std::memory_order_relaxed</code>的特性</p>
+<ol>
+<li>作用于原子变量</li>
+<li>不具有<code>synchronizes-with</code> 关系</li>
+<li>对于同一个原子变量，同一个线程具有<code>happens-before</code> 关系，</li>
+<li>不同原子变量，同一线程可以乱序执行</li>
+<li>多线程不具有<code>happens-before</code></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"> <span class="n">std</span><span class="o">::</span><span class="n">atomic</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">atomic</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">write_x_then_y</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">x</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order_relaxed</span><span class="p">);</span> <span class="c1">// 1. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">y</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order_relaxed</span><span class="p">);</span> <span class="c1">// 2. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">read_y_then_x</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">y</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_relaxed</span><span class="p">))</span> <span class="c1">// 3.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;y is not true yet&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_relaxed</span><span class="p">))</span> <span class="c1">// 4.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">++</span><span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">TestRelaxedOrder</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">x</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">y</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">a</span><span class="p">(</span><span class="n">write_x_then_y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">b</span><span class="p">(</span><span class="n">read_y_then_x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">a</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">b</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">assert</span><span class="p">(</span><span class="n">z</span><span class="p">.</span><span class="n">load</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>上述代码中，由于采用了<code>std::memory_order_relaxed</code> 无法保证多个原子变量访问顺序的顺序，也无法保证同一个原子变量在不同线程的可见顺序，因此在<code>read_y_then_x()</code>中，<code>y</code>的值可能先被更新为<code>true</code>，然后<code>x</code>的值被更新为<code>true</code>，导致<code>z</code>的值可能为0，因此断言失败。</p>
+<h1 id="happens-before"><code>happens-before</code><a hidden class="anchor" aria-hidden="true" href="#happens-before">#</a></h1>
+<p><code>happens-before</code>可以建立在同一线程的两个操作之间，也可以建立在不同线程的两个操作之间</p>
+<h1 id="sequenced-before"><code>sequenced-before</code><a hidden class="anchor" aria-hidden="true" href="#sequenced-before">#</a></h1>
+<p>单线程下，前边的语句先执行，后边的语句后执行。操作A先于操作B，操作B可以看到操作A的结果，称操作A先行于操作B。</p>
+<h1 id="inter-thread-happens-before"><code>inter-thread-happens-before</code><a hidden class="anchor" aria-hidden="true" href="#inter-thread-happens-before">#</a></h1>
+<p>线程间先行。
+如果线程1的操作A先行于线程2的操作B，那么线程1在操作A之前对共享内存做的修改，在线程2操作B之后对共享内存做的修改可见。</p>
+<h1 id="carries-dependency--dependency-ordered-before"><code>carries dependency &amp; dependency-ordered before</code><a hidden class="anchor" aria-hidden="true" href="#carries-dependency--dependency-ordered-before">#</a></h1>
+<p>单线程下 a <code>sequenced-before</code> b, 且 b 依赖于a， 则a<code>carries dependency into </code>b，即b依赖于a<br>
+多线程下，线程1执行操作A，线程2执行操作B，如果线程1先于线程2执行，且A的结果对B可见，称A <code>dependency-ordered before</code> B.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:3158/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="http://localhost:3158/tags/multi-thread/">Multi-Thread</a></li>
+      <li><a href="http://localhost:3158/tags/atomic/">Atomic</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:3158/posts/future-async-promise/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>Future Async Promise</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="http://localhost:3158/">Kris的Neverland</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

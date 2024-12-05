@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>金山二面 | 😶‍🌫️Kris的Neverland</title>
+<meta name="keywords" content="面试, C&#43;&#43;">
+<meta name="description" content="12/05/2024 金山wpsC&#43;&#43;二面">
+<meta name="author" content="Kris">
+<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%BA%8C%E9%9D%A2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b77f76025494e037d52c0250f00cc8a2ff41875d068463a56e0d76beed50dd13.css" integrity="sha256-t392AlSU4DfVLAJQ8AzIov9Bh10GhGOlbg12vu1Q3RM=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%BA%8C%E9%9D%A2/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%BA%8C%E9%9D%A2/">
+  <meta property="og:site_name" content="😶‍🌫️Kris的Neverland">
+  <meta property="og:title" content="金山二面">
+  <meta property="og:description" content="12/05/2024 金山wpsC&#43;&#43;二面">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-05T17:19:33+08:00">
+    <meta property="article:modified_time" content="2024-12-05T17:19:33+08:00">
+    <meta property="article:tag" content="面试">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="og:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msP5m.img">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msP5m.img">
+<meta name="twitter:title" content="金山二面">
+<meta name="twitter:description" content="12/05/2024 金山wpsC&#43;&#43;二面">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://magics0ng-github-io.pages.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "金山二面",
+      "item": "https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%BA%8C%E9%9D%A2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "金山二面",
+  "name": "金山二面",
+  "description": "12/05/2024 金山wpsC++二面",
+  "keywords": [
+    "面试", "C++"
+  ],
+  "articleBody": "无自我介绍 熟悉的C++版本 C++11以后的基本都了解一些， 没有特别针对某个版本.\n智能指针 shared_ptr: 支持拷贝、移动，可以作为返回值类型，避免大对象的拷贝. 引用计数是线程安全的 unique_ptr：支持移动，可以通过转移所有权的方式，将对象的所有权转移给另一个独占指针 weal_ptr: 支持拷贝，可以作为返回值类型，但是不能转移所有权，只能通过weak_ptr转成shared_ptr 线程安全的单例模式 通过C++11std::call_once实现 对指针判空执行两次，因为第一次判断为空后初始化前，可能其他线程已经初始化了，所以要两次判空 问有没有其他的，回答原子变量应该也行，不是很了解。 了解压缩算法吗 不知道为啥问这个问题，面试官接着问是否了解哈夫曼，然后让讲一下自己了解的压缩算法。回答了科研做的图像压缩。\n项目 项目结构 略\n负载均衡怎么做的 通过roundRobin方式实现，返回一个连接数量少的服务器；接着问道有考虑延迟吗，回答没有，因为是在单个机器测试的。\n单例模板基类是什么 通过模板类是实现一个单例基类，子类通过CRTP的方式实现单例。\nQt键盘鼠标事件 键盘事件：keyPressEvent keyReleaseEvent 鼠标事件：mousePressEvent mouseReleaseEvent mouseMoveEvent linux相关 docker如何建立目录映射 回答，在创建容器时通过-v指定宿主目录和容器目录的映射关系。\ntop如何根据内存占用排序 回答不知道，自己使用的基于top封装的btop，可以通过命令控制\n1 top -o %MEM 如何查找进程的句柄， 回答不太了解。可以使用ps命令查询进程状态。 查询大模型得到： 进程句柄：操作系统为每个进程分配的一个唯一标识符。它主要用于操作系统内核和其他系统组件之间进行进程管理和通信。以下是关于进程句柄的一些关键点：\n1 ls -l /proc//fd 查看进程端口占用 1 netstat -anp 查看进程打开的文件句柄 回答不知道，查询大模型得到：\n1 lsof -p git 回答稀碎，只会使用push, pull\ngit rebase git rebase可以将一个分支的更改应用到另一个分支上，可以用来\n更新分支： 将当前分支的更改应用到最新的主分支（如 main 或 master）上，以保持代码的最新状态。 例如，如果你在一个功能分支上工作，而主分支上有新的提交，你可以使用 rebase 将功能分支的更改应用到最新的主分支上。 线性化提交历史： rebase 可以使提交历史更加线性，避免合并提交（merge commit）的出现，从而使提交历史更清晰。 例如，如果你从 main 分支派生了一个功能分支，并且 main 分支上有新的提交，rebase 可以将你的功能分支的提交重新应用到 main 分支的最新提交之上。 解决冲突： 在 rebase 过程中，如果遇到冲突，Git 会暂停并提示你解决冲突。解决冲突后，你可以继续 rebase 过程。 例如，如果你的功能分支和 main 分支在同一个文件上进行了修改，rebase 会提示你解决这些冲突。 git 如何创建分支 回答使用checkout 具体是：\n1 git checkout -b ",
+  "wordCount" : "104",
+  "inLanguage": "zh",
+  "image":"https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msP5m.img","datePublished": "2024-12-05T17:19:33+08:00",
+  "dateModified": "2024-12-05T17:19:33+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Kris"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%BA%8C%E9%9D%A2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "😶‍🌫️Kris的Neverland",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="😶‍🌫️Kris的Neverland (Alt + H)">😶‍🌫️Kris的Neverland</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/archives" title="🗂️Archives">
+                    <span>🗂️Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/tags" title="🏷️Tags">
+                    <span>🏷️Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://magics0ng-github-io.pages.dev/">主页</a>&nbsp;»&nbsp;<a href="https://magics0ng-github-io.pages.dev/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      金山二面
+    </h1>
+    <div class="post-meta"><span title='2024-12-05 17:19:33 +0800 CST'>十二月 5, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="eager" src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msP5m.img" alt="">
+        
+</figure><aside id="toc-container" class="toc-container wide">
+        <div class="toc">
+            <details >
+                <summary accesskey="c" title="(Alt + C)">
+                    <span class="details">目录</span>
+                </summary>
+
+                <div class="inner"><ul>
+                        <li>
+                            <a href="#%e6%97%a0%e8%87%aa%e6%88%91%e4%bb%8b%e7%bb%8d" aria-label="无自我介绍">无自我介绍</a></li>
+                        <li>
+                            <a href="#%e7%86%9f%e6%82%89%e7%9a%84c%e7%89%88%e6%9c%ac" aria-label="熟悉的C&#43;&#43;版本">熟悉的C++版本</a></li>
+                        <li>
+                            <a href="#%e6%99%ba%e8%83%bd%e6%8c%87%e9%92%88" aria-label="智能指针">智能指针</a></li>
+                        <li>
+                            <a href="#%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e7%9a%84%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f" aria-label="线程安全的单例模式">线程安全的单例模式</a></li>
+                        <li>
+                            <a href="#%e4%ba%86%e8%a7%a3%e5%8e%8b%e7%bc%a9%e7%ae%97%e6%b3%95%e5%90%97" aria-label="了解压缩算法吗">了解压缩算法吗</a></li>
+                        <li>
+                            <a href="#%e9%a1%b9%e7%9b%ae" aria-label="项目">项目</a><ul>
+                                    
+                        <li>
+                            <a href="#%e9%a1%b9%e7%9b%ae%e7%bb%93%e6%9e%84" aria-label="项目结构">项目结构</a></li>
+                        <li>
+                            <a href="#%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e6%80%8e%e4%b9%88%e5%81%9a%e7%9a%84" aria-label="负载均衡怎么做的">负载均衡怎么做的</a></li>
+                        <li>
+                            <a href="#%e5%8d%95%e4%be%8b%e6%a8%a1%e6%9d%bf%e5%9f%ba%e7%b1%bb%e6%98%af%e4%bb%80%e4%b9%88" aria-label="单例模板基类是什么">单例模板基类是什么</a></li></ul>
+                        </li>
+                        <li>
+                            <a href="#qt%e9%94%ae%e7%9b%98%e9%bc%a0%e6%a0%87%e4%ba%8b%e4%bb%b6" aria-label="Qt键盘鼠标事件">Qt键盘鼠标事件</a></li>
+                        <li>
+                            <a href="#linux%e7%9b%b8%e5%85%b3" aria-label="linux相关">linux相关</a><ul>
+                                    
+                        <li>
+                            <a href="#docker%e5%a6%82%e4%bd%95%e5%bb%ba%e7%ab%8b%e7%9b%ae%e5%bd%95%e6%98%a0%e5%b0%84" aria-label="docker如何建立目录映射">docker如何建立目录映射</a></li>
+                        <li>
+                            <a href="#top%e5%a6%82%e4%bd%95%e6%a0%b9%e6%8d%ae%e5%86%85%e5%ad%98%e5%8d%a0%e7%94%a8%e6%8e%92%e5%ba%8f" aria-label="top如何根据内存占用排序">top如何根据内存占用排序</a></li>
+                        <li>
+                            <a href="#%e5%a6%82%e4%bd%95%e6%9f%a5%e6%89%be%e8%bf%9b%e7%a8%8b%e7%9a%84%e5%8f%a5%e6%9f%84" aria-label="如何查找进程的句柄，">如何查找进程的句柄，</a></li>
+                        <li>
+                            <a href="#%e6%9f%a5%e7%9c%8b%e8%bf%9b%e7%a8%8b%e7%ab%af%e5%8f%a3%e5%8d%a0%e7%94%a8" aria-label="查看进程端口占用">查看进程端口占用</a></li>
+                        <li>
+                            <a href="#%e6%9f%a5%e7%9c%8b%e8%bf%9b%e7%a8%8b%e6%89%93%e5%bc%80%e7%9a%84%e6%96%87%e4%bb%b6%e5%8f%a5%e6%9f%84" aria-label="查看进程打开的文件句柄">查看进程打开的文件句柄</a></li></ul>
+                        </li>
+                        <li>
+                            <a href="#git" aria-label="git">git</a><ul>
+                                    
+                        <li>
+                            <a href="#git-rebase" aria-label="git rebase">git rebase</a></li>
+                        <li>
+                            <a href="#git-%e5%a6%82%e4%bd%95%e5%88%9b%e5%bb%ba%e5%88%86%e6%94%af" aria-label="git 如何创建分支">git 如何创建分支</a>
+                        </li>
+                    </ul>
+                    </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </aside>
+    <script>
+        let activeElement;
+        let elements;
+        window.addEventListener('DOMContentLoaded', function (event) {
+            checkTocPosition();
+
+            elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }, false);
+
+        window.addEventListener('resize', function (event) {
+            checkTocPosition();
+        }, false);
+
+        window.addEventListener('scroll', () => {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                    (getOffsetTop(element) - window.pageYOffset) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement
+
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                if (element === activeElement) {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+                } else {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+                }
+            })
+        }, false);
+
+        const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+        const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+        const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+        function checkTocPosition() {
+            const width = document.body.scrollWidth;
+
+            if (width - main - (toc * 2) - (gap * 4) > 0) {
+                document.getElementById("toc-container").classList.add("wide");
+            } else {
+                document.getElementById("toc-container").classList.remove("wide");
+            }
+        }
+
+        function getOffsetTop(element) {
+            if (!element.getClientRects().length) {
+                return 0;
+            }
+            let rect = element.getBoundingClientRect();
+            let win = element.ownerDocument.defaultView;
+            return rect.top + win.pageYOffset;
+        }
+    </script>
+
+  <div class="post-content"><h1 id="无自我介绍">无自我介绍<a hidden class="anchor" aria-hidden="true" href="#无自我介绍">#</a></h1>
+<h1 id="熟悉的c版本">熟悉的C++版本<a hidden class="anchor" aria-hidden="true" href="#熟悉的c版本">#</a></h1>
+<p>C++11以后的基本都了解一些， 没有特别针对某个版本.</p>
+<h1 id="智能指针">智能指针<a hidden class="anchor" aria-hidden="true" href="#智能指针">#</a></h1>
+<ol>
+<li><code>shared_ptr</code>: 支持拷贝、移动，可以作为返回值类型，避免大对象的拷贝. 引用计数是线程安全的</li>
+<li><code>unique_ptr</code>：支持移动，可以通过转移所有权的方式，将对象的所有权转移给另一个独占指针</li>
+<li><code>weal_ptr</code>: 支持拷贝，可以作为返回值类型，但是不能转移所有权，只能通过weak_ptr转成shared_ptr</li>
+</ol>
+<h1 id="线程安全的单例模式">线程安全的单例模式<a hidden class="anchor" aria-hidden="true" href="#线程安全的单例模式">#</a></h1>
+<ol>
+<li>通过C++11<code>std::call_once</code>实现</li>
+<li>对指针判空执行两次，因为第一次判断为空后初始化前，可能其他线程已经初始化了，所以要两次判空
+问有没有其他的，回答原子变量应该也行，不是很了解。</li>
+</ol>
+<h1 id="了解压缩算法吗">了解压缩算法吗<a hidden class="anchor" aria-hidden="true" href="#了解压缩算法吗">#</a></h1>
+<p>不知道为啥问这个问题，面试官接着问是否了解哈夫曼，然后让讲一下自己了解的压缩算法。回答了科研做的图像压缩。</p>
+<h1 id="项目">项目<a hidden class="anchor" aria-hidden="true" href="#项目">#</a></h1>
+<h2 id="项目结构">项目结构<a hidden class="anchor" aria-hidden="true" href="#项目结构">#</a></h2>
+<p>略</p>
+<h2 id="负载均衡怎么做的">负载均衡怎么做的<a hidden class="anchor" aria-hidden="true" href="#负载均衡怎么做的">#</a></h2>
+<p>通过<code>roundRobin</code>方式实现，返回一个连接数量少的服务器；接着问道有考虑延迟吗，回答没有，因为是在单个机器测试的。</p>
+<h2 id="单例模板基类是什么">单例模板基类是什么<a hidden class="anchor" aria-hidden="true" href="#单例模板基类是什么">#</a></h2>
+<p>通过模板类是实现一个单例基类，子类通过CRTP的方式实现单例。</p>
+<h1 id="qt键盘鼠标事件">Qt键盘鼠标事件<a hidden class="anchor" aria-hidden="true" href="#qt键盘鼠标事件">#</a></h1>
+<ol>
+<li>键盘事件：<code>keyPressEvent</code> <code>keyReleaseEvent</code></li>
+<li>鼠标事件：<code>mousePressEvent</code> <code>mouseReleaseEvent</code> <code>mouseMoveEvent</code></li>
+</ol>
+<h1 id="linux相关">linux相关<a hidden class="anchor" aria-hidden="true" href="#linux相关">#</a></h1>
+<h2 id="docker如何建立目录映射">docker如何建立目录映射<a hidden class="anchor" aria-hidden="true" href="#docker如何建立目录映射">#</a></h2>
+<p>回答，在创建容器时通过<code>-v</code>指定宿主目录和容器目录的映射关系。</p>
+<h2 id="top如何根据内存占用排序">top如何根据内存占用排序<a hidden class="anchor" aria-hidden="true" href="#top如何根据内存占用排序">#</a></h2>
+<p>回答不知道，自己使用的基于top封装的btop，可以通过命令控制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">top -o %MEM
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="如何查找进程的句柄">如何查找进程的句柄，<a hidden class="anchor" aria-hidden="true" href="#如何查找进程的句柄">#</a></h2>
+<p>回答不太了解。可以使用<code>ps</code>命令查询进程状态。
+查询大模型得到：
+进程句柄：操作系统为每个进程分配的一个唯一标识符。它主要用于操作系统内核和其他系统组件之间进行进程管理和通信。以下是关于进程句柄的一些关键点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls -l /proc/&lt;pid&gt;/fd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="查看进程端口占用">查看进程端口占用<a hidden class="anchor" aria-hidden="true" href="#查看进程端口占用">#</a></h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">netstat -anp 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="查看进程打开的文件句柄">查看进程打开的文件句柄<a hidden class="anchor" aria-hidden="true" href="#查看进程打开的文件句柄">#</a></h2>
+<p>回答不知道，查询大模型得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">lsof -p &lt;pid&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="git">git<a hidden class="anchor" aria-hidden="true" href="#git">#</a></h1>
+<p>回答稀碎，只会使用<code>push</code>, <code>pull</code></p>
+<h2 id="git-rebase">git rebase<a hidden class="anchor" aria-hidden="true" href="#git-rebase">#</a></h2>
+<p><code>git rebase</code>可以将一个分支的更改应用到另一个分支上，可以用来</p>
+<ol>
+<li>更新分支：
+<ul>
+<li>将当前分支的更改应用到最新的主分支（如 main 或 master）上，以保持代码的最新状态。</li>
+<li>例如，如果你在一个功能分支上工作，而主分支上有新的提交，你可以使用 rebase 将功能分支的更改应用到最新的主分支上。</li>
+</ul>
+</li>
+<li>线性化提交历史：
+<ul>
+<li>rebase 可以使提交历史更加线性，避免合并提交（merge commit）的出现，从而使提交历史更清晰。</li>
+<li>例如，如果你从 main 分支派生了一个功能分支，并且 main 分支上有新的提交，rebase 可以将你的功能分支的提交重新应用到 main 分支的最新提交之上。</li>
+</ul>
+</li>
+<li>解决冲突：
+<ul>
+<li>在 rebase 过程中，如果遇到冲突，Git 会暂停并提示你解决冲突。解决冲突后，你可以继续 rebase 过程。</li>
+<li>例如，如果你的功能分支和 main 分支在同一个文件上进行了修改，rebase 会提示你解决这些冲突。</li>
+</ul>
+</li>
+</ol>
+<h2 id="git-如何创建分支">git 如何创建分支<a hidden class="anchor" aria-hidden="true" href="#git-如何创建分支">#</a></h2>
+<p>回答使用<code>checkout</code>
+具体是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout -b &lt;branch_name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/%E9%9D%A2%E8%AF%95/">面试</a></li>
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%B8%80%E9%9D%A2/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>金山一面</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">😶‍🌫️Kris的Neverland</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
