@@ -103,8 +103,8 @@
   "keywords": [
     "面试", "C++"
   ],
-  "articleBody": "无自我介绍 熟悉的C++版本 C++11以后的基本都了解一些， 没有特别针对某个版本.\n智能指针 shared_ptr: 支持拷贝、移动，可以作为返回值类型，避免大对象的拷贝. 引用计数是线程安全的 unique_ptr：支持移动，可以通过转移所有权的方式，将对象的所有权转移给另一个独占指针 weal_ptr: 支持拷贝，可以作为返回值类型，但是不能转移所有权，只能通过weak_ptr转成shared_ptr 线程安全的单例模式 通过C++11std::call_once实现 对指针判空执行两次，因为第一次判断为空后初始化前，可能其他线程已经初始化了，所以要两次判空 问有没有其他的，回答原子变量应该也行，不是很了解。 了解压缩算法吗 不知道为啥问这个问题，面试官接着问是否了解哈夫曼，然后让讲一下自己了解的压缩算法。回答了科研做的图像压缩。\n项目 项目结构 略\n负载均衡怎么做的 通过roundRobin方式实现，返回一个连接数量少的服务器；接着问道有考虑延迟吗，回答没有，因为是在单个机器测试的。\n单例模板基类是什么 通过模板类是实现一个单例基类，子类通过CRTP的方式实现单例。\nQt键盘鼠标事件 键盘事件：keyPressEvent keyReleaseEvent 鼠标事件：mousePressEvent mouseReleaseEvent mouseMoveEvent linux相关 docker如何建立目录映射 回答，在创建容器时通过-v指定宿主目录和容器目录的映射关系。\ntop如何根据内存占用排序 回答不知道，自己使用的基于top封装的btop，可以通过命令控制\n1 top -o %MEM 如何查找进程的句柄， 回答不太了解。可以使用ps命令查询进程状态。 查询大模型得到： 进程句柄：操作系统为每个进程分配的一个唯一标识符。它主要用于操作系统内核和其他系统组件之间进行进程管理和通信。以下是关于进程句柄的一些关键点：\n1 ls -l /proc//fd 查看进程端口占用 1 netstat -anp 查看进程打开的文件句柄 回答不知道，查询大模型得到：\n1 lsof -p git 回答稀碎，只会使用push, pull\ngit rebase git rebase可以将一个分支的更改应用到另一个分支上，可以用来\n更新分支： 将当前分支的更改应用到最新的主分支（如 main 或 master）上，以保持代码的最新状态。 例如，如果你在一个功能分支上工作，而主分支上有新的提交，你可以使用 rebase 将功能分支的更改应用到最新的主分支上。 线性化提交历史： rebase 可以使提交历史更加线性，避免合并提交（merge commit）的出现，从而使提交历史更清晰。 例如，如果你从 main 分支派生了一个功能分支，并且 main 分支上有新的提交，rebase 可以将你的功能分支的提交重新应用到 main 分支的最新提交之上。 解决冲突： 在 rebase 过程中，如果遇到冲突，Git 会暂停并提示你解决冲突。解决冲突后，你可以继续 rebase 过程。 例如，如果你的功能分支和 main 分支在同一个文件上进行了修改，rebase 会提示你解决这些冲突。 git 如何创建分支 回答使用checkout 具体是：\n1 git checkout -b ",
-  "wordCount" : "104",
+  "articleBody": "无自我介绍 熟悉的C++版本 C++11以后的基本都了解一些， 没有特别针对某个版本.\n智能指针 shared_ptr: 支持拷贝、移动，可以作为返回值类型，避免大对象的拷贝. 引用计数是线程安全的 unique_ptr：支持移动，可以通过转移所有权的方式，将对象的所有权转移给另一个独占指针 weal_ptr: 支持拷贝，可以作为返回值类型，但是不能转移所有权，只能通过weak_ptr转成shared_ptr gdb gcc有用过吗 不怎么用gdb gcc有了解\ngcc如何预处理 忘了，回答gcc有参数控制\n1 gcc -E main.c -o main.i 如何获取不进行链接的代码 忘了，回答gcc有参数控制\n1 gcc -c main.c -o main.o 线程安全的单例模式 通过C++11std::call_once实现 对指针判空执行两次，因为第一次判断为空后初始化前，可能其他线程已经初始化了，所以要两次判空 问有没有其他的，回答原子变量应该也行，不是很了解。 了解压缩算法吗 不知道为啥问这个问题，面试官接着问是否了解哈夫曼，然后让讲一下自己了解的压缩算法。回答了科研做的图像压缩。\n项目 项目结构 略\n负载均衡怎么做的 通过roundRobin方式实现，返回一个连接数量少的服务器；接着问道有考虑延迟吗，回答没有，因为是在单个机器测试的。\n单例模板基类是什么 通过模板类是实现一个单例基类，子类通过CRTP的方式实现单例。\nQt键盘鼠标事件 键盘事件：keyPressEvent keyReleaseEvent 鼠标事件：mousePressEvent mouseReleaseEvent mouseMoveEvent linux相关 docker如何建立目录映射 回答，在创建容器时通过-v指定宿主目录和容器目录的映射关系。\ntop如何根据内存占用排序 回答不知道，自己使用的基于top封装的btop，可以通过命令控制\n1 top -o %MEM 如何查找进程的句柄， 回答不太了解。可以使用ps命令查询进程状态。 查询大模型得到： 进程句柄：操作系统为每个进程分配的一个唯一标识符。它主要用于操作系统内核和其他系统组件之间进行进程管理和通信。以下是关于进程句柄的一些关键点：\n1 ls -l /proc//fd 查看进程端口占用 1 netstat -anp 查看进程打开的文件句柄 回答不知道，查询大模型得到：\n1 lsof -p git 回答稀碎，只会使用push, pull\ngit rebase git rebase可以将一个分支的更改应用到另一个分支上，可以用来\n更新分支： 将当前分支的更改应用到最新的主分支（如 main 或 master）上，以保持代码的最新状态。 例如，如果你在一个功能分支上工作，而主分支上有新的提交，你可以使用 rebase 将功能分支的更改应用到最新的主分支上。 线性化提交历史： rebase 可以使提交历史更加线性，避免合并提交（merge commit）的出现，从而使提交历史更清晰。 例如，如果你从 main 分支派生了一个功能分支，并且 main 分支上有新的提交，rebase 可以将你的功能分支的提交重新应用到 main 分支的最新提交之上。 解决冲突： 在 rebase 过程中，如果遇到冲突，Git 会暂停并提示你解决冲突。解决冲突后，你可以继续 rebase 过程。 例如，如果你的功能分支和 main 分支在同一个文件上进行了修改，rebase 会提示你解决这些冲突。 git 如何创建分支 回答使用checkout 具体是：\n1 git checkout -b ",
+  "wordCount" : "124",
   "inLanguage": "zh",
   "image":"https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msP5m.img","datePublished": "2024-12-05T17:19:33+08:00",
   "dateModified": "2024-12-05T17:19:33+08:00",
@@ -209,6 +209,14 @@
                             <a href="#%e7%86%9f%e6%82%89%e7%9a%84c%e7%89%88%e6%9c%ac" aria-label="熟悉的C&#43;&#43;版本">熟悉的C++版本</a></li>
                         <li>
                             <a href="#%e6%99%ba%e8%83%bd%e6%8c%87%e9%92%88" aria-label="智能指针">智能指针</a></li>
+                        <li>
+                            <a href="#gdb-gcc%e6%9c%89%e7%94%a8%e8%bf%87%e5%90%97" aria-label="gdb gcc有用过吗">gdb gcc有用过吗</a><ul>
+                                    
+                        <li>
+                            <a href="#gcc%e5%a6%82%e4%bd%95%e9%a2%84%e5%a4%84%e7%90%86" aria-label="gcc如何预处理">gcc如何预处理</a></li>
+                        <li>
+                            <a href="#%e5%a6%82%e4%bd%95%e8%8e%b7%e5%8f%96%e4%b8%8d%e8%bf%9b%e8%a1%8c%e9%93%be%e6%8e%a5%e7%9a%84%e4%bb%a3%e7%a0%81" aria-label="如何获取不进行链接的代码">如何获取不进行链接的代码</a></li></ul>
+                        </li>
                         <li>
                             <a href="#%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e7%9a%84%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f" aria-label="线程安全的单例模式">线程安全的单例模式</a></li>
                         <li>
@@ -323,7 +331,29 @@
 <li><code>unique_ptr</code>：支持移动，可以通过转移所有权的方式，将对象的所有权转移给另一个独占指针</li>
 <li><code>weal_ptr</code>: 支持拷贝，可以作为返回值类型，但是不能转移所有权，只能通过weak_ptr转成shared_ptr</li>
 </ol>
-<h1 id="线程安全的单例模式">线程安全的单例模式<a hidden class="anchor" aria-hidden="true" href="#线程安全的单例模式">#</a></h1>
+<h1 id="gdb-gcc有用过吗">gdb gcc有用过吗<a hidden class="anchor" aria-hidden="true" href="#gdb-gcc有用过吗">#</a></h1>
+<p>不怎么用gdb gcc有了解</p>
+<h2 id="gcc如何预处理">gcc如何预处理<a hidden class="anchor" aria-hidden="true" href="#gcc如何预处理">#</a></h2>
+<p>忘了，回答gcc有参数控制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -E main.c -o main.i
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="如何获取不进行链接的代码">如何获取不进行链接的代码<a hidden class="anchor" aria-hidden="true" href="#如何获取不进行链接的代码">#</a></h2>
+<p>忘了，回答gcc有参数控制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -c main.c -o main.o
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="线程安全的单例模式">线程安全的单例模式<a hidden class="anchor" aria-hidden="true" href="#线程安全的单例模式">#</a></h1>
 <ol>
 <li>通过C++11<code>std::call_once</code>实现</li>
 <li>对指针判空执行两次，因为第一次判断为空后初始化前，可能其他线程已经初始化了，所以要两次判空
