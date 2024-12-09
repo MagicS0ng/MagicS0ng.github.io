@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>快手客户端一面 | 😶‍🌫️Kris的Neverland</title>
+<meta name="keywords" content="面试, C&#43;&#43;">
+<meta name="description" content="自我介绍
+C&#43;&#43;
+对象初始化
+回答会根据传递的参数，调用不同的重载。
+面试官问还有吗？不知道问的什么，然后继续问了虚函数。
+虚函数
+成员函数，通过virtual修饰，子类继承时可以选择是否重载，也可以通过virtual 成员函数=0的方式声明为纯虚函数，子类必须重载。
+虚函数指针
+new delete, malloc free
+C&#43;&#43;可以视作C的超集，C&#43;&#43;继承了C的malloc和free
+new / delete
+
+new
+
+动态申请内存，返回对应对象类型的指针，
+调用类的构造函数，并进行初始化，访问了内存，涉及到虚实地址变换
+申请失败会抛出异常std::bad_alloc。
+
+
+delete
+
+释放通过new申请的空间；
+调用类的析构函数
+
+
+补充：可以通过new(nothrow)返回空指针; new和delete是C&#43;&#43;运算符可以重载。是否访问内存取决于具体的初始化逻辑，虚实地址变换由操作系统完成。
+
+malloc / free
+
+malloc
+
+申请内存，返回void类型的指针，
+不进行初始化，因此没有访存
+申请失败，返回NULL
+
+
+free
+
+释放通过malloc申请的空间；
+
+
+补充：malloc和free是C的函数。不支持重载
+
+内存布局
+
+栈： 自动管理，速度比较快，超出作用域自定析构
+堆：手动管理，通过裸指针申请时，必须手动析构；也可以通过智能指针管理
+全局区data：初始化的全局变量和静态变量
+代码区text：代码段，存储函数，和类的静态成员函数
+bss区：未初始化的全局变量和静态变量，默认为0
+rodata区：只读数据，常量
+
+线程 进程区别
+
+进程
+
+进程享有自己的地址空间，因此多进程之间是隔离的，一个进程的崩溃往往不会导致其他进程崩溃
+进程通信比较复杂
+进程是资源分配的基本单位
+
+
+线程
+
+多个线程共享一个进程的地址空间，因此一个线程崩溃有可能导致其他线程的崩溃
+线程通信简单，因此需要频繁交互任务可以使用多线程。
+
+
+补充：进程通信包括：管道，共享内存，消息队列，socket，信号，信号量；线程通信主要包括：互斥锁，条件变量，信号量，原子操作，互斥量，读写锁。
+
+数据库索引
+尴尬，答成引擎了。然后又回答一遍
+
+B&#43;： 多路平衡，高度比较矮，快速查询，叶子节点为链表结构，支持范围查询，非叶子节点存储索引节点，叶子节点存储数据
+B：不支持范围查询，非叶子节点也可以存储数据
+单列索引：单个字段创建索引
+联合索引：多个字段创建索引，需要主要最左匹配原则
+补充：哈希索引：快速查找，无法排序，不支持范围查询，
+
+项目
+问到有没有测过并发量。回答没有，但是根据之前测试线程池的经验，应该可以支持1w用户。
+网络部分
+浏览器访问url到渲染页面的具体过程
+
+DNS解析
+
+有缓存先查缓存
+没有缓存，查询根域名服务器，根域名服务器通过树状结构查询顶级域名服务器，顶级域名查询负责该域名的权威域名服务器
+权威域名服务器返回IP地址
+
+
+TCP握手
+IP
+同一个子网，通过arp寻找对应的mac，不同子网通过默认路由转发，通过路由器自动更新下一跳的mac地址寻找目标mac地址
+封装http消息，请求行，请求头，请求体，
+通过交换机或路由器将信息转为二进制流，发送到目标主机
+服务器收到后通过拆包，协议栈自底向上到达应用层，知道是http消息，取出对应的资源，以响应行：status_code等，响应头，响应体，经协议栈自顶向下发送
+客户端收到消息，通过浏览器渲染得到页面
+
+如何加快http的速度
+
+选择压缩算法，压缩消息体
+服务器负载均衡，返回最近的最快的服务器
+选择合适的协议，因为TCP很慢，所以http3.0 使用了UPD实现了quic
+将用户访问过的资源，在本地缓存
+补充：其他优化方式：合并多个css、js使用一个http连接发送，减少请求数量；异步加载js；使用高效的图像压缩算法，压缩图像
+补充缓存：
+
+浏览器缓存：通过设置适当的缓存策略（如Cache-Control、Expires）在浏览器端缓存常用资源，避免每次请求都重新从服务器加载资源，显著提高页面加载速度。
+CDN缓存：内容分发网络（CDN）将资源缓存到离用户更近的节点，通过地理位置分发减少网络延迟，提升响应速度。
+服务器端缓存：对于常用的动态资源（如数据库查询结果），可以使用 Redis 或 Memcached 等缓存技术，减少数据库的压力，快速返回常见请求的结果。
+服务工作者缓存：现代浏览器提供服务工作者（Service Workers）来缓存资源并提供离线支持，使得即使没有网络，用户也可以继续使用应用程序。
+
+
+
+手撕 二叉树最近公共祖先
+ACM模式，写出函数讲解思路">
+<meta name="author" content="Kris">
+<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%80%E9%9D%A2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b77f76025494e037d52c0250f00cc8a2ff41875d068463a56e0d76beed50dd13.css" integrity="sha256-t392AlSU4DfVLAJQ8AzIov9Bh10GhGOlbg12vu1Q3RM=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%80%E9%9D%A2/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%80%E9%9D%A2/">
+  <meta property="og:site_name" content="😶‍🌫️Kris的Neverland">
+  <meta property="og:title" content="快手客户端一面">
+  <meta property="og:description" content="自我介绍 C&#43;&#43; 对象初始化 回答会根据传递的参数，调用不同的重载。 面试官问还有吗？不知道问的什么，然后继续问了虚函数。
+虚函数 成员函数，通过virtual修饰，子类继承时可以选择是否重载，也可以通过virtual 成员函数=0的方式声明为纯虚函数，子类必须重载。
+虚函数指针 new delete, malloc free C&#43;&#43;可以视作C的超集，C&#43;&#43;继承了C的malloc和free
+new / delete new 动态申请内存，返回对应对象类型的指针， 调用类的构造函数，并进行初始化，访问了内存，涉及到虚实地址变换 申请失败会抛出异常std::bad_alloc。 delete 释放通过new申请的空间； 调用类的析构函数 补充：可以通过new(nothrow)返回空指针; new和delete是C&#43;&#43;运算符可以重载。是否访问内存取决于具体的初始化逻辑，虚实地址变换由操作系统完成。 malloc / free malloc 申请内存，返回void类型的指针， 不进行初始化，因此没有访存 申请失败，返回NULL free 释放通过malloc申请的空间； 补充：malloc和free是C的函数。不支持重载 内存布局 栈： 自动管理，速度比较快，超出作用域自定析构 堆：手动管理，通过裸指针申请时，必须手动析构；也可以通过智能指针管理 全局区data：初始化的全局变量和静态变量 代码区text：代码段，存储函数，和类的静态成员函数 bss区：未初始化的全局变量和静态变量，默认为0 rodata区：只读数据，常量 线程 进程区别 进程 进程享有自己的地址空间，因此多进程之间是隔离的，一个进程的崩溃往往不会导致其他进程崩溃 进程通信比较复杂 进程是资源分配的基本单位 线程 多个线程共享一个进程的地址空间，因此一个线程崩溃有可能导致其他线程的崩溃 线程通信简单，因此需要频繁交互任务可以使用多线程。 补充：进程通信包括：管道，共享内存，消息队列，socket，信号，信号量；线程通信主要包括：互斥锁，条件变量，信号量，原子操作，互斥量，读写锁。 数据库索引 尴尬，答成引擎了。然后又回答一遍
+B&#43;： 多路平衡，高度比较矮，快速查询，叶子节点为链表结构，支持范围查询，非叶子节点存储索引节点，叶子节点存储数据 B：不支持范围查询，非叶子节点也可以存储数据 单列索引：单个字段创建索引 联合索引：多个字段创建索引，需要主要最左匹配原则 补充：哈希索引：快速查找，无法排序，不支持范围查询， 项目 问到有没有测过并发量。回答没有，但是根据之前测试线程池的经验，应该可以支持1w用户。
+网络部分 浏览器访问url到渲染页面的具体过程 DNS解析 有缓存先查缓存 没有缓存，查询根域名服务器，根域名服务器通过树状结构查询顶级域名服务器，顶级域名查询负责该域名的权威域名服务器 权威域名服务器返回IP地址 TCP握手 IP 同一个子网，通过arp寻找对应的mac，不同子网通过默认路由转发，通过路由器自动更新下一跳的mac地址寻找目标mac地址 封装http消息，请求行，请求头，请求体， 通过交换机或路由器将信息转为二进制流，发送到目标主机 服务器收到后通过拆包，协议栈自底向上到达应用层，知道是http消息，取出对应的资源，以响应行：status_code等，响应头，响应体，经协议栈自顶向下发送 客户端收到消息，通过浏览器渲染得到页面 如何加快http的速度 选择压缩算法，压缩消息体 服务器负载均衡，返回最近的最快的服务器 选择合适的协议，因为TCP很慢，所以http3.0 使用了UPD实现了quic 将用户访问过的资源，在本地缓存 补充：其他优化方式：合并多个css、js使用一个http连接发送，减少请求数量；异步加载js；使用高效的图像压缩算法，压缩图像 补充缓存： 浏览器缓存：通过设置适当的缓存策略（如Cache-Control、Expires）在浏览器端缓存常用资源，避免每次请求都重新从服务器加载资源，显著提高页面加载速度。 CDN缓存：内容分发网络（CDN）将资源缓存到离用户更近的节点，通过地理位置分发减少网络延迟，提升响应速度。 服务器端缓存：对于常用的动态资源（如数据库查询结果），可以使用 Redis 或 Memcached 等缓存技术，减少数据库的压力，快速返回常见请求的结果。 服务工作者缓存：现代浏览器提供服务工作者（Service Workers）来缓存资源并提供离线支持，使得即使没有网络，用户也可以继续使用应用程序。 手撕 二叉树最近公共祖先 ACM模式，写出函数讲解思路">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-09T17:09:59+08:00">
+    <meta property="article:modified_time" content="2024-12-09T17:09:59+08:00">
+    <meta property="article:tag" content="面试">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="og:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msDTu.img">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msDTu.img">
+<meta name="twitter:title" content="快手客户端一面">
+<meta name="twitter:description" content="自我介绍
+C&#43;&#43;
+对象初始化
+回答会根据传递的参数，调用不同的重载。
+面试官问还有吗？不知道问的什么，然后继续问了虚函数。
+虚函数
+成员函数，通过virtual修饰，子类继承时可以选择是否重载，也可以通过virtual 成员函数=0的方式声明为纯虚函数，子类必须重载。
+虚函数指针
+new delete, malloc free
+C&#43;&#43;可以视作C的超集，C&#43;&#43;继承了C的malloc和free
+new / delete
+
+new
+
+动态申请内存，返回对应对象类型的指针，
+调用类的构造函数，并进行初始化，访问了内存，涉及到虚实地址变换
+申请失败会抛出异常std::bad_alloc。
+
+
+delete
+
+释放通过new申请的空间；
+调用类的析构函数
+
+
+补充：可以通过new(nothrow)返回空指针; new和delete是C&#43;&#43;运算符可以重载。是否访问内存取决于具体的初始化逻辑，虚实地址变换由操作系统完成。
+
+malloc / free
+
+malloc
+
+申请内存，返回void类型的指针，
+不进行初始化，因此没有访存
+申请失败，返回NULL
+
+
+free
+
+释放通过malloc申请的空间；
+
+
+补充：malloc和free是C的函数。不支持重载
+
+内存布局
+
+栈： 自动管理，速度比较快，超出作用域自定析构
+堆：手动管理，通过裸指针申请时，必须手动析构；也可以通过智能指针管理
+全局区data：初始化的全局变量和静态变量
+代码区text：代码段，存储函数，和类的静态成员函数
+bss区：未初始化的全局变量和静态变量，默认为0
+rodata区：只读数据，常量
+
+线程 进程区别
+
+进程
+
+进程享有自己的地址空间，因此多进程之间是隔离的，一个进程的崩溃往往不会导致其他进程崩溃
+进程通信比较复杂
+进程是资源分配的基本单位
+
+
+线程
+
+多个线程共享一个进程的地址空间，因此一个线程崩溃有可能导致其他线程的崩溃
+线程通信简单，因此需要频繁交互任务可以使用多线程。
+
+
+补充：进程通信包括：管道，共享内存，消息队列，socket，信号，信号量；线程通信主要包括：互斥锁，条件变量，信号量，原子操作，互斥量，读写锁。
+
+数据库索引
+尴尬，答成引擎了。然后又回答一遍
+
+B&#43;： 多路平衡，高度比较矮，快速查询，叶子节点为链表结构，支持范围查询，非叶子节点存储索引节点，叶子节点存储数据
+B：不支持范围查询，非叶子节点也可以存储数据
+单列索引：单个字段创建索引
+联合索引：多个字段创建索引，需要主要最左匹配原则
+补充：哈希索引：快速查找，无法排序，不支持范围查询，
+
+项目
+问到有没有测过并发量。回答没有，但是根据之前测试线程池的经验，应该可以支持1w用户。
+网络部分
+浏览器访问url到渲染页面的具体过程
+
+DNS解析
+
+有缓存先查缓存
+没有缓存，查询根域名服务器，根域名服务器通过树状结构查询顶级域名服务器，顶级域名查询负责该域名的权威域名服务器
+权威域名服务器返回IP地址
+
+
+TCP握手
+IP
+同一个子网，通过arp寻找对应的mac，不同子网通过默认路由转发，通过路由器自动更新下一跳的mac地址寻找目标mac地址
+封装http消息，请求行，请求头，请求体，
+通过交换机或路由器将信息转为二进制流，发送到目标主机
+服务器收到后通过拆包，协议栈自底向上到达应用层，知道是http消息，取出对应的资源，以响应行：status_code等，响应头，响应体，经协议栈自顶向下发送
+客户端收到消息，通过浏览器渲染得到页面
+
+如何加快http的速度
+
+选择压缩算法，压缩消息体
+服务器负载均衡，返回最近的最快的服务器
+选择合适的协议，因为TCP很慢，所以http3.0 使用了UPD实现了quic
+将用户访问过的资源，在本地缓存
+补充：其他优化方式：合并多个css、js使用一个http连接发送，减少请求数量；异步加载js；使用高效的图像压缩算法，压缩图像
+补充缓存：
+
+浏览器缓存：通过设置适当的缓存策略（如Cache-Control、Expires）在浏览器端缓存常用资源，避免每次请求都重新从服务器加载资源，显著提高页面加载速度。
+CDN缓存：内容分发网络（CDN）将资源缓存到离用户更近的节点，通过地理位置分发减少网络延迟，提升响应速度。
+服务器端缓存：对于常用的动态资源（如数据库查询结果），可以使用 Redis 或 Memcached 等缓存技术，减少数据库的压力，快速返回常见请求的结果。
+服务工作者缓存：现代浏览器提供服务工作者（Service Workers）来缓存资源并提供离线支持，使得即使没有网络，用户也可以继续使用应用程序。
+
+
+
+手撕 二叉树最近公共祖先
+ACM模式，写出函数讲解思路">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://magics0ng-github-io.pages.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "快手客户端一面",
+      "item": "https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%80%E9%9D%A2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "快手客户端一面",
+  "name": "快手客户端一面",
+  "description": "自我介绍 C++ 对象初始化 回答会根据传递的参数，调用不同的重载。 面试官问还有吗？不知道问的什么，然后继续问了虚函数。\n虚函数 成员函数，通过virtual修饰，子类继承时可以选择是否重载，也可以通过virtual 成员函数=0的方式声明为纯虚函数，子类必须重载。\n虚函数指针 new delete, malloc free C++可以视作C的超集，C++继承了C的malloc和free\nnew / delete new 动态申请内存，返回对应对象类型的指针， 调用类的构造函数，并进行初始化，访问了内存，涉及到虚实地址变换 申请失败会抛出异常std::bad_alloc。 delete 释放通过new申请的空间； 调用类的析构函数 补充：可以通过new(nothrow)返回空指针; new和delete是C++运算符可以重载。是否访问内存取决于具体的初始化逻辑，虚实地址变换由操作系统完成。 malloc / free malloc 申请内存，返回void类型的指针， 不进行初始化，因此没有访存 申请失败，返回NULL free 释放通过malloc申请的空间； 补充：malloc和free是C的函数。不支持重载 内存布局 栈： 自动管理，速度比较快，超出作用域自定析构 堆：手动管理，通过裸指针申请时，必须手动析构；也可以通过智能指针管理 全局区data：初始化的全局变量和静态变量 代码区text：代码段，存储函数，和类的静态成员函数 bss区：未初始化的全局变量和静态变量，默认为0 rodata区：只读数据，常量 线程 进程区别 进程 进程享有自己的地址空间，因此多进程之间是隔离的，一个进程的崩溃往往不会导致其他进程崩溃 进程通信比较复杂 进程是资源分配的基本单位 线程 多个线程共享一个进程的地址空间，因此一个线程崩溃有可能导致其他线程的崩溃 线程通信简单，因此需要频繁交互任务可以使用多线程。 补充：进程通信包括：管道，共享内存，消息队列，socket，信号，信号量；线程通信主要包括：互斥锁，条件变量，信号量，原子操作，互斥量，读写锁。 数据库索引 尴尬，答成引擎了。然后又回答一遍\nB+： 多路平衡，高度比较矮，快速查询，叶子节点为链表结构，支持范围查询，非叶子节点存储索引节点，叶子节点存储数据 B：不支持范围查询，非叶子节点也可以存储数据 单列索引：单个字段创建索引 联合索引：多个字段创建索引，需要主要最左匹配原则 补充：哈希索引：快速查找，无法排序，不支持范围查询， 项目 问到有没有测过并发量。回答没有，但是根据之前测试线程池的经验，应该可以支持1w用户。\n网络部分 浏览器访问url到渲染页面的具体过程 DNS解析 有缓存先查缓存 没有缓存，查询根域名服务器，根域名服务器通过树状结构查询顶级域名服务器，顶级域名查询负责该域名的权威域名服务器 权威域名服务器返回IP地址 TCP握手 IP 同一个子网，通过arp寻找对应的mac，不同子网通过默认路由转发，通过路由器自动更新下一跳的mac地址寻找目标mac地址 封装http消息，请求行，请求头，请求体， 通过交换机或路由器将信息转为二进制流，发送到目标主机 服务器收到后通过拆包，协议栈自底向上到达应用层，知道是http消息，取出对应的资源，以响应行：status_code等，响应头，响应体，经协议栈自顶向下发送 客户端收到消息，通过浏览器渲染得到页面 如何加快http的速度 选择压缩算法，压缩消息体 服务器负载均衡，返回最近的最快的服务器 选择合适的协议，因为TCP很慢，所以http3.0 使用了UPD实现了quic 将用户访问过的资源，在本地缓存 补充：其他优化方式：合并多个css、js使用一个http连接发送，减少请求数量；异步加载js；使用高效的图像压缩算法，压缩图像 补充缓存： 浏览器缓存：通过设置适当的缓存策略（如Cache-Control、Expires）在浏览器端缓存常用资源，避免每次请求都重新从服务器加载资源，显著提高页面加载速度。 CDN缓存：内容分发网络（CDN）将资源缓存到离用户更近的节点，通过地理位置分发减少网络延迟，提升响应速度。 服务器端缓存：对于常用的动态资源（如数据库查询结果），可以使用 Redis 或 Memcached 等缓存技术，减少数据库的压力，快速返回常见请求的结果。 服务工作者缓存：现代浏览器提供服务工作者（Service Workers）来缓存资源并提供离线支持，使得即使没有网络，用户也可以继续使用应用程序。 手撕 二叉树最近公共祖先 ACM模式，写出函数讲解思路\n",
+  "keywords": [
+    "面试", "C++"
+  ],
+  "articleBody": "自我介绍 C++ 对象初始化 回答会根据传递的参数，调用不同的重载。 面试官问还有吗？不知道问的什么，然后继续问了虚函数。\n虚函数 成员函数，通过virtual修饰，子类继承时可以选择是否重载，也可以通过virtual 成员函数=0的方式声明为纯虚函数，子类必须重载。\n虚函数指针 new delete, malloc free C++可以视作C的超集，C++继承了C的malloc和free\nnew / delete new 动态申请内存，返回对应对象类型的指针， 调用类的构造函数，并进行初始化，访问了内存，涉及到虚实地址变换 申请失败会抛出异常std::bad_alloc。 delete 释放通过new申请的空间； 调用类的析构函数 补充：可以通过new(nothrow)返回空指针; new和delete是C++运算符可以重载。是否访问内存取决于具体的初始化逻辑，虚实地址变换由操作系统完成。 malloc / free malloc 申请内存，返回void类型的指针， 不进行初始化，因此没有访存 申请失败，返回NULL free 释放通过malloc申请的空间； 补充：malloc和free是C的函数。不支持重载 内存布局 栈： 自动管理，速度比较快，超出作用域自定析构 堆：手动管理，通过裸指针申请时，必须手动析构；也可以通过智能指针管理 全局区data：初始化的全局变量和静态变量 代码区text：代码段，存储函数，和类的静态成员函数 bss区：未初始化的全局变量和静态变量，默认为0 rodata区：只读数据，常量 线程 进程区别 进程 进程享有自己的地址空间，因此多进程之间是隔离的，一个进程的崩溃往往不会导致其他进程崩溃 进程通信比较复杂 进程是资源分配的基本单位 线程 多个线程共享一个进程的地址空间，因此一个线程崩溃有可能导致其他线程的崩溃 线程通信简单，因此需要频繁交互任务可以使用多线程。 补充：进程通信包括：管道，共享内存，消息队列，socket，信号，信号量；线程通信主要包括：互斥锁，条件变量，信号量，原子操作，互斥量，读写锁。 数据库索引 尴尬，答成引擎了。然后又回答一遍\nB+： 多路平衡，高度比较矮，快速查询，叶子节点为链表结构，支持范围查询，非叶子节点存储索引节点，叶子节点存储数据 B：不支持范围查询，非叶子节点也可以存储数据 单列索引：单个字段创建索引 联合索引：多个字段创建索引，需要主要最左匹配原则 补充：哈希索引：快速查找，无法排序，不支持范围查询， 项目 问到有没有测过并发量。回答没有，但是根据之前测试线程池的经验，应该可以支持1w用户。\n网络部分 浏览器访问url到渲染页面的具体过程 DNS解析 有缓存先查缓存 没有缓存，查询根域名服务器，根域名服务器通过树状结构查询顶级域名服务器，顶级域名查询负责该域名的权威域名服务器 权威域名服务器返回IP地址 TCP握手 IP 同一个子网，通过arp寻找对应的mac，不同子网通过默认路由转发，通过路由器自动更新下一跳的mac地址寻找目标mac地址 封装http消息，请求行，请求头，请求体， 通过交换机或路由器将信息转为二进制流，发送到目标主机 服务器收到后通过拆包，协议栈自底向上到达应用层，知道是http消息，取出对应的资源，以响应行：status_code等，响应头，响应体，经协议栈自顶向下发送 客户端收到消息，通过浏览器渲染得到页面 如何加快http的速度 选择压缩算法，压缩消息体 服务器负载均衡，返回最近的最快的服务器 选择合适的协议，因为TCP很慢，所以http3.0 使用了UPD实现了quic 将用户访问过的资源，在本地缓存 补充：其他优化方式：合并多个css、js使用一个http连接发送，减少请求数量；异步加载js；使用高效的图像压缩算法，压缩图像 补充缓存： 浏览器缓存：通过设置适当的缓存策略（如Cache-Control、Expires）在浏览器端缓存常用资源，避免每次请求都重新从服务器加载资源，显著提高页面加载速度。 CDN缓存：内容分发网络（CDN）将资源缓存到离用户更近的节点，通过地理位置分发减少网络延迟，提升响应速度。 服务器端缓存：对于常用的动态资源（如数据库查询结果），可以使用 Redis 或 Memcached 等缓存技术，减少数据库的压力，快速返回常见请求的结果。 服务工作者缓存：现代浏览器提供服务工作者（Service Workers）来缓存资源并提供离线支持，使得即使没有网络，用户也可以继续使用应用程序。 手撕 二叉树最近公共祖先 ACM模式，写出函数讲解思路\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 struct TreeNode{ int val; TreeNode *left; TreeNode *right; TreeNode():val(0),left(nullptr), right(nullptr){} TreeNode(int _val):val(_val),left(nullptr), right(nullptr){} }; TreeNode * commonAncestor(TreeNode *root, TreeNode *p, TreeNode *q){ if(!root||p==root||q==root) return p; auto left = commonAncestor(root-\u003eleft, p, q); auto right = commonAncestor(root-\u003eright, p, q); if(left\u0026\u0026right) return root; return left?left:right; } ",
+  "wordCount" : "156",
+  "inLanguage": "zh",
+  "image":"https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msDTu.img","datePublished": "2024-12-09T17:09:59+08:00",
+  "dateModified": "2024-12-09T17:09:59+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Kris"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%80%E9%9D%A2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "😶‍🌫️Kris的Neverland",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="😶‍🌫️Kris的Neverland (Alt + H)">😶‍🌫️Kris的Neverland</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/archives" title="🗂️Archives">
+                    <span>🗂️Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/tags" title="🏷️Tags">
+                    <span>🏷️Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://magics0ng-github-io.pages.dev/">主页</a>&nbsp;»&nbsp;<a href="https://magics0ng-github-io.pages.dev/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      快手客户端一面
+    </h1>
+    <div class="post-meta"><span title='2024-12-09 17:09:59 +0800 CST'>十二月 9, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris
+
+</div>
+  </header> 
+<figure class="entry-cover"><img loading="eager" src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msDTu.img" alt="">
+        
+</figure><aside id="toc-container" class="toc-container wide">
+        <div class="toc">
+            <details >
+                <summary accesskey="c" title="(Alt + C)">
+                    <span class="details">目录</span>
+                </summary>
+
+                <div class="inner"><ul>
+                        <li>
+                            <a href="#%e8%87%aa%e6%88%91%e4%bb%8b%e7%bb%8d" aria-label="自我介绍">自我介绍</a></li>
+                        <li>
+                            <a href="#c" aria-label="C&#43;&#43;">C++</a><ul>
+                                    
+                        <li>
+                            <a href="#%e5%af%b9%e8%b1%a1%e5%88%9d%e5%a7%8b%e5%8c%96" aria-label="对象初始化">对象初始化</a></li>
+                        <li>
+                            <a href="#%e8%99%9a%e5%87%bd%e6%95%b0" aria-label="虚函数">虚函数</a><ul>
+                                    
+                        <li>
+                            <a href="#%e8%99%9a%e5%87%bd%e6%95%b0%e6%8c%87%e9%92%88" aria-label="虚函数指针">虚函数指针</a></li></ul>
+                        </li>
+                        <li>
+                            <a href="#new-delete-malloc-free" aria-label="new delete, malloc free">new delete, malloc free</a><ul>
+                                    
+                        <li>
+                            <a href="#new--delete" aria-label="new / delete">new / delete</a></li>
+                        <li>
+                            <a href="#malloc--free" aria-label="malloc / free">malloc / free</a></li></ul>
+                        </li>
+                        <li>
+                            <a href="#%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80" aria-label="内存布局">内存布局</a></li></ul>
+                        </li>
+                        <li>
+                            <a href="#%e7%ba%bf%e7%a8%8b-%e8%bf%9b%e7%a8%8b%e5%8c%ba%e5%88%ab" aria-label="线程 进程区别">线程 进程区别</a></li>
+                        <li>
+                            <a href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e7%b4%a2%e5%bc%95" aria-label="数据库索引">数据库索引</a></li>
+                        <li>
+                            <a href="#%e9%a1%b9%e7%9b%ae" aria-label="项目">项目</a></li>
+                        <li>
+                            <a href="#%e7%bd%91%e7%bb%9c%e9%83%a8%e5%88%86" aria-label="网络部分">网络部分</a><ul>
+                                    
+                        <li>
+                            <a href="#%e6%b5%8f%e8%a7%88%e5%99%a8%e8%ae%bf%e9%97%aeurl%e5%88%b0%e6%b8%b2%e6%9f%93%e9%a1%b5%e9%9d%a2%e7%9a%84%e5%85%b7%e4%bd%93%e8%bf%87%e7%a8%8b" aria-label="浏览器访问url到渲染页面的具体过程">浏览器访问url到渲染页面的具体过程</a></li>
+                        <li>
+                            <a href="#%e5%a6%82%e4%bd%95%e5%8a%a0%e5%bf%abhttp%e7%9a%84%e9%80%9f%e5%ba%a6" aria-label="如何加快http的速度">如何加快http的速度</a></li></ul>
+                        </li>
+                        <li>
+                            <a href="#%e6%89%8b%e6%92%95-%e4%ba%8c%e5%8f%89%e6%a0%91%e6%9c%80%e8%bf%91%e5%85%ac%e5%85%b1%e7%a5%96%e5%85%88" aria-label="手撕 二叉树最近公共祖先">手撕 二叉树最近公共祖先</a>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </aside>
+    <script>
+        let activeElement;
+        let elements;
+        window.addEventListener('DOMContentLoaded', function (event) {
+            checkTocPosition();
+
+            elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }, false);
+
+        window.addEventListener('resize', function (event) {
+            checkTocPosition();
+        }, false);
+
+        window.addEventListener('scroll', () => {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                    (getOffsetTop(element) - window.pageYOffset) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement
+
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                if (element === activeElement) {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+                } else {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+                }
+            })
+        }, false);
+
+        const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+        const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+        const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+        function checkTocPosition() {
+            const width = document.body.scrollWidth;
+
+            if (width - main - (toc * 2) - (gap * 4) > 0) {
+                document.getElementById("toc-container").classList.add("wide");
+            } else {
+                document.getElementById("toc-container").classList.remove("wide");
+            }
+        }
+
+        function getOffsetTop(element) {
+            if (!element.getClientRects().length) {
+                return 0;
+            }
+            let rect = element.getBoundingClientRect();
+            let win = element.ownerDocument.defaultView;
+            return rect.top + win.pageYOffset;
+        }
+    </script>
+
+  <div class="post-content"><h1 id="自我介绍">自我介绍<a hidden class="anchor" aria-hidden="true" href="#自我介绍">#</a></h1>
+<h1 id="c">C++<a hidden class="anchor" aria-hidden="true" href="#c">#</a></h1>
+<h2 id="对象初始化">对象初始化<a hidden class="anchor" aria-hidden="true" href="#对象初始化">#</a></h2>
+<p>回答会根据传递的参数，调用不同的重载。
+面试官问还有吗？不知道问的什么，然后继续问了虚函数。</p>
+<h2 id="虚函数">虚函数<a hidden class="anchor" aria-hidden="true" href="#虚函数">#</a></h2>
+<p>成员函数，通过<code>virtual</code>修饰，子类继承时可以选择是否重载，也可以通过<code>virtual 成员函数=0</code>的方式声明为纯虚函数，子类必须重载。</p>
+<h3 id="虚函数指针">虚函数指针<a hidden class="anchor" aria-hidden="true" href="#虚函数指针">#</a></h3>
+<h2 id="new-delete-malloc-free">new delete, malloc free<a hidden class="anchor" aria-hidden="true" href="#new-delete-malloc-free">#</a></h2>
+<p><code>C++</code>可以视作<code>C</code>的超集，<code>C++</code>继承了<code>C</code>的<code>malloc</code>和<code>free</code></p>
+<h3 id="new--delete">new / delete<a hidden class="anchor" aria-hidden="true" href="#new--delete">#</a></h3>
+<ol>
+<li>new
+<ol>
+<li>动态申请内存，返回对应对象类型的指针，</li>
+<li>调用类的构造函数，并进行初始化，访问了内存，涉及到虚实地址变换</li>
+<li>申请失败会抛出异常<code>std::bad_alloc</code>。</li>
+</ol>
+</li>
+<li>delete
+<ol>
+<li>释放通过new申请的空间；</li>
+<li>调用类的析构函数</li>
+</ol>
+</li>
+<li>补充：可以通过<code>new(nothrow)</code>返回空指针; <code>new</code>和<code>delete</code>是<code>C++</code>运算符可以重载。是否访问内存取决于具体的初始化逻辑，虚实地址变换由操作系统完成。</li>
+</ol>
+<h3 id="malloc--free">malloc / free<a hidden class="anchor" aria-hidden="true" href="#malloc--free">#</a></h3>
+<ol>
+<li>malloc
+<ol>
+<li>申请内存，返回<code>void</code>类型的指针，</li>
+<li>不进行初始化，因此没有访存</li>
+<li>申请失败，返回<code>NULL</code></li>
+</ol>
+</li>
+<li>free
+<ol>
+<li>释放通过malloc申请的空间；</li>
+</ol>
+</li>
+<li>补充：<code>malloc</code>和<code>free</code>是<code>C</code>的函数。不支持重载</li>
+</ol>
+<h2 id="内存布局">内存布局<a hidden class="anchor" aria-hidden="true" href="#内存布局">#</a></h2>
+<ol>
+<li>栈： 自动管理，速度比较快，超出作用域自定析构</li>
+<li>堆：手动管理，通过裸指针申请时，必须手动析构；也可以通过智能指针管理</li>
+<li>全局区data：初始化的全局变量和静态变量</li>
+<li>代码区text：代码段，存储函数，和类的静态成员函数</li>
+<li>bss区：未初始化的全局变量和静态变量，默认为0</li>
+<li>rodata区：只读数据，常量</li>
+</ol>
+<h1 id="线程-进程区别">线程 进程区别<a hidden class="anchor" aria-hidden="true" href="#线程-进程区别">#</a></h1>
+<ol>
+<li>进程
+<ol>
+<li>进程享有自己的地址空间，因此多进程之间是隔离的，一个进程的崩溃往往不会导致其他进程崩溃</li>
+<li>进程通信比较复杂</li>
+<li>进程是资源分配的基本单位</li>
+</ol>
+</li>
+<li>线程
+<ol>
+<li>多个线程共享一个进程的地址空间，因此一个线程崩溃有可能导致其他线程的崩溃</li>
+<li>线程通信简单，因此需要频繁交互任务可以使用多线程。</li>
+</ol>
+</li>
+<li>补充：进程通信包括：管道，共享内存，消息队列，socket，信号，信号量；线程通信主要包括：互斥锁，条件变量，信号量，原子操作，互斥量，读写锁。</li>
+</ol>
+<h1 id="数据库索引">数据库索引<a hidden class="anchor" aria-hidden="true" href="#数据库索引">#</a></h1>
+<p>尴尬，答成引擎了。然后又回答一遍</p>
+<ol>
+<li>B+： 多路平衡，高度比较矮，快速查询，叶子节点为链表结构，支持范围查询，非叶子节点存储索引节点，叶子节点存储数据</li>
+<li>B：不支持范围查询，非叶子节点也可以存储数据</li>
+<li>单列索引：单个字段创建索引</li>
+<li>联合索引：多个字段创建索引，需要主要最左匹配原则</li>
+<li>补充：哈希索引：快速查找，无法排序，不支持范围查询，</li>
+</ol>
+<h1 id="项目">项目<a hidden class="anchor" aria-hidden="true" href="#项目">#</a></h1>
+<p>问到有没有测过并发量。回答没有，但是根据之前测试线程池的经验，应该可以支持1w用户。</p>
+<h1 id="网络部分">网络部分<a hidden class="anchor" aria-hidden="true" href="#网络部分">#</a></h1>
+<h2 id="浏览器访问url到渲染页面的具体过程">浏览器访问url到渲染页面的具体过程<a hidden class="anchor" aria-hidden="true" href="#浏览器访问url到渲染页面的具体过程">#</a></h2>
+<ol>
+<li>DNS解析
+<ol>
+<li>有缓存先查缓存</li>
+<li>没有缓存，查询根域名服务器，根域名服务器通过树状结构查询顶级域名服务器，顶级域名查询负责该域名的权威域名服务器</li>
+<li>权威域名服务器返回IP地址</li>
+</ol>
+</li>
+<li>TCP握手</li>
+<li>IP</li>
+<li>同一个子网，通过arp寻找对应的mac，不同子网通过默认路由转发，通过路由器自动更新下一跳的mac地址寻找目标mac地址</li>
+<li>封装http消息，请求行，请求头，请求体，</li>
+<li>通过交换机或路由器将信息转为二进制流，发送到目标主机</li>
+<li>服务器收到后通过拆包，协议栈自底向上到达应用层，知道是http消息，取出对应的资源，以响应行：status_code等，响应头，响应体，经协议栈自顶向下发送</li>
+<li>客户端收到消息，通过浏览器渲染得到页面</li>
+</ol>
+<h2 id="如何加快http的速度">如何加快http的速度<a hidden class="anchor" aria-hidden="true" href="#如何加快http的速度">#</a></h2>
+<ol>
+<li>选择压缩算法，压缩消息体</li>
+<li>服务器负载均衡，返回最近的最快的服务器</li>
+<li>选择合适的协议，因为TCP很慢，所以http3.0 使用了UPD实现了quic</li>
+<li>将用户访问过的资源，在本地缓存</li>
+<li>补充：其他优化方式：合并多个css、js使用一个http连接发送，减少请求数量；异步加载js；使用高效的图像压缩算法，压缩图像</li>
+<li>补充缓存：
+<ol>
+<li>浏览器缓存：通过设置适当的缓存策略（如Cache-Control、Expires）在浏览器端缓存常用资源，避免每次请求都重新从服务器加载资源，显著提高页面加载速度。</li>
+<li>CDN缓存：内容分发网络（CDN）将资源缓存到离用户更近的节点，通过地理位置分发减少网络延迟，提升响应速度。</li>
+<li>服务器端缓存：对于常用的动态资源（如数据库查询结果），可以使用 Redis 或 Memcached 等缓存技术，减少数据库的压力，快速返回常见请求的结果。</li>
+<li>服务工作者缓存：现代浏览器提供服务工作者（Service Workers）来缓存资源并提供离线支持，使得即使没有网络，用户也可以继续使用应用程序。</li>
+</ol>
+</li>
+</ol>
+<h1 id="手撕-二叉树最近公共祖先">手撕 二叉树最近公共祖先<a hidden class="anchor" aria-hidden="true" href="#手撕-二叉树最近公共祖先">#</a></h1>
+<p>ACM模式，写出函数讲解思路</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span><span class="o">:</span><span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">_val</span><span class="p">)</span><span class="o">:</span><span class="n">val</span><span class="p">(</span><span class="n">_val</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">){}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">TreeNode</span> <span class="o">*</span> <span class="nf">commonAncestor</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">q</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="o">||</span><span class="n">p</span><span class="o">==</span><span class="n">root</span><span class="o">||</span><span class="n">q</span><span class="o">==</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">left</span> <span class="o">=</span> <span class="n">commonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">right</span> <span class="o">=</span> <span class="n">commonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">&amp;&amp;</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">left</span><span class="o">?</span><span class="nl">left</span><span class="p">:</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/%E9%9D%A2%E8%AF%95/">面试</a></li>
+      <li><a href="https://magics0ng-github-io.pages.dev/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/%E9%87%91%E5%B1%B1%E4%BA%8C%E9%9D%A2/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>金山二面</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">😶‍🌫️Kris的Neverland</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
