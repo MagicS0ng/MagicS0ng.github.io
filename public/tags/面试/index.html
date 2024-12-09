@@ -144,13 +144,7 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>自我介绍 C&#43;&#43; i&#43;&#43; ,&#43;&#43;i i&#43;&#43;是右值，&#43;&#43;i是左值 如果在一条语句内执行i&#43;&#43;, 会先获取i的值，然后执行语句，执行结束后i自增1 如果在一条语句内执行&#43;&#43;i, 会先对i自增1，然后执行语句 补充：一般来讲，i&#43;&#43; 的执行操作为：使用临时对象保存i的值，然后执行i&#43;1，返回临时对象；&#43;&#43;i 直接对i自增，不涉及临时变量 for-loop for(int i = 0;i&lt;10;i&#43;&#43;/&#43;&#43;i&gt;): &#43;&#43;i 与i&#43;&#43; 输出i，结果一致吗？ 一致
-for()的使用
-for如果使用之前声明的变量，可以直接以for (;condition;expression) 循环，循环开始时会获取变量的初始值，判断本次执行是否满足条件，满足则执行，执行完循环体，循环变量更新，不满足则结束循环 也可以使用for(init;condition;expression) 3. 其他想到的补充：
-对象初始化 回答会根据传递的参数，调用不同的重载。也可以根据成员变成，隐式构造；也可以将构造函数声明为explicit的，禁止隐式构造。 面试官问还有吗？不知道问的什么，然后继续问了虚函数。
-虚函数 成员函数，通过virtual修饰，子类继承时可以选择是否重载，也可以通过virtual 成员函数=0的方式声明为纯虚函数，子类必须重载。 子类继承父类时，构造子类时需要先构造父类，析构时通过声明父类析构为virtual，先析构子类，后析构父类。 补充：
-纯虚函数的父类为虚基类，无法实例化。 如果构造函数中包含虚函数，因为子类还没有构造，没有虚函数指针，因此会调用父类的虚函数。 虚函数，成员函数会存储在代码段，虚函数表存储在rodata段 在析构函数中调用虚函数时：基类析构函数在执行时，派生类部分的对象已经被销毁，虚函数表的指针可能不再有效，导致虚函数调用的行为不可预测。 inline 因为inline会原地展开，没有具体的地址，无法通过指针访问 static函数不能是虚函数，static成员函数是类级别的，无法通过多态调用。 子类可以访问父类的静态资源，只要子类有访问权限 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 #include &lt;iostream&gt; class Base { public: static int x; public: static void staticFunction() { std::cout &lt;&lt; &#34;Base static function&#34; &lt;&lt; std::endl; } }; int Base::x = 30; class Derived : public Base { public: static int x; public: static void derivedStaticFunction() { std::cout &lt;&lt; &#34;Derived static function&#34; &lt;&lt; std::endl; } }; int Derived::x = 40; int main() { Base::staticFunction(); // 访问父类的静态成员函数 Derived::staticFunction(); // 子类也可以通过类名访问父类的静态成员函数 std::cout &lt;&lt; Base::x &lt;&lt; std::endl; // 访问父类的静态成员变量 std::cout &lt;&lt; Derived::x &lt;&lt; std::endl; // 访问子类的静态成员变量,同名资源 优先输出子类的 } 输出
-...</p>
+    <p>12/09/2024 快手广告部门客户端一面</p>
   </div>
   <footer class="entry-footer"><span title='2024-12-09 17:09:59 +0800 CST'>十二月 9, 2024</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Kris</footer>
   <a class="entry-link" aria-label="post link to 快手客户端一面" href="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%80%E9%9D%A2/"></a>
