@@ -15,120 +15,108 @@
       <guid>https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%80%E9%9D%A2/</guid>
       <description>&lt;h1 id=&#34;自我介绍&#34;&gt;自我介绍&lt;/h1&gt;
 &lt;h1 id=&#34;c&#34;&gt;C++&lt;/h1&gt;
+&lt;h2 id=&#34;i-i&#34;&gt;i++ ,++i&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;i++&lt;/code&gt;是右值，&lt;code&gt;++i&lt;/code&gt;是左值&lt;/li&gt;
+&lt;li&gt;如果在一条语句内执行&lt;code&gt;i++&lt;/code&gt;, 会先获取&lt;code&gt;i&lt;/code&gt;的值，然后执行语句，执行结束后&lt;code&gt;i&lt;/code&gt;自增1&lt;/li&gt;
+&lt;li&gt;如果在一条语句内执行&lt;code&gt;++i&lt;/code&gt;, 会先对&lt;code&gt;i&lt;/code&gt;自增1，然后执行语句&lt;/li&gt;
+&lt;li&gt;补充：一般来讲，&lt;code&gt;i++&lt;/code&gt; 的执行操作为：使用临时对象保存i的值，然后执行i+1，返回临时对象；&lt;code&gt;++i&lt;/code&gt; 直接对&lt;code&gt;i&lt;/code&gt;自增，不涉及临时变量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;for-loop&#34;&gt;for-loop&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;for(int i = 0;i&amp;lt;10;i++/++i&amp;gt;)&lt;/code&gt;: ++i 与i++ 输出i，结果一致吗？ 一致&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;for()&lt;/code&gt;的使用&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;for如果使用之前声明的变量，可以直接以&lt;code&gt;for (;condition;expression)&lt;/code&gt; 循环，循环开始时会获取变量的初始值，判断本次执行是否满足条件，满足则执行，执行完循环体，循环变量更新，不满足则结束循环&lt;/li&gt;
+&lt;li&gt;也可以使用&lt;code&gt;for(init;condition;expression)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;3. 其他想到的补充：&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h2 id=&#34;对象初始化&#34;&gt;对象初始化&lt;/h2&gt;
-&lt;p&gt;回答会根据传递的参数，调用不同的重载。
+&lt;p&gt;回答会根据传递的参数，调用不同的重载。也可以根据成员变成，隐式构造；也可以将构造函数声明为&lt;code&gt;explicit&lt;/code&gt;的，禁止隐式构造。
 面试官问还有吗？不知道问的什么，然后继续问了虚函数。&lt;/p&gt;
 &lt;h2 id=&#34;虚函数&#34;&gt;虚函数&lt;/h2&gt;
-&lt;p&gt;成员函数，通过&lt;code&gt;virtual&lt;/code&gt;修饰，子类继承时可以选择是否重载，也可以通过&lt;code&gt;virtual 成员函数=0&lt;/code&gt;的方式声明为纯虚函数，子类必须重载。&lt;/p&gt;
-&lt;h3 id=&#34;虚函数指针&#34;&gt;虚函数指针&lt;/h3&gt;
-&lt;h2 id=&#34;new-delete-malloc-free&#34;&gt;new delete, malloc free&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;C++&lt;/code&gt;可以视作&lt;code&gt;C&lt;/code&gt;的超集，&lt;code&gt;C++&lt;/code&gt;继承了&lt;code&gt;C&lt;/code&gt;的&lt;code&gt;malloc&lt;/code&gt;和&lt;code&gt;free&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;new--delete&#34;&gt;new / delete&lt;/h3&gt;
+&lt;p&gt;成员函数，通过&lt;code&gt;virtual&lt;/code&gt;修饰，子类继承时可以选择是否重载，也可以通过&lt;code&gt;virtual 成员函数=0&lt;/code&gt;的方式声明为纯虚函数，子类必须重载。
+子类继承父类时，构造子类时需要先构造父类，析构时通过声明父类析构为&lt;code&gt;virtual&lt;/code&gt;，先析构子类，后析构父类。
+补充：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;new
-&lt;ol&gt;
-&lt;li&gt;动态申请内存，返回对应对象类型的指针，&lt;/li&gt;
-&lt;li&gt;调用类的构造函数，并进行初始化，访问了内存，涉及到虚实地址变换&lt;/li&gt;
-&lt;li&gt;申请失败会抛出异常&lt;code&gt;std::bad_alloc&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;纯虚函数的父类为虚基类，无法实例化。&lt;/li&gt;
+&lt;li&gt;如果构造函数中包含虚函数，因为子类还没有构造，没有虚函数指针，因此会调用父类的虚函数。&lt;/li&gt;
+&lt;li&gt;虚函数，成员函数会存储在代码段，虚函数表存储在&lt;code&gt;rodata&lt;/code&gt;段&lt;/li&gt;
+&lt;li&gt;在析构函数中调用虚函数时：基类析构函数在执行时，派生类部分的对象已经被销毁，虚函数表的指针可能不再有效，导致虚函数调用的行为不可预测。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;inline&lt;/code&gt; 因为&lt;code&gt;inline&lt;/code&gt;会原地展开，没有具体的地址，无法通过指针访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;static&lt;/code&gt;函数不能是虚函数，&lt;code&gt;static&lt;/code&gt;成员函数是类级别的，无法通过多态调用。&lt;/li&gt;
+&lt;li&gt;子类可以访问父类的静态资源，只要子类有访问权限&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;delete
-&lt;ol&gt;
-&lt;li&gt;释放通过new申请的空间；&lt;/li&gt;
-&lt;li&gt;调用类的析构函数&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;补充：可以通过&lt;code&gt;new(nothrow)&lt;/code&gt;返回空指针; &lt;code&gt;new&lt;/code&gt;和&lt;code&gt;delete&lt;/code&gt;是&lt;code&gt;C++&lt;/code&gt;运算符可以重载。是否访问内存取决于具体的初始化逻辑，虚实地址变换由操作系统完成。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;malloc--free&#34;&gt;malloc / free&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;malloc
-&lt;ol&gt;
-&lt;li&gt;申请内存，返回&lt;code&gt;void&lt;/code&gt;类型的指针，&lt;/li&gt;
-&lt;li&gt;不进行初始化，因此没有访存&lt;/li&gt;
-&lt;li&gt;申请失败，返回&lt;code&gt;NULL&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;free
-&lt;ol&gt;
-&lt;li&gt;释放通过malloc申请的空间；&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;补充：&lt;code&gt;malloc&lt;/code&gt;和&lt;code&gt;free&lt;/code&gt;是&lt;code&gt;C&lt;/code&gt;的函数。不支持重载&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;内存布局&#34;&gt;内存布局&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;栈： 自动管理，速度比较快，超出作用域自定析构&lt;/li&gt;
-&lt;li&gt;堆：手动管理，通过裸指针申请时，必须手动析构；也可以通过智能指针管理&lt;/li&gt;
-&lt;li&gt;全局区data：初始化的全局变量和静态变量&lt;/li&gt;
-&lt;li&gt;代码区text：代码段，存储函数，和类的静态成员函数&lt;/li&gt;
-&lt;li&gt;bss区：未初始化的全局变量和静态变量，默认为0&lt;/li&gt;
-&lt;li&gt;rodata区：只读数据，常量&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;线程-进程区别&#34;&gt;线程 进程区别&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;进程
-&lt;ol&gt;
-&lt;li&gt;进程享有自己的地址空间，因此多进程之间是隔离的，一个进程的崩溃往往不会导致其他进程崩溃&lt;/li&gt;
-&lt;li&gt;进程通信比较复杂&lt;/li&gt;
-&lt;li&gt;进程是资源分配的基本单位&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;线程
-&lt;ol&gt;
-&lt;li&gt;多个线程共享一个进程的地址空间，因此一个线程崩溃有可能导致其他线程的崩溃&lt;/li&gt;
-&lt;li&gt;线程通信简单，因此需要频繁交互任务可以使用多线程。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;补充：进程通信包括：管道，共享内存，消息队列，socket，信号，信号量；线程通信主要包括：互斥锁，条件变量，信号量，原子操作，互斥量，读写锁。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;数据库索引&#34;&gt;数据库索引&lt;/h1&gt;
-&lt;p&gt;尴尬，答成引擎了。然后又回答一遍&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;B+： 多路平衡，高度比较矮，快速查询，叶子节点为链表结构，支持范围查询，非叶子节点存储索引节点，叶子节点存储数据&lt;/li&gt;
-&lt;li&gt;B：不支持范围查询，非叶子节点也可以存储数据&lt;/li&gt;
-&lt;li&gt;单列索引：单个字段创建索引&lt;/li&gt;
-&lt;li&gt;联合索引：多个字段创建索引，需要主要最左匹配原则&lt;/li&gt;
-&lt;li&gt;补充：哈希索引：快速查找，无法排序，不支持范围查询，&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;项目&#34;&gt;项目&lt;/h1&gt;
-&lt;p&gt;问到有没有测过并发量。回答没有，但是根据之前测试线程池的经验，应该可以支持1w用户。&lt;/p&gt;
-&lt;h1 id=&#34;网络部分&#34;&gt;网络部分&lt;/h1&gt;
-&lt;h2 id=&#34;浏览器访问url到渲染页面的具体过程&#34;&gt;浏览器访问url到渲染页面的具体过程&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;DNS解析
-&lt;ol&gt;
-&lt;li&gt;有缓存先查缓存&lt;/li&gt;
-&lt;li&gt;没有缓存，查询根域名服务器，根域名服务器通过树状结构查询顶级域名服务器，顶级域名查询负责该域名的权威域名服务器&lt;/li&gt;
-&lt;li&gt;权威域名服务器返回IP地址&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;TCP握手&lt;/li&gt;
-&lt;li&gt;IP&lt;/li&gt;
-&lt;li&gt;同一个子网，通过arp寻找对应的mac，不同子网通过默认路由转发，通过路由器自动更新下一跳的mac地址寻找目标mac地址&lt;/li&gt;
-&lt;li&gt;封装http消息，请求行，请求头，请求体，&lt;/li&gt;
-&lt;li&gt;通过交换机或路由器将信息转为二进制流，发送到目标主机&lt;/li&gt;
-&lt;li&gt;服务器收到后通过拆包，协议栈自底向上到达应用层，知道是http消息，取出对应的资源，以响应行：status_code等，响应头，响应体，经协议栈自顶向下发送&lt;/li&gt;
-&lt;li&gt;客户端收到消息，通过浏览器渲染得到页面&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;如何加快http的速度&#34;&gt;如何加快http的速度&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;选择压缩算法，压缩消息体&lt;/li&gt;
-&lt;li&gt;服务器负载均衡，返回最近的最快的服务器&lt;/li&gt;
-&lt;li&gt;选择合适的协议，因为TCP很慢，所以http3.0 使用了UDP实现的quic&lt;/li&gt;
-&lt;li&gt;将用户访问过的资源，在本地缓存&lt;/li&gt;
-&lt;li&gt;补充：其他优化方式：合并多个css、js使用一个http连接发送，减少请求数量；异步加载js；使用高效的图像压缩算法，压缩图像&lt;/li&gt;
-&lt;li&gt;补充缓存：
-&lt;ol&gt;
-&lt;li&gt;浏览器缓存：通过设置适当的缓存策略（如Cache-Control、Expires）在浏览器端缓存常用资源，避免每次请求都重新从服务器加载资源，显著提高页面加载速度。&lt;/li&gt;
-&lt;li&gt;CDN缓存：内容分发网络（CDN）将资源缓存到离用户更近的节点，通过地理位置分发减少网络延迟，提升响应速度。&lt;/li&gt;
-&lt;li&gt;服务器端缓存：对于常用的动态资源（如数据库查询结果），可以使用 Redis 或 Memcached 等缓存技术，减少数据库的压力，快速返回常见请求的结果。&lt;/li&gt;
-&lt;li&gt;服务工作者缓存：现代浏览器提供服务工作者（Service Workers）来缓存资源并提供离线支持，使得即使没有网络，用户也可以继续使用应用程序。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&#34;手撕-二叉树最近公共祖先&#34;&gt;手撕 二叉树最近公共祖先&lt;/h1&gt;
-&lt;p&gt;ACM模式，写出函数讲解思路&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Base&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;staticFunction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Base static function&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Base&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Derived&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Base&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;derivedStaticFunction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Derived static function&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Derived&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;Base&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;staticFunction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 访问父类的静态成员函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Derived&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;staticFunction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 子类也可以通过类名访问父类的静态成员函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Base&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 访问父类的静态成员变量
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Derived&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 访问子类的静态成员变量,同名资源 优先输出子类的
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;输出&lt;/p&gt;</description>
     </item>
     <item>
       <title>金山二面</title>
