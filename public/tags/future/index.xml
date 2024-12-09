@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Future on 😶‍🌫️Kris的Neverland</title>
-    <link>https://magics0ng-github-io.pages.dev/tags/future/</link>
+    <link>http://localhost:14745/tags/future/</link>
     <description>Recent content in Future on 😶‍🌫️Kris的Neverland</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>zh</language>
     <lastBuildDate>Wed, 27 Nov 2024 21:11:39 +0800</lastBuildDate>
-    <atom:link href="https://magics0ng-github-io.pages.dev/tags/future/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:14745/tags/future/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Future Async Promise</title>
-      <link>https://magics0ng-github-io.pages.dev/posts/future-async-promise/</link>
+      <link>http://localhost:14745/posts/future-async-promise/</link>
       <pubDate>Wed, 27 Nov 2024 21:11:39 +0800</pubDate>
-      <guid>https://magics0ng-github-io.pages.dev/posts/future-async-promise/</guid>
+      <guid>http://localhost:14745/posts/future-async-promise/</guid>
       <description>C&#43;&#43;中std::future, std::packaged_task, std::promise的使用</description>
     </item>
   </channel>

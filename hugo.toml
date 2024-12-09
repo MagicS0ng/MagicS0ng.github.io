@@ -94,7 +94,7 @@ home = [ "HTML", "RSS", "JSON" ]
         enableDefault = false
     [markup.goldmark.renderer]
       hardWraps = false
-      unsafe = false
+      unsafe = true
       xhtml = false
   [markup.highlight]
     codeFences= true
@@ -116,6 +116,7 @@ disableInlineCSS = true
 [services.twitter]
 disableInlineCSS = true
 [params]
+fancybox=true
 env = "production"
 description = "This is Kris's neverland"
 author = "Kris"
