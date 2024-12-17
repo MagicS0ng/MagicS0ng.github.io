@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>华芯程一面 | 😶‍🌫️Kris的Neverland</title>
+<meta name="keywords" content="">
+<meta name="description" content="12/17/2024 华芯程一面">
+<meta name="author" content="Kris">
+<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/%E5%8D%8E%E8%8A%AF%E7%A8%8B%E4%BA%8C%E9%9D%A2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b77f76025494e037d52c0250f00cc8a2ff41875d068463a56e0d76beed50dd13.css" integrity="sha256-t392AlSU4DfVLAJQ8AzIov9Bh10GhGOlbg12vu1Q3RM=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/%E5%8D%8E%E8%8A%AF%E7%A8%8B%E4%BA%8C%E9%9D%A2/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/%E5%8D%8E%E8%8A%AF%E7%A8%8B%E4%BA%8C%E9%9D%A2/">
+  <meta property="og:site_name" content="😶‍🌫️Kris的Neverland">
+  <meta property="og:title" content="华芯程一面">
+  <meta property="og:description" content="12/17/2024 华芯程一面">
+  <meta property="og:locale" content="zh">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-17T11:00:10+08:00">
+    <meta property="article:modified_time" content="2024-12-17T11:00:10+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="华芯程一面">
+<meta name="twitter:description" content="12/17/2024 华芯程一面">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://magics0ng-github-io.pages.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "华芯程一面",
+      "item": "https://magics0ng-github-io.pages.dev/posts/%E5%8D%8E%E8%8A%AF%E7%A8%8B%E4%BA%8C%E9%9D%A2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "华芯程一面",
+  "name": "华芯程一面",
+  "description": "12/17/2024 华芯程一面",
+  "keywords": [
+    
+  ],
+  "articleBody": "C++ 1. const_cast 功能：用于去除变量的const或volatile属性（非const对象的强制转换）。 注意：去除const后修改数据时需小心，若对原本声明为const的数据进行修改，会导致未定义行为。 2. 三大特性 封装: 封装了数据，隐藏了实现细节，只暴露出必要的接口。 通过访问修饰符（private、protected、public）控制数据的访问权限。 继承: 子类可以继承父类的资源、属性、函数等。 支持代码复用，子类可以添加新的属性或重写父类的方法。 多态: 子类可以重写（override）父类的虚函数，在运行时根据实际对象类型调用对应的方法。 通过基类指针或引用实现动态绑定。 3. 虚函数与纯虚函数 虚函数 (virtual):\n通过virtual关键字声明，可以被子类重写。 有正常的函数体，子类可以选择是否重写。 纯虚函数 (= 0):\n没有函数体，子类必须重写。 拥有纯虚函数的类称为抽象类，不能实例化。 4. static 静态存储：存储在静态区，生命周期贯穿程序整个运行周期。 应用场景： 静态成员变量：类共享的变量，每个对象实例共享一份内存。 静态函数：不依赖于具体对象，可以通过类名直接调用。 5. 上行转换与下行转换 上行转换（Upcasting）：\n子类指针或引用转换为父类指针或引用。 安全且无需强制转换。 下行转换（Downcasting）：\n父类指针或引用转换为子类指针或引用。 需要通过dynamic_cast（确保安全）或static_cast。 6. weak_ptr 使用场景：\n避免shared_ptr之间的循环引用。 特性：\n不增加引用计数。 可以通过lock()将weak_ptr提升为shared_ptr，如果资源已被释放，则返回空指针。 7. vector 查询：\n访问元素时间复杂度为O(1)（通过索引直接访问）。 插入：\n末尾插入：若空间足够，时间复杂度为O(1)；否则触发扩容，为O(n)。 中间插入：需要将后续元素向后移动，时间复杂度为O(n)。 8. 左值与右值 左值：\n可以取地址的对象（如变量）。 右值：\n不能取地址的临时对象（如返回值、字面量）。 通过std::move()可以将右值的所有权转移给其他对象。 9. C++函数参数的内存分配 传值参数：\n在栈上分配内存。 引用参数：\n不复制数据，仅在栈上存储引用（指针）。 指针参数：\n指针本身存储在栈上，指向的数据位置取决于具体分配（堆/栈）。 10. override 子类重写父类的虚函数时，显式标记为override，可以帮助编译器检查是否真的重写了父类方法，避免错误。 11. 常见链表 单链表 双向链表 循环链表 跳表（用于高效查找，时间复杂度O(log n)） 12. 哈希冲突 哈希冲突：两个不同的键通过哈希函数得到相同的哈希值。\n解决方法：\n链式法：在同一哈希桶中存储冲突的元素。 线性探测：寻找下一个空闲位置存储元素。 二次探测：跳跃式寻找下一个空闲位置。 13. 死锁 四个必要条件：\n请求保持：线程已持有资源，同时请求新的资源。 不可剥夺：资源不能被强行剥夺。 循环等待：多个线程形成资源等待的循环链。 互斥条件：资源只能被一个线程独占。 简述：\n两个线程分别持有部分资源，互相请求对方的资源且不释放，导致僵持状态。 14. enum 与 enum class enum：\n底层类型默认为int，可以隐式转换为int。 同一作用域内，多个enum的成员名可能冲突。 enum class：\n成员名必须通过enum class名限定。 不支持隐式转换为int，需要显式转换。 15. malloc 与 new 分配的内存位置 malloc 和 new：分配在堆区。 16. malloc/free 与 new/delete 的区别 malloc/free：\nC语言函数。 返回void *，需手动转换类型。 分配失败返回NULL。 不会调用构造/析构函数。 new/delete：\nC++操作符。 返回具体类型指针。 分配失败抛出异常（std::bad_alloc），可以使用nothrow避免异常。 会自动调用构造/析构函数。 17. 手撕题 分组问题（并查集）：\n有些人不想和某人一组，判断是否可以分为两组。 使用并查集或二分图染色法解决。 青蛙跳台阶问题：\n简单DP: 状态转移方程：dp[i] = dp[i-1] + dp[i-2] 初始化：dp[0] = 1, dp[1] = 1 ",
+  "wordCount" : "151",
+  "inLanguage": "zh",
+  "datePublished": "2024-12-17T11:00:10+08:00",
+  "dateModified": "2024-12-17T11:00:10+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Kris"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://magics0ng-github-io.pages.dev/posts/%E5%8D%8E%E8%8A%AF%E7%A8%8B%E4%BA%8C%E9%9D%A2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "😶‍🌫️Kris的Neverland",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="😶‍🌫️Kris的Neverland (Alt + H)">😶‍🌫️Kris的Neverland</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/archives" title="🗂️Archives">
+                    <span>🗂️Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://magics0ng-github-io.pages.dev/tags" title="🏷️Tags">
+                    <span>🏷️Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://magics0ng-github-io.pages.dev/">主页</a>&nbsp;»&nbsp;<a href="https://magics0ng-github-io.pages.dev/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      华芯程一面
+    </h1>
+    <div class="post-meta"><span title='2024-12-17 11:00:10 +0800 CST'>十二月 17, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris
+
+</div>
+  </header> <aside id="toc-container" class="toc-container wide">
+        <div class="toc">
+            <details >
+                <summary accesskey="c" title="(Alt + C)">
+                    <span class="details">目录</span>
+                </summary>
+
+                <div class="inner"><ul>
+                        <li>
+                            <a href="#c" aria-label="C&#43;&#43;">C++</a><ul>
+                                    <ul>
+                                    
+                        <li>
+                            <a href="#1-const_cast" aria-label="1. const_cast">1. <code>const_cast</code></a></li>
+                        <li>
+                            <a href="#2-%e4%b8%89%e5%a4%a7%e7%89%b9%e6%80%a7" aria-label="2. 三大特性">2. 三大特性</a></li>
+                        <li>
+                            <a href="#3-%e8%99%9a%e5%87%bd%e6%95%b0%e4%b8%8e%e7%ba%af%e8%99%9a%e5%87%bd%e6%95%b0" aria-label="3. 虚函数与纯虚函数">3. 虚函数与纯虚函数</a></li>
+                        <li>
+                            <a href="#4-static" aria-label="4. static">4. <code>static</code></a></li>
+                        <li>
+                            <a href="#5-%e4%b8%8a%e8%a1%8c%e8%bd%ac%e6%8d%a2%e4%b8%8e%e4%b8%8b%e8%a1%8c%e8%bd%ac%e6%8d%a2" aria-label="5. 上行转换与下行转换">5. 上行转换与下行转换</a></li>
+                        <li>
+                            <a href="#6-weak_ptr" aria-label="6. weak_ptr">6. <code>weak_ptr</code></a></li>
+                        <li>
+                            <a href="#7-vector" aria-label="7. vector">7. <code>vector</code></a></li>
+                        <li>
+                            <a href="#8-%e5%b7%a6%e5%80%bc%e4%b8%8e%e5%8f%b3%e5%80%bc" aria-label="8. 左值与右值">8. 左值与右值</a></li>
+                        <li>
+                            <a href="#9-c%e5%87%bd%e6%95%b0%e5%8f%82%e6%95%b0%e7%9a%84%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d" aria-label="9. C&#43;&#43;函数参数的内存分配">9. C++函数参数的内存分配</a></li>
+                        <li>
+                            <a href="#10-override" aria-label="10. override">10. <code>override</code></a></li>
+                        <li>
+                            <a href="#11-%e5%b8%b8%e8%a7%81%e9%93%be%e8%a1%a8" aria-label="11. 常见链表">11. 常见链表</a></li>
+                        <li>
+                            <a href="#12-%e5%93%88%e5%b8%8c%e5%86%b2%e7%aa%81" aria-label="12. 哈希冲突">12. 哈希冲突</a></li>
+                        <li>
+                            <a href="#13-%e6%ad%bb%e9%94%81" aria-label="13. 死锁">13. 死锁</a></li>
+                        <li>
+                            <a href="#14-enum-%e4%b8%8e-enum-class" aria-label="14. enum 与 enum class">14. <code>enum</code> 与 <code>enum class</code></a></li>
+                        <li>
+                            <a href="#15-malloc-%e4%b8%8e-new-%e5%88%86%e9%85%8d%e7%9a%84%e5%86%85%e5%ad%98%e4%bd%8d%e7%bd%ae" aria-label="15. malloc 与 new 分配的内存位置">15. <code>malloc</code> 与 <code>new</code> 分配的内存位置</a></li>
+                        <li>
+                            <a href="#16-mallocfree-%e4%b8%8e-newdelete-%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="16. malloc/free 与 new/delete 的区别">16. <code>malloc</code>/<code>free</code> 与 <code>new</code>/<code>delete</code> 的区别</a></li>
+                        <li>
+                            <a href="#17-%e6%89%8b%e6%92%95%e9%a2%98" aria-label="17. 手撕题">17. 手撕题</a>
+                        </li>
+                    </ul>
+                    </ul>
+                    </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </aside>
+    <script>
+        let activeElement;
+        let elements;
+        window.addEventListener('DOMContentLoaded', function (event) {
+            checkTocPosition();
+
+            elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }, false);
+
+        window.addEventListener('resize', function (event) {
+            checkTocPosition();
+        }, false);
+
+        window.addEventListener('scroll', () => {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - window.pageYOffset) > 0 &&
+                    (getOffsetTop(element) - window.pageYOffset) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement
+
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                if (element === activeElement) {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+                } else {
+                    document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+                }
+            })
+        }, false);
+
+        const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+        const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+        const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+        function checkTocPosition() {
+            const width = document.body.scrollWidth;
+
+            if (width - main - (toc * 2) - (gap * 4) > 0) {
+                document.getElementById("toc-container").classList.add("wide");
+            } else {
+                document.getElementById("toc-container").classList.remove("wide");
+            }
+        }
+
+        function getOffsetTop(element) {
+            if (!element.getClientRects().length) {
+                return 0;
+            }
+            let rect = element.getBoundingClientRect();
+            let win = element.ownerDocument.defaultView;
+            return rect.top + win.pageYOffset;
+        }
+    </script>
+
+  <div class="post-content"><h1 id="c">C++<a hidden class="anchor" aria-hidden="true" href="#c">#</a></h1>
+<h3 id="1-const_cast">1. <code>const_cast</code><a hidden class="anchor" aria-hidden="true" href="#1-const_cast">#</a></h3>
+<ul>
+<li><strong>功能</strong>：用于去除变量的<code>const</code>或<code>volatile</code>属性（非<code>const</code>对象的强制转换）。</li>
+<li><strong>注意</strong>：去除<code>const</code>后修改数据时需小心，若对原本声明为<code>const</code>的数据进行修改，会导致未定义行为。</li>
+</ul>
+<hr>
+<h3 id="2-三大特性">2. 三大特性<a hidden class="anchor" aria-hidden="true" href="#2-三大特性">#</a></h3>
+<ol>
+<li><strong>封装</strong>:
+<ul>
+<li>封装了数据，隐藏了实现细节，只暴露出必要的接口。</li>
+<li>通过访问修饰符（<code>private</code>、<code>protected</code>、<code>public</code>）控制数据的访问权限。</li>
+</ul>
+</li>
+<li><strong>继承</strong>:
+<ul>
+<li>子类可以继承父类的资源、属性、函数等。</li>
+<li>支持代码复用，子类可以添加新的属性或重写父类的方法。</li>
+</ul>
+</li>
+<li><strong>多态</strong>:
+<ul>
+<li>子类可以重写（override）父类的虚函数，在运行时根据实际对象类型调用对应的方法。</li>
+<li>通过基类指针或引用实现动态绑定。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="3-虚函数与纯虚函数">3. 虚函数与纯虚函数<a hidden class="anchor" aria-hidden="true" href="#3-虚函数与纯虚函数">#</a></h3>
+<ol>
+<li>
+<p><strong>虚函数</strong> (<code>virtual</code>):</p>
+<ul>
+<li>通过<code>virtual</code>关键字声明，可以被子类重写。</li>
+<li>有正常的函数体，子类可以选择是否重写。</li>
+</ul>
+</li>
+<li>
+<p><strong>纯虚函数</strong> (<code>= 0</code>):</p>
+<ul>
+<li>没有函数体，子类必须重写。</li>
+<li>拥有纯虚函数的类称为<strong>抽象类</strong>，不能实例化。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="4-static">4. <code>static</code><a hidden class="anchor" aria-hidden="true" href="#4-static">#</a></h3>
+<ol>
+<li><strong>静态存储</strong>：存储在静态区，生命周期贯穿程序整个运行周期。</li>
+<li><strong>应用场景</strong>：
+<ul>
+<li><strong>静态成员变量</strong>：类共享的变量，每个对象实例共享一份内存。</li>
+<li><strong>静态函数</strong>：不依赖于具体对象，可以通过类名直接调用。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="5-上行转换与下行转换">5. 上行转换与下行转换<a hidden class="anchor" aria-hidden="true" href="#5-上行转换与下行转换">#</a></h3>
+<ol>
+<li>
+<p><strong>上行转换</strong>（Upcasting）：</p>
+<ul>
+<li>子类指针或引用转换为父类指针或引用。</li>
+<li>安全且无需强制转换。</li>
+</ul>
+</li>
+<li>
+<p><strong>下行转换</strong>（Downcasting）：</p>
+<ul>
+<li>父类指针或引用转换为子类指针或引用。</li>
+<li>需要通过<code>dynamic_cast</code>（确保安全）或<code>static_cast</code>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="6-weak_ptr">6. <code>weak_ptr</code><a hidden class="anchor" aria-hidden="true" href="#6-weak_ptr">#</a></h3>
+<ol>
+<li>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>避免<code>shared_ptr</code>之间的循环引用。</li>
+</ul>
+</li>
+<li>
+<p><strong>特性</strong>：</p>
+<ul>
+<li>不增加引用计数。</li>
+<li>可以通过<code>lock()</code>将<code>weak_ptr</code>提升为<code>shared_ptr</code>，如果资源已被释放，则返回空指针。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="7-vector">7. <code>vector</code><a hidden class="anchor" aria-hidden="true" href="#7-vector">#</a></h3>
+<ol>
+<li>
+<p><strong>查询</strong>：</p>
+<ul>
+<li>访问元素时间复杂度为<code>O(1)</code>（通过索引直接访问）。</li>
+</ul>
+</li>
+<li>
+<p><strong>插入</strong>：</p>
+<ul>
+<li><strong>末尾插入</strong>：若空间足够，时间复杂度为<code>O(1)</code>；否则触发扩容，为<code>O(n)</code>。</li>
+<li><strong>中间插入</strong>：需要将后续元素向后移动，时间复杂度为<code>O(n)</code>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="8-左值与右值">8. 左值与右值<a hidden class="anchor" aria-hidden="true" href="#8-左值与右值">#</a></h3>
+<ol>
+<li>
+<p><strong>左值</strong>：</p>
+<ul>
+<li>可以取地址的对象（如变量）。</li>
+</ul>
+</li>
+<li>
+<p><strong>右值</strong>：</p>
+<ul>
+<li>不能取地址的临时对象（如返回值、字面量）。</li>
+<li>通过<code>std::move()</code>可以将右值的所有权转移给其他对象。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="9-c函数参数的内存分配">9. C++函数参数的内存分配<a hidden class="anchor" aria-hidden="true" href="#9-c函数参数的内存分配">#</a></h3>
+<ol>
+<li>
+<p><strong>传值参数</strong>：</p>
+<ul>
+<li>在栈上分配内存。</li>
+</ul>
+</li>
+<li>
+<p><strong>引用参数</strong>：</p>
+<ul>
+<li>不复制数据，仅在栈上存储引用（指针）。</li>
+</ul>
+</li>
+<li>
+<p><strong>指针参数</strong>：</p>
+<ul>
+<li>指针本身存储在栈上，指向的数据位置取决于具体分配（堆/栈）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="10-override">10. <code>override</code><a hidden class="anchor" aria-hidden="true" href="#10-override">#</a></h3>
+<ul>
+<li>子类重写父类的虚函数时，显式标记为<code>override</code>，可以帮助编译器检查是否真的重写了父类方法，避免错误。</li>
+</ul>
+<hr>
+<h3 id="11-常见链表">11. 常见链表<a hidden class="anchor" aria-hidden="true" href="#11-常见链表">#</a></h3>
+<ol>
+<li><strong>单链表</strong></li>
+<li><strong>双向链表</strong></li>
+<li><strong>循环链表</strong></li>
+<li><strong>跳表</strong>（用于高效查找，时间复杂度<code>O(log n)</code>）</li>
+</ol>
+<hr>
+<h3 id="12-哈希冲突">12. 哈希冲突<a hidden class="anchor" aria-hidden="true" href="#12-哈希冲突">#</a></h3>
+<p><strong>哈希冲突</strong>：两个不同的键通过哈希函数得到相同的哈希值。<br>
+<strong>解决方法</strong>：</p>
+<ol>
+<li><strong>链式法</strong>：在同一哈希桶中存储冲突的元素。</li>
+<li><strong>线性探测</strong>：寻找下一个空闲位置存储元素。</li>
+<li><strong>二次探测</strong>：跳跃式寻找下一个空闲位置。</li>
+</ol>
+<hr>
+<h3 id="13-死锁">13. 死锁<a hidden class="anchor" aria-hidden="true" href="#13-死锁">#</a></h3>
+<ol>
+<li>
+<p><strong>四个必要条件</strong>：</p>
+<ol>
+<li><strong>请求保持</strong>：线程已持有资源，同时请求新的资源。</li>
+<li><strong>不可剥夺</strong>：资源不能被强行剥夺。</li>
+<li><strong>循环等待</strong>：多个线程形成资源等待的循环链。</li>
+<li><strong>互斥条件</strong>：资源只能被一个线程独占。</li>
+</ol>
+</li>
+<li>
+<p><strong>简述</strong>：</p>
+<ul>
+<li>两个线程分别持有部分资源，互相请求对方的资源且不释放，导致僵持状态。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="14-enum-与-enum-class">14. <code>enum</code> 与 <code>enum class</code><a hidden class="anchor" aria-hidden="true" href="#14-enum-与-enum-class">#</a></h3>
+<ol>
+<li>
+<p><strong><code>enum</code></strong>：</p>
+<ul>
+<li>底层类型默认为<code>int</code>，可以隐式转换为<code>int</code>。</li>
+<li>同一作用域内，多个<code>enum</code>的成员名可能冲突。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>enum class</code></strong>：</p>
+<ul>
+<li>成员名必须通过<code>enum class</code>名限定。</li>
+<li>不支持隐式转换为<code>int</code>，需要显式转换。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="15-malloc-与-new-分配的内存位置">15. <code>malloc</code> 与 <code>new</code> 分配的内存位置<a hidden class="anchor" aria-hidden="true" href="#15-malloc-与-new-分配的内存位置">#</a></h3>
+<ul>
+<li><strong><code>malloc</code> 和 <code>new</code></strong>：分配在堆区。</li>
+</ul>
+<hr>
+<h3 id="16-mallocfree-与-newdelete-的区别">16. <code>malloc</code>/<code>free</code> 与 <code>new</code>/<code>delete</code> 的区别<a hidden class="anchor" aria-hidden="true" href="#16-mallocfree-与-newdelete-的区别">#</a></h3>
+<ol>
+<li>
+<p><strong><code>malloc/free</code></strong>：</p>
+<ul>
+<li>C语言函数。</li>
+<li>返回<code>void *</code>，需手动转换类型。</li>
+<li>分配失败返回<code>NULL</code>。</li>
+<li>不会调用构造/析构函数。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>new/delete</code></strong>：</p>
+<ul>
+<li>C++操作符。</li>
+<li>返回具体类型指针。</li>
+<li>分配失败抛出异常（<code>std::bad_alloc</code>），可以使用<code>nothrow</code>避免异常。</li>
+<li>会自动调用构造/析构函数。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="17-手撕题">17. 手撕题<a hidden class="anchor" aria-hidden="true" href="#17-手撕题">#</a></h3>
+<ol>
+<li>
+<p><strong>分组问题（并查集）</strong>：</p>
+<ul>
+<li>有些人不想和某人一组，判断是否可以分为两组。</li>
+<li>使用<strong>并查集</strong>或<strong>二分图染色法</strong>解决。</li>
+</ul>
+</li>
+<li>
+<p><strong>青蛙跳台阶问题</strong>：</p>
+<ul>
+<li><strong>简单DP</strong>:
+<ul>
+<li>状态转移方程：<code>dp[i] = dp[i-1] + dp[i-2]</code></li>
+<li>初始化：<code>dp[0] = 1, dp[1] = 1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BA%8C%E9%9D%A2/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>快手客户端二面</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">😶‍🌫️Kris的Neverland</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
