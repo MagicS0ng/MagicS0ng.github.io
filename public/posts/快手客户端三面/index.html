@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=10849&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,16 +9,16 @@
 <meta name="keywords" content="">
 <meta name="description" content="12/17/2024 快手客户端三面">
 <meta name="author" content="Kris">
-<link rel="canonical" href="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/">
+<link rel="canonical" href="http://localhost:10849/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.b77f76025494e037d52c0250f00cc8a2ff41875d068463a56e0d76beed50dd13.css" integrity="sha256-t392AlSU4DfVLAJQ8AzIov9Bh10GhGOlbg12vu1Q3RM=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://magics0ng-github-io.pages.dev/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://magics0ng-github-io.pages.dev/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://magics0ng-github-io.pages.dev/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://magics0ng-github-io.pages.dev/apple-touch-icon.png">
-<link rel="mask-icon" href="https://magics0ng-github-io.pages.dev/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:10849/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:10849/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:10849/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:10849/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:10849/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh" href="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/">
+<link rel="alternate" hreflang="zh" href="http://localhost:10849/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,7 +55,7 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/">
+</noscript><meta property="og:url" content="http://localhost:10849/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/">
   <meta property="og:site_name" content="😶‍🌫️Kris的Neverland">
   <meta property="og:title" content="快手客户端三面">
   <meta property="og:description" content="12/17/2024 快手客户端三面">
@@ -64,7 +64,9 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-12-17T16:13:30+08:00">
     <meta property="article:modified_time" content="2024-12-17T16:13:30+08:00">
-<meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1w1uxB.img">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1w1uxB.img">
 <meta name="twitter:title" content="快手客户端三面">
 <meta name="twitter:description" content="12/17/2024 快手客户端三面">
 
@@ -78,13 +80,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://magics0ng-github-io.pages.dev/posts/"
+      "item": "http://localhost:10849/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "快手客户端三面",
-      "item": "https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/"
+      "item": "http://localhost:10849/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/"
     }
   ]
 }
@@ -102,7 +104,7 @@
   "articleBody": "C++部分 野指针\n没有初始化的指针为野指针，导致使用时崩溃 扩展：悬垂指针，通过delete回收资源后，没有赋值为空，再次使用，由于指向的内存被回收了，导致崩溃\n扩充： 解决方法： 在指针被delete后，将指针赋值为nullptr，防止悬垂指针。 使用智能指针（std::unique_ptr、std::shared_ptr），自动管理内存，减少手动错误。 析构函数\nC++ 析构函数主要是为了在对象被销毁时回收构造时申请的资源 扩展：可以基于RAII思想，管理对象资源的生命周期\n扩充： 析构函数的特性： 如果类中包含指针成员，析构函数必须显式释放内存，否则会导致内存泄漏。 基类的析构函数应声明为virtual，确保派生类析构时正确调用基类析构函数。 内存布局\n.data: 初始化的全局变量 .rodata: 存储常量 .bss: 未初始化的全局变量，默认初始化为0 .text: 存储函数\n扩充： 堆与栈： 栈：用于函数调用、局部变量存储，自动分配和释放，快速且安全。 堆：动态内存分配，生命周期由程序员控制，容易产生内存泄漏。 内存分配\nmalloc, new 在堆上申请空间\n扩充： 区别： malloc返回void*，不调用构造函数，使用时需要显式类型转换。 new返回对象类型指针，自动调用构造函数并初始化内存。 释放内存： malloc配合free，new配合delete，不能混用，否则会引发未定义行为。 多线程要注意什么\n数据竞争 锁的使用\n扩充： 常见问题： 死锁：多个线程循环等待资源，导致无法继续执行。 线程安全：使用互斥锁（std::mutex）、条件变量等同步机制防止资源争用。 优化： 使用std::lock_guard或std::unique_lock管理锁，防止忘记释放锁。 单例模式\n为什么使用单例\n扩充： 单例的作用： 确保类只有一个实例，且提供全局访问点。 常用于日志、配置管理、数据库连接等场景。 实现方式： 懒汉模式（延迟初始化） 饿汉模式（程序启动时初始化） 使用std::call_once和std::mutex保证线程安全。 项目部分 即时通讯软件，1对1聊天的聊天记录如何保存，群组的呢\n回答：\n1对1聊天记录：可以保存到本地数据库（如SQLite）或者云端服务器，按用户ID建立索引以便快速查询。 群组聊天记录：可以使用分布式数据库，按群ID和消息时间戳存储，便于同步和检索。 登录应该保存用户的哪些信息\n回答：\n用户ID、用户名 用户凭据（如Token、加密后的密码） 登录状态和过期时间 设备信息（如设备ID） 聊天界面有多种气泡，如文本，语音，图片。在接收到消息时，本地客户端如何判断是哪种类型的气泡\n回答：\n消息格式应采用统一的消息协议，包含消息类型字段（如文本、语音、图片）。 通过协议解析消息，判断消息类型，并调用对应的UI组件进行渲染。 如何实现消息的撤回\n回答：\n在服务端和客户端记录消息的唯一ID。 用户发起撤回请求，服务端验证权限后标记该消息为“撤回状态”。 客户端接收到撤回指令后更新消息显示状态，如提示“消息已撤回”。 离线消息如何持久化\n回答：\n服务端将离线消息存储到数据库或缓存中，按用户ID进行索引。 当用户上线时，查询对应的离线消息并推送到客户端。 客户端收到离线消息后，存储到本地持久化数据库（如SQLite）。 ",
   "wordCount" : "83",
   "inLanguage": "zh",
-  "datePublished": "2024-12-17T16:13:30+08:00",
+  "image":"https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1w1uxB.img","datePublished": "2024-12-17T16:13:30+08:00",
   "dateModified": "2024-12-17T16:13:30+08:00",
   "author":{
     "@type": "Person",
@@ -110,14 +112,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://magics0ng-github-io.pages.dev/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/"
+    "@id": "http://localhost:10849/posts/%E5%BF%AB%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%89%E9%9D%A2/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "😶‍🌫️Kris的Neverland",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://magics0ng-github-io.pages.dev/favicon.ico"
+      "url": "http://localhost:10849/favicon.ico"
     }
   }
 }
@@ -139,7 +141,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://magics0ng-github-io.pages.dev/" accesskey="h" title="😶‍🌫️Kris的Neverland (Alt + H)">😶‍🌫️Kris的Neverland</a>
+            <a href="http://localhost:10849/" accesskey="h" title="😶‍🌫️Kris的Neverland (Alt + H)">😶‍🌫️Kris的Neverland</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -165,12 +167,12 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://magics0ng-github-io.pages.dev/archives" title="🗂️Archives">
+                <a href="http://localhost:10849/archives" title="🗂️Archives">
                     <span>🗂️Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://magics0ng-github-io.pages.dev/tags" title="🏷️Tags">
+                <a href="http://localhost:10849/tags" title="🏷️Tags">
                     <span>🏷️Tags</span>
                 </a>
             </li>
@@ -181,14 +183,17 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://magics0ng-github-io.pages.dev/">主页</a>&nbsp;»&nbsp;<a href="https://magics0ng-github-io.pages.dev/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:10849/">主页</a>&nbsp;»&nbsp;<a href="http://localhost:10849/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       快手客户端三面
     </h1>
     <div class="post-meta"><span title='2024-12-17 16:13:30 +0800 CST'>十二月 17, 2024</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Kris
 
 </div>
-  </header> <aside id="toc-container" class="toc-container wide">
+  </header> 
+<figure class="entry-cover"><img loading="eager" src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1w1uxB.img" alt="">
+        
+</figure><aside id="toc-container" class="toc-container wide">
         <div class="toc">
             <details >
                 <summary accesskey="c" title="(Alt + C)">
@@ -437,7 +442,7 @@
     <ul class="post-tags">
     </ul>
 <nav class="paginav">
-  <a class="next" href="https://magics0ng-github-io.pages.dev/posts/%E5%8D%8E%E8%8A%AF%E7%A8%8B%E4%BA%8C%E9%9D%A2/">
+  <a class="next" href="http://localhost:10849/posts/%E5%8D%8E%E8%8A%AF%E7%A8%8B%E4%BA%8C%E9%9D%A2/">
     <span class="title">下一页 »</span>
     <br>
     <span>华芯程一面</span>
@@ -449,7 +454,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://magics0ng-github-io.pages.dev/">😶‍🌫️Kris的Neverland</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:10849/">😶‍🌫️Kris的Neverland</a></span> · 
 
     <span>
         Powered by
